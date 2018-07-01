@@ -38,8 +38,13 @@ client.on('message', message => {
 function handleCommand(message, command, args) {
 	console.log("RUNNING COMMAND " + command + " WITH ARGS " + args);
 	if(command == "eval") {
-		let toEval = args.join(" ");
-		message.channel.send(eval(toEval));
+		let pidor = args.join(" ");
+		try {
+			message.channel.send("Function: ```" + pidor + "```\n" + "Result:\n" + "```" + eval(pidor) + "```");
+		} catch(e) {
+			message.channel.send("Function: ```" + pidor + "```\n" + "Result:\n" + "```" + e + "```");
+			}
+		}
 	}
 
 }
