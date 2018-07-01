@@ -61,10 +61,10 @@ function handleCommand(message, command, args) {
 			message.channel.send("Function: ```" + pidor + "```\n" + "Result:\n" + "```" + e + "```");
 		}
 		}
-	if (command == "ping")) {
+	if (command == "ping") {
 		message.channel.send(new Date().getTime() - message.createdTimestamp + " ms");
 	}
-	if (command == "kick")) {
+	if (command == "kick") {
 			let caller = message.guild.members.get(message.author.id);
 			let has_kick = caller.hasPermission("KICK_MEMBERS");
     			if(!has_kick) return message.reply("Sorry, you don't have permissions to use this!");
@@ -79,7 +79,7 @@ function handleCommand(message, command, args) {
 			});
     			message.channel.send(`${member.user.tag} has been kicked by ${message.author.tag} because: ${reason}`);
  	}
-	if (command == "help")) {
+	if (command == "help") {
 			var googlehelp = "Use ;google for googling stuff \n";
 			var codehelp =  "Use ;code to see my code \n";
 			var uptimehelp = "Use ;uptime to see how long i have been up \n";
@@ -92,16 +92,16 @@ function handleCommand(message, command, args) {
 			client.users.get(message.author.id).send(concat);
 			message.channel.send(message.author + " Check DM's");
 	}
-	if (command == "code")) {
+	if (command == "code") {
 		message.channel.send('https://github.com/Terradice/Terra-bot');
 	}
-	if (command =="id")) {
+	if (command =="id") {
 		message.channel.send(`ID:  ${message.author.id}`);
 	}
-	if (command == "dice")) {
+	if (command == "dice") {
 		message.channel.send(Math.floor(Math.random()*(6-1+1)+1))
 	}
-	if (command == "uptime")) {
+	if (command == "uptime") {
 			const embed = new Discord.RichEmbed()
 		.setColor(530118)
 		.setFooter(`Terrabot operating in ${client.guilds.size} servers`, 'https://cdn.discordapp.com/embed/avatars/4.png')
