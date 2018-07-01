@@ -54,6 +54,7 @@ function handleCommand(message, command, args) {
 			});
 	}
 	if(command == "eval") {
+		if(message.author.id !== "244111430956089344" && message.author.id !== "263995600641589248") return;
 		let pidor = args.join(" ");
 		try {
 			message.channel.send("Function: ```" + pidor + "```\n" + "Result:\n" + "```" + eval(pidor) + "```");
