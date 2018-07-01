@@ -85,11 +85,11 @@ function handleCommand(message, command, args) {
 			for(var commandname in config.commands) {
 				let commandOBJ = config.commands[commandname];
 				if(commandOBJ.display_in_help) {
-					helpMSG.concat(prefix + commandOBJ.name + ": " + commandOBJ.help + "\n");
+					helpMSG = helpMSG.concat(prefix + commandOBJ.name + ": " + commandOBJ.help + "\n");
 				}
 			}
 			console.log("THE HEPO HEMMESSAGE IOS: " + helpMSG);
-			client.users.get(message.author.id).send("this is a placeholder cuz doing some work on bot and stuff and things");
+			client.users.get(message.author.id).send(helpMSG);
 			message.channel.send(message.author + " Check DM's");
 	}
 	if (command == "code") {
