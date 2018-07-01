@@ -82,9 +82,10 @@ function handleCommand(message, command, args) {
  	}
 	if (command == "help") {
 			var helpMSG = "";
-			for(var command of config.commands) {
-				if(command.display_in_help) {
-					helpMSG.concat(prefix + command.name + ": " + command.help + "\n");
+			for(var commandname of config.commands) {
+				let commandOBJ = config.commands[commandname];
+				if(commandOBJ.display_in_help) {
+					helpMSG.concat(prefix + commandOBJ.name + ": " + commandOBJ.help + "\n");
 				}
 			}
 			client.users.get(message.author.id).send(helpMSG);
