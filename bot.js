@@ -37,8 +37,8 @@ client.on('message', message => {
 
 function handleCommand(message, command, args) {
 	console.log("RUNNING COMMAND " + command + " WITH ARGS " + args);
-	if (command.startsWith(prefix + "google")) {
-			var lookup = message.content.replace(";google ", "");
+	if (command == "google") {
+			var lookup = args.join(" ");
 			message.channel.send("<a:googling:426453223310622740>" + " Loading...").then(msg => {
  			google(lookup, (err, res) => {
 				if (err) console.error(err);
