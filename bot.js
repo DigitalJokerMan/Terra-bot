@@ -7,7 +7,7 @@ const client = new Discord.Client();
 var knock = true;
 var jokeover = true;
 var laugh = false;
-var prefix = config.commands.prefix;
+var prefix = config.prefix;
 
 client.on('ready', () => {
   console.log(`Bots is ready and working in ${client.guilds.size} servers with ${client.users.size} users!`);
