@@ -24,15 +24,23 @@ client.on('guildMemberAdd', member => {
 });
 
 client.on('message', message => {
-		var msg = message.content.toLowerCase();
+		let msg = message.content;
 		if (message.author.bot) return;
 		if(msg.startsWith(prefix)) {
 			let command = msg.split(" ")[0];
 			let args = msg.split(" ").slice(1);
-			message.channel.send("Command: " + command);
-			message.channel.send("Args: " + args);
+
+			handleCommand(message, command, args);
 		}
 });
+
+function handleCommand(message, command, args) {
+	if(command == "eval") {
+		let toEval = args.join(" ");
+		eval(toEval);
+	}
+
+}
  
 function setConfigEntry(key, value) {
 	config[key] = value;
