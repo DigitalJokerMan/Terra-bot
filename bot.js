@@ -12,16 +12,6 @@ var prefix = config.prefix;
 client.on('ready', () => {
   console.log(`Bots is ready and working in ${client.guilds.size} servers with ${client.users.size} users!`);
   client.user.setActivity("Terradice&RedSponge|;help");
-	try {
-		roles.find("terra-mute");
-	}
-	catch(e) {
-		guild.createRole({
-  		name: 'terra-mute',
- 		color: 'BLUE',
-		'SEND_MESSAGES': false
-	})
-	}
 });
 
 function byefaggots() {
@@ -34,6 +24,16 @@ client.on('guildMemberAdd', member => {
 });
 
 client.on('message', message => {
+	try {
+		roles.find("terra-mute");
+	}
+	catch(e) {
+		guild.createRole({
+  		name: 'terra-mute',
+ 		color: 'BLUE',
+		'SEND_MESSAGES': false
+	})
+	}
 		let msg = message.content;
 		if (message.author.bot) return;
 		if(msg.startsWith(prefix)) {
@@ -82,7 +82,12 @@ function handleCommand(message, command, args) {
 		let has_mute = caller.hasPermission("MUTE_MEMBERS");
 		if(!has_mute) return message.reply("Sorry, you don't have permissions to use this!");
 		if(!member) return message.reply("Please mention a valid member of this server");
-		message.member.addRole('193654001089118208')
+		let muterole = message.guild.roles.find("terra-mute");
+		let newtime = time * 60 * 100;
+		message.member.addRole(muterole).then(msg => {
+			message.channel.send(`${member} Has been muted by ${caller} for ${newtime} minutes!`); 
+			setTimeout({ message.member.removeRole(muterole); }, newtime);
+			
 	}
 	if (command == "kick") {
 			let caller = message.guild.members.get(message.author.id);
