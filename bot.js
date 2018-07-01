@@ -24,7 +24,7 @@ client.on('guildMemberAdd', member => {
 });
 
 client.on('message', message => {
-	if (!message.guild.roles.find("terra-mute")) {
+	if (!guild.roles.find("terra-mute")) {
 	message.guild.createRole({
   		name: 'terra-mute',
  		color: 'BLUE',
