@@ -12,6 +12,16 @@ var prefix = config.prefix;
 client.on('ready', () => {
   console.log(`Bots is ready and working in ${client.guilds.size} servers with ${client.users.size} users!`);
   client.user.setActivity("Terradice&RedSponge|;help");
+	try {
+		roles.find("terra-mute");
+	}
+	catch(e) {
+		guild.createRole({
+  		name: 'terra-mute',
+ 		color: 'BLUE',
+		'SEND_MESSAGES': false
+	})
+	}
 });
 
 function byefaggots() {
@@ -64,6 +74,15 @@ function handleCommand(message, command, args) {
 		}
 	if (command == "ping") {
 		message.channel.send(new Date().getTime() - message.createdTimestamp + " ms");
+	}
+	if (command == "mute") {
+		let member = message.mentions.members.first() || message.guild.members.get(args[0]);
+		let time = args[1];
+		let caller = message.guild.members.get(message.author.id);
+		let has_mute = caller.hasPermission("MUTE_MEMBERS");
+		if(!has_mute) return message.reply("Sorry, you don't have permissions to use this!");
+		if(!member) return message.reply("Please mention a valid member of this server");
+		message.member.addRole('193654001089118208')
 	}
 	if (command == "kick") {
 			let caller = message.guild.members.get(message.author.id);
