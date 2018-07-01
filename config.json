@@ -2,7 +2,7 @@
 "prefix": ";",
   "commands": {
     "cmd_eval": {
-		"display_in_help": true,
+		"display_in_help": false,
 		"name": "eval",
 		"help": "Runs code!",
 		"embed": false,
@@ -15,7 +15,32 @@
 	"cmd_google": {
 		"display_in_help": true,
 		"name": "google",
-		"help": "Searches something in google!"
+		"help": "for googling stuff!"
+	},
+	"cmd_code": {
+		"display_in_help": true,
+		"name": "code",
+		"help": "to see the code for this bot"
+	},
+	"cmd_uptime": {
+		"display_in_help": true,
+		"name": "uptime",
+		"help": "to see how long i have been up"
+	},
+	"cmd_ping": {
+		"display_in_help": true,
+		"name": "ping",
+		"help": "to see your ping to the bot"
+	},
+	"cmd_id": {
+		"display_in_help": true,
+		"name": "id",
+		"help": "to see your user id"
+	},
+	"cmd_kick": {
+		"display_in_help": true,
+		"name": "kick",
+		"help": "to kick people (Admin only)"
 	}
-  }
+  },
 }
