@@ -36,25 +36,9 @@ client.on('message', message => {
 					pidor = pidor.replace(entry[0], entry[1]);
 				}
 				try {
-				if(config.commands.cmd_eval.embed) {
-					const embed = new Discord.RichEmbed()
-					.setColor(530118)
-					.setFooter(`Terrabot operating in ${client.guilds.size} servers`)
-					.setAuthor("Evaluate", client.user.avatarURL)
-					.addField("Function", pidor, true)
-					.addField("Result", eval(pidor), true)
-					message.channel.send(embed);
-				} else message.channel.send("Function: ```" + pidor + "```\n" + "Result:\n" + "```" + eval(pidor) + "```");
+				message.channel.send("Function: ```" + pidor + "```\n" + "Result:\n" + "```" + eval(pidor) + "```");
 				} catch(e) {
-				if(config.commands.cmd_eval.embed) {
-					const embed = new Discord.RichEmbed()
-					.setColor(530118)
-					.setFooter(`Terrabot operating in ${client.guilds.size} servers`, 'https://cdn.discordapp.com/embed/avatars/4.png')
-					.setAuthor("Evaluate", client.user.avatarURL)
-					.addField("Function", pidor, true)
-					.addField("Result", e, true)
-					message.channel.send(embed);
-				} else message.channel.send("Function: ```" + pidor + "```\n" + "Result:\n" + "```" + e + "```");
+				message.channel.send("Function: ```" + pidor + "```\n" + "Result:\n" + "```" + e + "```");
 				}
 		}
 		if (command.startsWith(prefix + "google")) {
