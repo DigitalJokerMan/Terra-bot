@@ -2,13 +2,20 @@
 "prefix": ";",
   "commands": {
     "cmd_eval": {
-		"__COMMENT": "add stuff to the replace for the eval to replace! (cool right?)",
-	    "embed": false,
-      "replace": [
-        [";eval", ""],
-        ["\n", ""],
-      	["print(", "message.channel.send("]
-      ]
-    }
+		"display_in_help": true,
+		"name": "eval",
+		"help": "Runs code!",
+		"embed": false,
+      	"replace": [
+        	[";eval", ""],
+        	["\n", ""],
+      		["print(", "message.channel.send("]
+      	]
+    },
+	"cmd_google": {
+		"display_in_help": true,
+		"name": "google",
+		"help": "Searches something in google!"
+	}
   }
 }
