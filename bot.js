@@ -86,7 +86,7 @@ function handleCommand(message, command, args) {
 		let newtime = time * 60 * 100;
 		member.addRole(muterole).then(msg => {
 			message.channel.send(`${member} Has been muted by ${caller} for ${newtime} minutes!`); 
-			setTimeout({ member.removeRole(muterole); }, newtime);
+			setTimeout(() => { member.removeRole(muterole); }, newtime);
 		})
 	}
 	if (command == "kick") {
