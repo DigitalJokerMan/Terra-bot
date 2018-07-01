@@ -85,7 +85,7 @@ function handleCommand(message, command, args) {
 			for(var commandname in config.commands) {
 				let commandOBJ = config.commands[commandname];
 				if(commandOBJ.display_in_help) {
-					helpMSG = helpMSG.concat(prefix + commandOBJ.name + ": " + commandOBJ.help + "\n");
+					helpMSG = helpMSG.concat("Use " + prefix + commandOBJ.name + " " + commandOBJ.help + "\n");
 				}
 			}
 			console.log("THE HEPO HEMMESSAGE IOS: " + helpMSG);
