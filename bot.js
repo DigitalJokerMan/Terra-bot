@@ -27,6 +27,7 @@ client.on('message', message => {
 		let msg = message.content;
 		if (message.author.bot) return;
 		if(msg.startsWith(prefix)) {
+			msg = msg.substring(prefix.length);
 			let command = msg.split(" ")[0];
 			let args = msg.split(" ").slice(1);
 
