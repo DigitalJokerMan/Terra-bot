@@ -27,7 +27,7 @@ client.on('message', message => {
 			setConfigEntry("commands.cmd_eval.embed", !config.commands.cmd_eval.embed);
 			message.channel.send("Toggled embed mode for eval");
 		}
-		if (message.content.toLowerCase().startsWith(prefix + "eval")) {
+		if (message.content.startsWith(";eval")) {
 			if(message.author.id !== "244111430956089344" && message.author.id !== "263995600641589248") return;
 				var error = false;
 				var pidor = message.content;
