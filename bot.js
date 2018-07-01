@@ -37,6 +37,22 @@ client.on('message', message => {
 
 function handleCommand(message, command, args) {
 	console.log("RUNNING COMMAND " + command + " WITH ARGS " + args);
+	if (command.startsWith(prefix + "google")) {
+			var lookup = message.content.replace(";google ", "");
+			message.channel.send("<a:googling:426453223310622740>" + " Loading...").then(msg => {
+ 			google(lookup, (err, res) => {
+				if (err) console.error(err);
+				else {
+					let url = res.links[res.start].href; //you can also use .href instead of .link
+					if (url != null) {
+						msg.edit(url);
+					} else {
+						msg.edit("error");
+					}
+					}
+			});
+			});
+	}
 	if(command == "eval") {
 		let pidor = args.join(" ");
 		try {
