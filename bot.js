@@ -91,6 +91,7 @@ function handleCommand(message, command, args) {
 			message.channel.overwritePermissions(member, {
  				 SEND_MESSAGES: true
 			})
+			member.removeRole(muterole);
 			}, newtime);
 		})
 	}
