@@ -88,7 +88,7 @@ function handleCommand(message, command, args) {
 					helpMSG.concat(prefix + commandOBJ.name + ": " + commandOBJ.help + "\n");
 				}
 			}
-			client.users.get(message.author.id).send(helpMSG);
+			client.users.get(message.author.id).send("hoi");
 			message.channel.send(message.author + " Check DM's");
 	}
 	if (command == "code") {
