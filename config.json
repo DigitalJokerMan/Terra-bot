@@ -1,5 +1,6 @@
 {
   "commands": {
+    "prefix": ";",
     "cmd_eval": {
 		"__COMMENT": "add stuff to the replace for the eval to replace! (cool right?)",
 	    "embed": false,
