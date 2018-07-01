@@ -53,6 +53,5 @@ function setConfigEntry(key, value) {
 	if (err) return console.log(err);
 	console.log(JSON.stringify(config));
 	console.log('writing to ' + "./config.json");
-});
-}
+})}
 client.login(process.env.TOKEN);
