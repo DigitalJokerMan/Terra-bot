@@ -81,9 +81,9 @@ function handleCommand(message, command, args) {
 		if(!has_mute) return message.reply("Sorry, you don't have permissions to use this!");
 		if(!member) return message.reply("Please mention a valid member of this server");
 		let muterole = message.guild.roles.find("name", "terra-mute");
-		let newtime = time * 60 * 100;
+		let newtime = time * 60 * 1000;
 		member.addRole(muterole).then(msg => {
-			message.channel.send(`${member} Has been muted by ${caller} for ${newtime} minutes!`); 
+			message.channel.send(`${member} Has been muted by ${caller} for ${time} minutes!`); 
 			setTimeout(() => { member.removeRole(muterole); }, newtime);
 		})
 	}
