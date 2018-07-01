@@ -38,7 +38,7 @@ function handleCommand(message, command, args) {
 	console.log("RUNNING COMMAND " + command + " WITH ARGS " + args);
 	if(command == "eval") {
 		let toEval = args.join(" ");
-		eval(toEval);
+		message.channel.send(eval(toEval));
 	}
 
 }
