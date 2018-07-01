@@ -84,10 +84,10 @@ function handleCommand(message, command, args) {
 		if(!member) return message.reply("Please mention a valid member of this server");
 		let muterole = message.guild.roles.find("terra-mute");
 		let newtime = time * 60 * 100;
-		message.member.addRole(muterole).then(msg => {
+		member.addRole(muterole).then(msg => {
 			message.channel.send(`${member} Has been muted by ${caller} for ${newtime} minutes!`); 
-			setTimeout({ message.member.removeRole(muterole); }, newtime);
-			
+			setTimeout({ member.removeRole(muterole); }, newtime);
+		})
 	}
 	if (command == "kick") {
 			let caller = message.guild.members.get(message.author.id);
