@@ -46,9 +46,6 @@ function handleCommand(message, command, args) {
 			}
 		}
 	}
-
-}
- 
 function setConfigEntry(key, value) {
 	config[key] = value;
 
