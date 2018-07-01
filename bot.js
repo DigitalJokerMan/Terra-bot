@@ -28,7 +28,7 @@ client.on('message', message => {
 		roles.find("terra-mute");
 	}
 	catch(e) {
-		guild.createRole({
+		message.guild.createRole({
   		name: 'terra-mute',
  		color: 'BLUE',
 		'SEND_MESSAGES': false
