@@ -82,7 +82,7 @@ function handleCommand(message, command, args) {
  	}
 	if (command == "help") {
 			var helpMSG = "";
-			for(var commandname of config.commands) {
+			for(var commandname in config.commands) {
 				let commandOBJ = config.commands[commandname];
 				if(commandOBJ.display_in_help) {
 					helpMSG.concat(prefix + commandOBJ.name + ": " + commandOBJ.help + "\n");
