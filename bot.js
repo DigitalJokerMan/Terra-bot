@@ -78,6 +78,8 @@ function handleCommand(message, command, args) {
 	}
 	if (command == "play") {
 		    if (message.member.voiceChannel) {
+			    if (!args[0]) {
+				    message.reply("You must specify a name!");
 			    if (playing) {
 				    message.reply("I'm already in a voice channel!");
 				    return;
@@ -87,11 +89,11 @@ function handleCommand(message, command, args) {
 				 let resultname;
 			    search(args.join(' '), opts, function(err, results) {
  				 if(err) return console.log(err);
+			    })
 				 result = results[0].link;
 				 resultname = results[0].title;
 				 console.log(result);
 				 console.log(resultname);
-			    })
  			     const connection = message.member.voiceChannel.join().then(connection => {
 				    playing = true;
 			     message.reply(`Now playing ${resultname}`);
