@@ -83,7 +83,6 @@ function handleCommand(message, command, args) {
 					message.member.voiceChannel.leave();
 					return;
 				)}
-			});
 		    } else {
    			   message.reply('You need to join a voice channel first!');
 			   return;
