@@ -4,9 +4,7 @@ const google = require('google');
 const config = require("./config.json");
 const ytdl = require("ytdl-core");
 const client = new Discord.Client();
-var knock = true;
-var jokeover = true;
-var laugh = false;
+const streamOptions = { seek: 0, volume: 1 };
 var prefix = config.prefix;
 
 client.on('ready', () => {
@@ -75,7 +73,6 @@ function handleCommand(message, command, args) {
 		message.channel.send(new Date().getTime() - message.createdTimestamp + " ms");
 	}
 	if (command == "join") {
-		const streamOptions = { seek: 0, volume: 1 };
 		    if (message.member.voiceChannel) {
  			     const connection = message.member.voiceChannel.join();
 			     message.reply('Queue started, connecting...');
