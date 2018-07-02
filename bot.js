@@ -79,7 +79,7 @@ function handleCommand(message, command, args) {
 		const streamOptions = { seek: 0, volume: 1 };
 		    if (message.member.voiceChannel) {
  			     const connection = message.member.voiceChannel.join();
-			     message.reply('Queue started, connecting...`);
+			     message.reply('Queue started, connecting...');
             			const stream = ytdl('https://www.youtube.com/watch?v=dQw4w9WgXcQ');
             			const dispatcher = connection.playStream(stream, streamOptions);
 		    } else {
