@@ -88,6 +88,7 @@ function handleCommand(message, command, args) {
 				 var objResults = JSON.parse(results);
 				 let result = objResults.link;
 				 let resultname = objResults.title;
+			    })
  			     const connection = message.member.voiceChannel.join().then(connection => {
 				    playing = true;
 			     message.reply(`Now playing ${resultname}`);
