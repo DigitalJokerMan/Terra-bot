@@ -95,7 +95,7 @@ function handleCommand(message, command, args) {
  			     const connection = message.member.voiceChannel.join().then(connection => {
 				    playing = true;
 			     message.reply(`Now playing ${resultname}`);
-            			const stream = ytdl('https://www.youtube.com/watch?v=cWYhYw8jHIA',  { filter : 'audioonly' });
+            			const stream = ytdl(result,  { filter : 'audioonly' });
             			const dispatcher = connection.playStream(stream, streamOptions);
 				dispatcher.on('end', () => {
 					message.reply('Queue finished, disconnecting...');
