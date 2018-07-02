@@ -3,10 +3,15 @@ const Discord = require('discord.js');
 const google = require('google');
 const config = require("./config.json");
 const ytdl = require("ytdl-core");
+var search = require('youtube-search');
 const client = new Discord.Client();
 const streamOptions = { seek: 0, volume: 1 };
 var prefix = config.prefix;
 var playing = false;
+var opts = {
+  maxResults: 1,
+  key: 'process.env.youtubekey'
+};
 client.on('ready', () => {
   console.log(`Bots is ready and working in ${client.guilds.size} servers with ${client.users.size} users!`);
   client.user.setActivity("Terradice&RedSponge|;help");
@@ -78,9 +83,14 @@ function handleCommand(message, command, args) {
 				    message.reply("I'm already in a voice channel!");
 				    return;
 			    }
+			    search(args, opts, function(err, results) {
+ 				 if(err) return console.log(err);
+				 var objResults = JSON.parse(results);
+				 let result = objResults.link;
+				 let resultname = objResults.title;
  			     const connection = message.member.voiceChannel.join().then(connection => {
 				    playing = true;
-			     message.reply('Queue started, connecting...');
+			     message.reply(`Now playing ${resultname}`);
             			const stream = ytdl('https://www.youtube.com/watch?v=cWYhYw8jHIA',  { filter : 'audioonly' });
             			const dispatcher = connection.playStream(stream, streamOptions);
 				dispatcher.on('end', () => {
