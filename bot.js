@@ -128,7 +128,12 @@ function handleCommand(message, command, args) {
 		message.channel.send(`ID:  ${message.author.id}`);
 	}
 	if (command == "dice") {
-		message.channel.send(Math.floor(Math.random()*(6-1+1)+1))
+		let rolls = args[0];
+		let min = args[1];
+		let max = args[2];
+		for(var i = 0; i > rolls; i++) {
+			message.channel.send(Math.floor(Math.random()*(max-min+1)+min));
+		}
 	}
 	if (command == "uptime") {
 			const embed = new Discord.RichEmbed()
