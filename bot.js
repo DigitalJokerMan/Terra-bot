@@ -77,11 +77,12 @@ function handleCommand(message, command, args) {
  			     const connection = message.member.voiceChannel.join().then(connection => {
 			     message.reply('Queue started, connecting...');
             			const stream = ytdl('https://www.youtube.com/watch?v=dQw4w9WgXcQ',  { filter : 'audioonly' });
-            			const dispatcher = connection.playStream(stream, streamOptions).then(msg => {
+            			const dispatcher = connection.playStream(stream, streamOptions);
+				dispatcher.on('end', () => {
 					message.reply('Queue finished, disconnecting...');
 					message.member.voiceChannel.leave();
 					return;
-				})
+				)}
 			});
 		    } else {
    			   message.reply('You need to join a voice channel first!');
