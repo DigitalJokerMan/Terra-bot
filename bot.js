@@ -105,6 +105,7 @@ function handleCommand(message, command, args) {
 					playing = false;
 					return;
 				})
+			     });
 		    } else {
    			   message.reply('You need to join a voice channel first!');
 			   return;
@@ -210,12 +211,4 @@ function handleCommand(message, command, args) {
 
 
 	}
-function setConfigEntry(key, value) {
-	config[key] = value;
-
-	fs.writeFile("./config.json", JSON.stringify(config), function (err) {
-	if (err) return console.log(err);
-	console.log(JSON.stringify(config));
-	console.log('writing to ' + "./config.json");
-})}
 client.login(process.env.TOKEN);
