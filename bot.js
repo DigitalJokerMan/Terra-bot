@@ -79,6 +79,7 @@ function handleCommand(message, command, args) {
             			const stream = ytdl('https://www.youtube.com/watch?v=dQw4w9WgXcQ',  { filter : 'audioonly' });
             			const dispatcher = connection.playStream(stream, streamOptions).then(msg => {
 					message.reply('Queue finished, disconnecting...');
+					message.member.voiceChannel.leave();
 				}
 			});
 		    } else {
