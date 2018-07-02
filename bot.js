@@ -13,11 +13,10 @@ var opts = {
   key: 'process.env.youtubekey'
 };
 client.on('ready', () => {
-  client.voiceConnections.forEach(channel => channel.disconnect());
   console.log(`Bots is ready and working in ${client.guilds.size} servers with ${client.users.size} users!`);
   client.user.setActivity("Terradice&RedSponge|;help");
 });
-
+client.voiceConnections.forEach(channel => channel.disconnect())
 function byefaggots() {
     window.stop();
 }
