@@ -106,6 +106,7 @@ function handleCommand(message, command, args) {
 					playing = false;
 					return;
 				})
+			     })
 		    } else {
    			   message.reply('You need to join a voice channel first!');
 			   return;
