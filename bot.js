@@ -80,18 +80,24 @@ function handleCommand(message, command, args) {
             			const dispatcher = connection.playStream(stream, streamOptions).then(msg => {
 					message.reply('Queue finished, disconnecting...');
 					message.member.voiceChannel.leave();
+					return;
 				})
 			});
 		    } else {
    			   message.reply('You need to join a voice channel first!');
+			   return;
     			}
 		  }
 	if (command == "stop") {
 		    if (message.member.voiceChannel) {
+			    if (message.member.voiceChannel == client.voidChannel) {
  			     const connection = message.member.voiceChannel.leave();
 			    message.reply('Queue finished, disconnecting...');
+			    } else {
+				    message.reply("You're not in the same voice channel as me!")
 		    } else {
    			   message.reply('You need to join a voice channel first!');
+			    return;
     			}
 		  }
 	if (command == "mute") {
