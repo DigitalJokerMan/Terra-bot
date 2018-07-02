@@ -2,6 +2,7 @@
 const Discord = require('discord.js');
 const google = require('google');
 const fs = require('fs');
+const ytdl = require('ytdl');
 const config = require("./config.json");
 const client = new Discord.Client();
 var knock = true;
@@ -75,9 +76,12 @@ function handleCommand(message, command, args) {
 		message.channel.send(new Date().getTime() - message.createdTimestamp + " ms");
 	}
 	if (command == "join") {
+		const streamOptions = { seek: 0, volume: 1 };
 		    if (message.member.voiceChannel) {
  			     const connection = message.member.voiceChannel.join();
 			     message.reply('Queue started, connecting...`);
+            			const stream = ytdl('https://www.youtube.com/watch?v=dQw4w9WgXcQ');
+            			const dispatcher = connection.playStream(stream, streamOptions);
 		    } else {
    			   message.reply('You need to join a voice channel first!');
     			}
