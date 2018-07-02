@@ -80,8 +80,8 @@ function handleCommand(message, command, args) {
 				    return;
 			    }
  			     const connection = message.member.voiceChannel.join().then(connection => {
+				    playing = true;
 			     message.reply('Queue started, connecting...');
-				playing = true;
             			const stream = ytdl('https://www.youtube.com/watch?v=cWYhYw8jHIA',  { filter : 'audioonly' });
             			const dispatcher = connection.playStream(stream, streamOptions);
 				dispatcher.on('end', () => {
