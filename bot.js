@@ -9,7 +9,7 @@ const streamOptions = { seek: 0, volume: 1 };
 var prefix = config.prefix;
 var playing = false;
 var opts = {
-  maxResults: 1,
+  maxResults: 10,
   key: 'process.env.youtubekey'
 };
 client.on('ready', () => {
@@ -86,7 +86,7 @@ function handleCommand(message, command, args) {
 			    	 var objResults;
 				 let result;
 				 let resultname;
-			    search(args.join(" "), opts, function(err, results) {
+			    search(args.join(' '), opts, function(err, results) {
  				 if(err) return console.log(err);
 				 objResults = JSON.parse(results);
 				 result = objResults.link;
