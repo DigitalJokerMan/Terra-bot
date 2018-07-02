@@ -111,16 +111,15 @@ function handleCommand(message, command, args) {
     			message.channel.send(`${member.user.tag} has been kicked by ${message.author.tag} because: ${reason}`);
  	}
 	if (command == "help") {
-			var helpMSG = "";
-			for(var commandname in config.commands) {
-				let commandOBJ = config.commands[commandname];
-				if(commandOBJ.display_in_help) {
-					helpMSG = helpMSG.concat("Use " + prefix + commandOBJ.name + " " + commandOBJ.help + "\n");
-				}
-			}
-			console.log("THE HEPO HEMMESSAGE IOS: " + helpMSG);
-			client.users.get(message.author.id).send(helpMSG);
-			message.channel.send(message.author + " Check DM's");
+		const embed = new Discord.RichEmbed()
+		.setColor(530118)
+		.setFooter(`Terrabot operating in ${client.guilds.size} servers`, 'https://cdn.discordapp.com/embed/avatars/4.png')
+		.setAuthor("Help", client.user.avatarURL)
+		.addField("Bot Info","`help` `uptime`", false)
+		.addField("Utilities", "`google`", false)
+		.addField("Admin", "`kick` `mute` `ban`", false)
+		.addField("Fun", "`dice`", false);
+		message.channel.send(embed)
 	}
 	if (command == "code") {
 		message.channel.send('https://github.com/Terradice/Terra-bot');
