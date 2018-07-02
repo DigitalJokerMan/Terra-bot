@@ -93,8 +93,11 @@ function handleCommand(message, command, args) {
 			    if (message.member.voiceChannel == client.voidChannel) {
  			     const connection = message.member.voiceChannel.leave();
 			    message.reply('Queue finished, disconnecting...');
-			    } else {
+			    }
+			    else {
 				    message.reply("You're not in the same voice channel as me!")
+				    return;
+			    }
 		    } else {
    			   message.reply('You need to join a voice channel first!');
 			    return;
