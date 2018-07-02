@@ -132,9 +132,10 @@ function handleCommand(message, command, args) {
 		.setColor(530118)
 		.setFooter(`Terrabot operating in ${client.guilds.size} servers`, 'https://cdn.discordapp.com/embed/avatars/4.png')
 		.setAuthor("Help", client.user.avatarURL)
-		.addField("Bot Info","`help` `uptime`", false)
+		.addField("Bot Info","`help` `uptime` `code` `id`", false)
 		.addField("Utilities", "`google`", false)
 		.addField("Admin", "`kick` `mute` `ban`", false)
+		.addField("Music", "`join` `leave`, false)
 		.addField("Fun", "`dice`", false);
 		message.channel.send(embed)
 	}
