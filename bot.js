@@ -83,11 +83,14 @@ function handleCommand(message, command, args) {
 				    message.reply("I'm already in a voice channel!");
 				    return;
 			    }
+			    	 var objResults;
+				 let result;
+				 let resultname;
 			    search(args.join(" "), opts, function(err, results) {
  				 if(err) return console.log(err);
-				 var objResults = JSON.parse(results);
-				 let result = objResults.link;
-				 let resultname = objResults.title;
+				 objResults = JSON.parse(results);
+				 result = objResults.link;
+				 resultname = objResults.title;
 			    })
  			     const connection = message.member.voiceChannel.join().then(connection => {
 				    playing = true;
