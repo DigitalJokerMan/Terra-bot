@@ -85,7 +85,6 @@ function handleCommand(message, command, args) {
 				    message.reply("I'm already in a voice channel!");
 				    return;
 			    }
-			    	 var objResults;
 				 let result;
 				 let resultname;
 			    search(args.join(' '), opts, function(err, results) {
