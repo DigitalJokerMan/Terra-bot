@@ -80,7 +80,7 @@ function handleCommand(message, command, args) {
             			const dispatcher = connection.playStream(stream, streamOptions).then(msg => {
 					message.reply('Queue finished, disconnecting...');
 					message.member.voiceChannel.leave();
-				}
+				})
 			});
 		    } else {
    			   message.reply('You need to join a voice channel first!');
