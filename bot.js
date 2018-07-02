@@ -90,7 +90,7 @@ function handleCommand(message, command, args) {
 		  }
 	if (command == "stop") {
 		    if (message.member.voiceChannel) {
-			    if (message.member.voiceChannel == client.voidChannel) {
+			    if (message.member.voiceChannelID === message.guild.voiceConnection.channel.id) {
  			     const connection = message.member.voiceChannel.leave();
 			    message.reply('Queue finished, disconnecting...');
 			    }
