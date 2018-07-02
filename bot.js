@@ -89,7 +89,7 @@ function handleCommand(message, command, args) {
 				 let resultname;
 			    search(args.join(' '), opts, function(err, results) {
  				 if(err) return console.log(err);
-			    })
+			    });
 				 result = results[0].link;
 				 resultname = results[0].title;
 				 console.log(result);
