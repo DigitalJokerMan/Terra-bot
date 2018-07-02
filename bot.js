@@ -135,7 +135,7 @@ function handleCommand(message, command, args) {
 		.addField("Bot Info","`help` `uptime` `code` `id`", false)
 		.addField("Utilities", "`google`", false)
 		.addField("Admin", "`kick` `mute` `ban`", false)
-		.addField("Music", "`join` `leave`, false)
+		.addField("Music", "`join` `leave`", false)
 		.addField("Fun", "`dice`", false);
 		message.channel.send(embed)
 	}
