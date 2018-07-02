@@ -6,7 +6,7 @@ const ytdl = require("ytdl-core");
 const client = new Discord.Client();
 const streamOptions = { seek: 0, volume: 1 };
 var prefix = config.prefix;
-
+var playing = false;
 client.on('ready', () => {
   console.log(`Bots is ready and working in ${client.guilds.size} servers with ${client.users.size} users!`);
   client.user.setActivity("Terradice&RedSponge|;help");
@@ -43,7 +43,6 @@ client.on('message', message => {
 });
 
 function handleCommand(message, command, args) {
-	var playing = false;
 	console.log("RUNNING COMMAND " + command + " WITH ARGS " + args);
 	if (command == "google") {
 			var lookup = args.join(" ");
