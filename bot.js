@@ -95,7 +95,10 @@ function handleCommand(message, command, args) {
 			    if (message.member.voiceChannelID !== message.guild.voiceConnection.channel.id) {
 				    message.reply("You're not in the same voice channel as me!")
 				    return;
-			    }} catch(e) {
+			    } else { 
+				    message.member.voiceChannel.leave();
+			    }
+			    	} catch(e) {
 				    message.reply("I'm not in a voice channel!");
 			    }
 		    } else {
