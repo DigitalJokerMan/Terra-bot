@@ -160,7 +160,7 @@ function handleCommand(message, command, args) {
 	}
 	if (command =="id") {
 		if (args[0]) {
- 		   message.channel.send(message.mentions.members.first().id);
+ 		   message.channel.send(`ID:  ${message.mentions.members.first().id}`);
  		   return;
 		}
 		message.channel.send(`ID:  ${message.author.id}`);
