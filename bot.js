@@ -34,6 +34,7 @@ client.on('message', message => {
 	}
 		let msg = message.content;
 		if (message.author.bot) return;
+		if (!message.guild) return;
 		if(msg.startsWith(prefix)) {
 			msg = msg.substring(prefix.length);
 			let command = msg.split(" ")[0];
@@ -73,6 +74,20 @@ function handleCommand(message, command, args) {
 	if (command == "ping") {
 		message.channel.send(new Date().getTime() - message.createdTimestamp + " ms");
 	}
+	if (command == "join") {
+		    if (message.member.voiceChannel) {
+ 			     const connection = message.member.voiceChannel.join();
+		    } else {
+   			   message.reply('You need to join a voice channel first!');
+    			}
+		  }
+	if (command == "leave") {
+		    if (message.member.voiceChannel) {
+ 			     const connection = message.member.voiceChannel.leave();
+		    } else {
+   			   message.reply('You need to join a voice channel first!');
+    			}
+		  }
 	if (command == "mute") {
 		let member = message.mentions.members.first() || message.guild.members.get(args[0]);
 		let time = args[1];
