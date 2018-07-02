@@ -104,6 +104,7 @@ function handleCommand(message, command, args) {
 				    return;
 			    } else { 
 				    message.member.voiceChannel.leave();
+				    playing = false;
 			    }
 			    	} catch(e) {
 				    message.reply("I'm not in a voice channel!");
