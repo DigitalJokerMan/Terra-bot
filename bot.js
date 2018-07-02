@@ -72,7 +72,7 @@ function handleCommand(message, command, args) {
 	if (command == "ping") {
 		message.channel.send(new Date().getTime() - message.createdTimestamp + " ms");
 	}
-	if (command == "join") {
+	if (command == "play") {
 		    if (message.member.voiceChannel) {
  			     const connection = message.member.voiceChannel.join().then(connection => {
 			     message.reply('Queue started, connecting...');
@@ -83,7 +83,7 @@ function handleCommand(message, command, args) {
    			   message.reply('You need to join a voice channel first!');
     			}
 		  }
-	if (command == "leave") {
+	if (command == "stop") {
 		    if (message.member.voiceChannel) {
  			     const connection = message.member.voiceChannel.leave();
 			    message.reply('Queue finished, disconnecting...');
@@ -136,7 +136,7 @@ function handleCommand(message, command, args) {
 		.addField("Bot Info","`help` `uptime` `code` `id`", false)
 		.addField("Utilities", "`google`", false)
 		.addField("Admin", "`kick` `mute` `ban`", false)
-		.addField("Music", "`join` `leave`", false)
+		.addField("Music", "`play` `stop`", false)
 		.addField("Fun", "`dice`", false);
 		message.channel.send(embed)
 	}
