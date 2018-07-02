@@ -13,6 +13,7 @@ var opts = {
   key: 'process.env.youtubekey'
 };
 client.on('ready', () => {
+  client.voiceConnections.disconnect()
   console.log(`Bots is ready and working in ${client.guilds.size} servers with ${client.users.size} users!`);
   client.user.setActivity("Terradice&RedSponge|;help");
 });
@@ -25,7 +26,6 @@ client.on('guildMemberAdd', member => {
        member.send(`Welcome to the server, ${member}!`);
        console.log(`${member.user.username} has joined`);
 });
-
 client.on('message', message => {
 	if (!message.guild.roles.find("name", "terra-mute")) {
 	message.guild.createRole({
