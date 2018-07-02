@@ -88,9 +88,8 @@ function handleCommand(message, command, args) {
 				 let resultname;
 			    search(args.join(' '), opts, function(err, results) {
  				 if(err) return console.log(err);
-				 objResults = JSON.parse(results);
-				 result = objResults.link;
-				 resultname = objResults.title;
+				 result = results[0].link;
+				 resultname = results[0].name;
 			    })
  			     const connection = message.member.voiceChannel.join().then(connection => {
 				    playing = true;
