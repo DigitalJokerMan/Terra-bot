@@ -80,6 +80,7 @@ function handleCommand(message, command, args) {
 		    if (message.member.voiceChannel) {
 			    if (!args[0]) {
 				    message.reply("You must specify a name!");
+			    }
 			    if (playing) {
 				    message.reply("I'm already in a voice channel!");
 				    return;
@@ -105,7 +106,6 @@ function handleCommand(message, command, args) {
 					playing = false;
 					return;
 				})
-			     });
 		    } else {
    			   message.reply('You need to join a voice channel first!');
 			   return;
