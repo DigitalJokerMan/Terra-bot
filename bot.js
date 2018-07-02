@@ -153,7 +153,7 @@ function handleCommand(message, command, args) {
 		let max = Number(args[2]) || 6;
 		for(var i = 0; i < rolls; i++) {
 			let dice = Math.floor(Math.random()*(max-min+1)+min);
-			roll = roll.concat(",").concat(dice);
+			roll = roll.concat(dice).concat(,);
 		}
 		message.channel.send(roll);
 	}
