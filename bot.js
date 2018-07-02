@@ -87,7 +87,7 @@ function handleCommand(message, command, args) {
 			    }
 				 let result;
 				 let resultname;
-			    search('despacito', opts, function(err, results) {
+			    search(args.join(' '), opts, function(err, results) {
  				 if(err) return console.log(err);
 				 result = results[0].link;
 				 resultname = results[0].title;
