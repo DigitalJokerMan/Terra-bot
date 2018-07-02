@@ -43,6 +43,7 @@ client.on('message', message => {
 });
 
 function handleCommand(message, command, args) {
+	var playing = false;
 	console.log("RUNNING COMMAND " + command + " WITH ARGS " + args);
 	if (command == "google") {
 			var lookup = args.join(" ");
@@ -74,13 +75,19 @@ function handleCommand(message, command, args) {
 	}
 	if (command == "play") {
 		    if (message.member.voiceChannel) {
+			    if (playing) {
+				    message.reply("I'm already in a voice channel!");
+				    return;
+			    }
  			     const connection = message.member.voiceChannel.join().then(connection => {
 			     message.reply('Queue started, connecting...');
+				playing = true;
             			const stream = ytdl('https://www.youtube.com/watch?v=cWYhYw8jHIA',  { filter : 'audioonly' });
             			const dispatcher = connection.playStream(stream, streamOptions);
 				dispatcher.on('end', () => {
 					message.reply('Queue finished, disconnecting...');
 					message.member.voiceChannel.leave();
+					playing = false;
 					return;
 				})
 			     });
