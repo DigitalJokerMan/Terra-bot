@@ -159,6 +159,10 @@ function handleCommand(message, command, args) {
 		message.channel.send('https://github.com/Terradice/Terra-bot');
 	}
 	if (command =="id") {
+		if (args[0]) {
+ 		   message.channel.send(message.mentions.first().id);
+ 		   return;
+		}
 		message.channel.send(`ID:  ${message.author.id}`);
 	}
 	if (command == "dice") {
