@@ -77,6 +77,7 @@ function handleCommand(message, command, args) {
 	if (command == "join") {
 		    if (message.member.voiceChannel) {
  			     const connection = message.member.voiceChannel.join();
+			     message.reply('Queue started, connecting...`);
 		    } else {
    			   message.reply('You need to join a voice channel first!');
     			}
@@ -84,6 +85,7 @@ function handleCommand(message, command, args) {
 	if (command == "leave") {
 		    if (message.member.voiceChannel) {
  			     const connection = message.member.voiceChannel.leave();
+			    message.reply('Queue finished, disconnecting...');
 		    } else {
    			   message.reply('You need to join a voice channel first!');
     			}
