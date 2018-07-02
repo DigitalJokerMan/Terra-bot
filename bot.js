@@ -1,8 +1,6 @@
 
 const Discord = require('discord.js');
 const google = require('google');
-const fs = require('fs');
-const ytdl = require('ytdl');
 const config = require("./config.json");
 const client = new Discord.Client();
 var knock = true;
