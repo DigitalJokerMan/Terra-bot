@@ -10,7 +10,7 @@ var prefix = config.prefix;
 var playing = false;
 var opts = {
   maxResults: 10,
-  key: 'process.env.youtubekey'
+  key: process.env.youtubekey
 };
 client.on('ready', () => {
   console.log(`Bots is ready and working in ${client.guilds.size} servers with ${client.users.size} users!`);
