@@ -6,7 +6,7 @@ const ytdl = require("ytdl-core");
 var search = require('youtube-search');
 const client = new Discord.Client();
 const streamOptions = { seek: 0, volume: 1 };
-var promise = "418750667067359234";
+var promise = "";
 var prefix = config.prefix;
 var opts = {
   maxResults: 10,
@@ -82,10 +82,6 @@ function handleCommand(message, command, args) {
 				    message.reply("You must specify a name!");
 				    return;
 			    }
-			    if (promise.channel.guild.voiceConnection) {
-				    message.reply("I'm already in a voice channel!");
-				    return;
-			    }
 				 let result;
 				 let resultname;
 			    search(args.join(' '), opts, function(err, results) {
@@ -96,7 +92,10 @@ function handleCommand(message, command, args) {
 				 console.log(result);
 				 console.log(resultname);
  			     const connection = message.member.voiceChannel.join().then(connection => {
-				     promise = connection;
+			    if (promise.channel.guild.voiceConnection) {
+				    message.reply("I'm already in a voice channel!");
+				    return;
+			    }
 			     message.reply(`Now playing ${resultname}`);
             			const stream = ytdl(result,  { filter : 'audioonly' });
             			const dispatcher = connection.playStream(stream, streamOptions);
