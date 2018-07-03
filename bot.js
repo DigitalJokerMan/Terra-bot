@@ -104,7 +104,7 @@ function handleCommand(message, command, args) {
 				 result = results[0].link;
 				 resultname = results[0].title;
 			    })
-				servers[message.channel.guild.id].queue.push(result);
+				servers[message.channel.guild.id].queue.push("https://www.youtube.com/watch?v=zxz3DP8v9ko");
  			     const connection = message.member.voiceChannel.join().then(connection => {
 			     message.reply(`Added ${resultname} to the queue`);
             			const stream = ytdl(servers[message.channel.guild.id].queue[0],  { filter : 'audioonly' });
