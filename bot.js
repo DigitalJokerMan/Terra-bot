@@ -119,8 +119,7 @@ function handleCommand(message, command, args) {
 					}
 					})
 			     	})
-			     }
-			else {
+			     } else {
    			   message.reply('You need to join a voice channel first!');
 			   return;
     			}
@@ -246,5 +245,5 @@ function handleCommand(message, command, args) {
 		.addField("Hours",Math.round(client.uptime / (1000 * 60 * 60)), true )
 		.addField("Minutes", Math.round(client.uptime / (1000 * 60)) % 60, true);
 		message.channel.send(embed)
-	}}}
+	}}
 client.login(process.env.TOKEN);
