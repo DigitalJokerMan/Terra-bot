@@ -23,6 +23,10 @@ client.on('ready', () => {
 		 servers[key] = {}
 		servers["" + key]["queue"] = [];
 	}
+	for(var songName of client.guilds.keys()) {
+		 servers[songName] = {}
+		servers["" + songName]["songname"] = [];
+	}
 });
 client.voiceConnections.forEach(channel => channel.disconnect())
 function byefaggots() {
@@ -104,6 +108,7 @@ function handleCommand(message, command, args) {
 				 result = results[0].link;
 				 resultname = results[0].title;
 				servers[message.channel.guild.id].queue.push(result);
+				servers[message.channel.guild.id].songName.push(resultname);
 			    })
  			     const connection = message.member.voiceChannel.join().then(connection => {
 			     message.reply(`Added ${resultname} to the queue`);
@@ -132,6 +137,7 @@ function handleCommand(message, command, args) {
 				    return;
 			    } else { 
 				    server[key].queue = [];
+				    servers[songName].songname = [];
 				    message.member.voiceChannel.leave();
 			    }
 			    	} catch(e) {
@@ -143,12 +149,13 @@ function handleCommand(message, command, args) {
     			}
 		  }
 	if (command == "queue") {
-		message.reply(servers[message.channel.guild.id].queue);
+		message.reply(servers[message.channel.guild.id].songname);
 		return;
 	}
 	if (command == "skip") {
 		message.reply("Skipping...");
 		servers[message.channel.guild.id].queue.shift();
+		servers[message.channel.guild.id].songname.shift();
 	}
 	if (command == "mute") {
 		let member = message.mentions.members.first() || message.guild.members.get(args[0]);
