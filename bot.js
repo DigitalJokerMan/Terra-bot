@@ -117,6 +117,7 @@ function handleCommand(message, command, args) {
 					if (servers[message.channel.guild.id].queue.lengh == 0) {
 						message.channel.send("Queue over, disconnecting...");
 						message.member.voiceChannel.leave();
+						break;
 						bool = false;
 						return;
 					}
