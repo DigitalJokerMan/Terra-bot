@@ -3,10 +3,12 @@ const google = require('google');
 const config = require("./config.json");
 const ytdl = require("ytdl-core");
 const search = require('youtube-search');
+
+var servers = {};
+
 const client = new Discord.Client();
 const streamOptions = { seek: 0, volume: 1 };
 var prefix = config.prefix;
-var servers = {};
 var opts = {
   maxResults: 10,
   key: process.env.youtubekey
@@ -18,7 +20,12 @@ client.on('ready', () => {
 		console.log(id);
 		servers["" + id]["queue"] = [];
 	}*/
-	for(var key of client.guilds.keys()) {console.log(key);}
+	for(var key of client.guilds.keys()) {
+		console.log(key);
+		console.log(servers);
+		servers["" + id]["queue"] = [];
+		console.log(servers[""+id].queue);
+	}
 });
 client.voiceConnections.forEach(channel => channel.disconnect())
 function byefaggots() {
