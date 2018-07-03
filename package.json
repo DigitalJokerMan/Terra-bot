@@ -15,7 +15,7 @@
     "ytdl-core": "^0.20.4",
     "node-opus": "^0.3.0",
     "opusscript": "0.0.3",
-    "simple-youtube-api": "^5.0.2",
+    "youtube-search": "^1.1.1",
     "google": "^2.1.0"
   },
     "devDependencies": {
