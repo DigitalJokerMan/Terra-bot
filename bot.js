@@ -99,8 +99,6 @@ function handleCommand(message, command, args) {
 			    	}
 				 let result;
 				 let resultname;
-			    	var bool = true;
-			    while (bool) {  
 			search(args.join(' '), opts, function(err, results) {
  				 if(err) return;
 				 result = results[0].link;
@@ -117,14 +115,11 @@ function handleCommand(message, command, args) {
 					if (servers[message.channel.guild.id].queue.lengh == 0) {
 						message.channel.send("Queue over, disconnecting...");
 						message.member.voiceChannel.leave();
-						break;
-						bool = false;
 						return;
 					}
 					})
 			     	})
 			     }
-		   	 }
 			else {
    			   message.reply('You need to join a voice channel first!');
 			   return;
