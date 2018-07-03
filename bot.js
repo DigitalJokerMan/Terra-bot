@@ -137,6 +137,10 @@ function handleCommand(message, command, args) {
 			    return;
     			}
 		  }
+	if (command == "queue") {
+		message.reply(server[id].queue);
+		return;
+	}
 	if (command == "mute") {
 		let member = message.mentions.members.first() || message.guild.members.get(args[0]);
 		let time = args[1];
