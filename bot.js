@@ -15,7 +15,7 @@ client.on('ready', () => {
   console.log(`Bots is ready and working in ${client.guilds.size} servers with ${client.users.size} users!`);
   client.user.setActivity("Terradice&RedSponge|;help");
 	for(var id of client.guilds.keys()) {
-		servers["" + id].queue = [];
+		servers[id]["queue"] = [];
 	}
 });
 client.voiceConnections.forEach(channel => channel.disconnect())
