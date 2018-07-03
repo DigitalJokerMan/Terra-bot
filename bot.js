@@ -109,8 +109,8 @@ function handleCommand(message, command, args) {
 				 resultname = results[0].title;
 				console.log(result);
 				console.log(resultname);
-				servers[message.channel.guild.id].queue.push(result);
-				servers[message.channel.guild.id].songName.push(resultname);
+				servers[message.guild.id].queue.push(result);
+				servers[message.guild.id].songName.push(resultname);
 			    })
 			    console.log(servers[message.channel.guild.id].queue);
 			    console.log(servers[message.channel.guild.id].songName);
