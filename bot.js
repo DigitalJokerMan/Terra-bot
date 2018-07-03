@@ -81,7 +81,7 @@ function handleCommand(message, command, args) {
 				    message.reply("You must specify a name!");
 				    return;
 			    }
-			    if (message.channel.guild.id.voiceConnection) {
+			    if (message.channel.guild.voiceConnection) {
 				    message.reply("I'm already in a voice channel!");
 				    return;
 			    }
