@@ -99,19 +99,19 @@ function handleCommand(message, command, args) {
 				 result = results[0].link;
 				 resultname = results[0].title;
 			    });
-				servers[id].queue.push(result);
+				servers[message.channel.guild.id].queue.push(result);
  			     const connection = message.member.voiceChannel.join().then(connection => {
 			     message.reply(`Now playing ${resultname}`);
             			const stream = ytdl(result,  { filter : 'audioonly' });
             			const dispatcher = connection.playStream(stream, streamOptions);
 				dispatcher.on('end', () => {
-					if (servers[id].queue.lengh == 0) {
+					if (servers[message.channel.guild.id].queue.lengh == 0) {
 						message.channel.send("Queue over, disconnecting...");
 						message.member.voiceChannel.leave();
 						return;
 					}
 					message.channel.send(`Next up, ${resultname}`);
-					servers[id].queue.shift();
+					servers[message.channel.guild.id].queue.shift();
 				})
 			     })
 		    } else {
@@ -137,7 +137,7 @@ function handleCommand(message, command, args) {
     			}
 		  }
 	if (command == "queue") {
-		message.reply(server[id].queue);
+		message.reply(server[message.channel.guild.id].queue);
 		return;
 	}
 	if (command == "mute") {
