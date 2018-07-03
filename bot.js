@@ -168,10 +168,12 @@ function handleCommand(message, command, args) {
 			message.channel.overwritePermissions(member, {
  				 SEND_MESSAGES: false
 			})
+			console.log("muted");
 			setTimeout(() => { 
 			message.channel.overwritePermissions(member, {
  				 SEND_MESSAGES: true
 			})
+			console.log("unmuted");
 			member.removeRole(muterole);
 			}, newtime);
 		})
