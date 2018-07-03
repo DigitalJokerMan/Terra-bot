@@ -6,8 +6,8 @@ const ytdl = require("ytdl-core");
 var search = require('youtube-search');
 const client = new Discord.Client();
 const streamOptions = { seek: 0, volume: 1 };
+var promise = "";
 var prefix = config.prefix;
-var playing = false;
 var opts = {
   maxResults: 10,
   key: process.env.youtubekey
@@ -82,7 +82,7 @@ function handleCommand(message, command, args) {
 				    message.reply("You must specify a name!");
 				    return;
 			    }
-			    if (playing) {
+			    if (promise.channel.guild.voiceConnection) {
 				    message.reply("I'm already in a voice channel!");
 				    return;
 			    }
@@ -96,14 +96,13 @@ function handleCommand(message, command, args) {
 				 console.log(result);
 				 console.log(resultname);
  			     const connection = message.member.voiceChannel.join().then(connection => {
-				    playing = true;
+				     promise = connection;
 			     message.reply(`Now playing ${resultname}`);
             			const stream = ytdl(result,  { filter : 'audioonly' });
             			const dispatcher = connection.playStream(stream, streamOptions);
 				dispatcher.on('end', () => {
 					message.reply('Queue finished, disconnecting...');
 					message.member.voiceChannel.leave();
-					playing = false;
 					return;
 				})
 			     })
@@ -120,7 +119,6 @@ function handleCommand(message, command, args) {
 				    return;
 			    } else { 
 				    message.member.voiceChannel.leave();
-				    playing = false;
 			    }
 			    	} catch(e) {
 				    message.reply("I'm not in a voice channel!");
