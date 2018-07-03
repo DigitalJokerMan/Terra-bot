@@ -81,6 +81,7 @@ async function handleCommand(message, command, args) {
 		message.channel.send(`${message.author} Says: ${args.join(" ")}`);
 	}
 	if (command == "play") {
+				const voiceChannel = msg.member.voiceChannel;
 				if (!voiceChannel) return msg.channel.send('I\'m sorry but you need to be in a voice channel to play music!');
 				const permissions = voiceChannel.permissionsFor(msg.client.user);
 				if (!permissions.has('CONNECT')) {
