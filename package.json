@@ -14,7 +14,17 @@
     "ffmpeg-binaries": "3.2.2-3",
     "ytdl-core": "^0.20.4",
     "node-opus": "^0.3.0",
-    "youtube-search": "^1.1.1",
+    "opusscript": "0.0.3",
+    "simple-youtube-api": "^5.0.2",
     "google": "^2.1.0"
   }
+    "devDependencies": {
+    "eslint": "^4.0.0",
+    "eslint-config-aqua": "^1.0.0"
+  },
+  "eslintConfig": {
+    "extends": "aqua",
+    "rules": {
+      "no-console": 0
+    }
 }
