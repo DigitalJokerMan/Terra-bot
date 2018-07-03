@@ -121,9 +121,11 @@ function handleCommand(message, command, args) {
 					message.channel.send(`Next up, ${resultname}`);
 					servers[message.channel.guild.id].queue.shift();
 					
-				})
+					})
+			     	})
 			     }
-		    } else {
+		   	 }
+			else {
    			   message.reply('You need to join a voice channel first!');
 			   return;
     			}
