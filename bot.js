@@ -105,6 +105,7 @@ function handleCommand(message, command, args) {
 				 resultname = results[0].title;
 				message.reply(`Added ${results[0].title} to the queue`);
 			    })
+			    for(var i = 0; i < servers[message.guild.id].queue; i = i) {
  			     const connection = message.member.voiceChannel.join().then(connection => {
 			     servers[message.guild.id].queue.push(result);
             			const stream = ytdl(servers[message.guild.id].queue[0],  { filter : 'audioonly' });
@@ -119,6 +120,7 @@ function handleCommand(message, command, args) {
 					}
 					})
 			     	})
+			     }
 			     } else {
    			   message.reply('You need to join a voice channel first!');
 			   return;
