@@ -21,10 +21,7 @@ client.on('ready', () => {
 	}*/
 	for(var key of client.guilds.keys()) {
 		 servers[key] = {}
-		console.log(key);
-		console.log(servers);
 		servers["" + key]["queue"] = [];
-		console.log(servers[""+key].queue);
 	}
 });
 client.voiceConnections.forEach(channel => channel.disconnect())
