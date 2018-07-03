@@ -127,10 +127,6 @@ function handleCommand(message, command, args) {
 		  }
 	if (command == "stop") {
 		    if (message.member.voiceChannel) {
-			    if (!client.voiceConnection) {
-				    message.reply("I'm not in a voice channel!");
-				    return;
-			    }
 			    if (message.member.voiceChannelID !== message.guild.voiceConnection.channel.id) {
 				    message.reply("You're not in the same voice channel as me!")
 				    return;
