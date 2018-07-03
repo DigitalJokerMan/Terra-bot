@@ -154,6 +154,9 @@ function handleCommand(message, command, args) {
 			}, newtime);
 		})
 	}
+	if(command == "-;" && args.length == 0) {
+		message.reply("Dont cry!");
+	}
 	if (command == "kick") {
 			let caller = message.guild.members.get(message.author.id);
 			let has_kick = caller.hasPermission("KICK_MEMBERS");
