@@ -101,7 +101,8 @@ function handleCommand(message, command, args) {
 				 let resultname;
 			    	var bool = true;
 			 
-			    while (bool) {   search(args.join(' '), opts, function(err, results) {
+			    while (bool) {  
+			search(args.join(' '), opts, function(err, results) {
  				 if(err) return;
 				 result = results[0].link;
 				 resultname = results[0].title;
