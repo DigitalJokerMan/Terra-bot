@@ -133,7 +133,6 @@ function handleCommand(message, command, args) {
 			    } else { 
 				    servers[message.guild.id].queue = [];
 				    console.log("queue over");
-						message.channel.send("Queue over, disconnecting...");
 						message.member.voiceChannel.leave();
 						return;
 			    }
