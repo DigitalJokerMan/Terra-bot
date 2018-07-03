@@ -112,13 +112,13 @@ function handleCommand(message, command, args) {
 				dispatcher.on('end', () => {
 					message.channel.send(`Next up, ${results[0].title}`);
 					servers[message.guild.id].queue.shift();
-            				const stream = ytdl(servers[message.guild.id].queue[0],  { filter : 'audioonly' });
-            				const dispatcher = connection.playStream(stream, streamOptions);
 					if (servers[message.guild.id].queue.lengh == 0) {
 						message.channel.send("Queue over, disconnecting...");
 						message.member.voiceChannel.leave();
 						return;
 					}
+            				const stream = ytdl(servers[message.guild.id].queue[0],  { filter : 'audioonly' });
+            				const dispatcher = connection.playStream(stream, streamOptions);
 					})
 			     	})
 			     } else {
