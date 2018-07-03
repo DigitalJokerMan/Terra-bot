@@ -7,6 +7,7 @@ const search = require('youtube-search');
 const client = new Discord.Client();
 const streamOptions = { seek: 0, volume: 1 };
 var prefix = config.prefix;
+var servers = {};
 var opts = {
   maxResults: 10,
   key: process.env.youtubekey
@@ -99,15 +100,19 @@ function handleCommand(message, command, args) {
 				 result = results[0].link;
 				 resultname = results[0].title;
 			    });
-
+				servers[id].queue.push(result);
  			     const connection = message.member.voiceChannel.join().then(connection => {
 			     message.reply(`Now playing ${resultname}`);
             			const stream = ytdl(result,  { filter : 'audioonly' });
             			const dispatcher = connection.playStream(stream, streamOptions);
 				dispatcher.on('end', () => {
-					message.reply('Queue finished, disconnecting...');
-					message.member.voiceChannel.leave();
-					return;
+					if (servers[id].queue.lengh == 0) {
+						message.channel.send("Queue over, disconnecting...");
+						message.member.voiceChannel.leave();
+						return;
+					}
+					message.channel.send(`Next up, ${resultname}`
+					servers[id].queue.shift();
 				})
 			     })
 		    } else {
@@ -178,7 +183,7 @@ function handleCommand(message, command, args) {
     			if(!has_ban) return message.reply("Sorry, you don't have permissions to use this!");
     			let member = message.mentions.members.first() || message.guild.members.get(args[0]);
     			if(!member) return message.reply("Please mention a valid member of this server");
-    			if(!member.banable) return message.reply("I cannot ban this user");
+    			if(!member.bannable) return message.reply("I cannot ban this user");
     				let reason = message.content.replace(";kick ", "");
 				reason = reason.replace(member, "");
     			if(!reason) reason = "No reason provided";
