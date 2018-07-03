@@ -93,9 +93,7 @@ function handleCommand(message, command, args) {
 				 result = results[0].link;
 				 resultname = results[0].title;
 			    });
-			    } catch(e) {
-				    console.log("ERROR!");
-			    }
+
  			     const connection = message.member.voiceChannel.join().then(connection => {
 			     message.reply(`Now playing ${resultname}`);
             			const stream = ytdl(result,  { filter : 'audioonly' });
@@ -106,6 +104,9 @@ function handleCommand(message, command, args) {
 					return;
 				})
 			     })
+			     } catch(e) {
+				    console.log("ERROR!");
+			    }
 		    } else {
    			   message.reply('You need to join a voice channel first!');
 			   return;
