@@ -149,6 +149,7 @@ function handleCommand(message, command, args) {
 	if (command == "skip") {
 		message.reply("Skipping...");
 		servers[message.channel.guild.id].queue.shift();
+	}
 	if (command == "mute") {
 		let member = message.mentions.members.first() || message.guild.members.get(args[0]);
 		let time = args[1];
