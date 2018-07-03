@@ -7,7 +7,7 @@ const client = new Discord.Client();
 const streamOptions = { seek: 0, volume: 1 };
 var prefix = config.prefix;
 const queue = new Map();
-const youtube = new YouTube(AIzaSyBOvCg2zTjH5Xb0NkMKZPWKTYhnYP6SBtE);
+const youtube = new YouTube(process.env.youtubekey);
 client.on('ready', () => {
   console.log(`Bots is ready and working in ${client.guilds.size} servers with ${client.users.size} users!`);
   client.user.setActivity("Terradice&RedSponge|;help");
