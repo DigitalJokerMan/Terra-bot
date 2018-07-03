@@ -76,6 +76,10 @@ function handleCommand(message, command, args) {
 		message.channel.send(new Date().getTime() - message.createdTimestamp + " ms");
 	}
 	if (command == "say") {
+		if (!args[0]) {
+			message.reply("You need to specify what to say!");
+			return;
+		}
 		message.channel.send(`${message.author} Says: ${args.join(" ")}`);
 	}
 	if (command == "play") {
