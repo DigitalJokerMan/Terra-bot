@@ -75,6 +75,9 @@ function handleCommand(message, command, args) {
 	if (command == "ping") {
 		message.channel.send(new Date().getTime() - message.createdTimestamp + " ms");
 	}
+	if (command == "say") {
+		message.channel.send(`${message.author} Says: ${args.join(" ")}`);
+	}
 	if (command == "play") {
 		    if (message.member.voiceChannel) {
 			    if (!args[0]) {
