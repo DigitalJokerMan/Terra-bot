@@ -81,6 +81,10 @@ function handleCommand(message, command, args) {
 				    message.reply("You must specify a name!");
 				    return;
 			    }
+			    if (message.channel.guild.id.voiceConnection) {
+				    message.reply("I'm already in a voice channel!");
+				    return;
+			    }
 				 let result;
 				 let resultname;
 			    search(args.join(' '), opts, function(err, results) {
@@ -91,10 +95,6 @@ function handleCommand(message, command, args) {
 				 console.log(result);
 				 console.log(resultname);
  			     const connection = message.member.voiceChannel.join().then(connection => {
-			    if (connection.channel.guild.voiceConnection) {
-				    message.reply("I'm already in a voice channel!");
-				    return;
-			    }
 			     message.reply(`Now playing ${resultname}`);
             			const stream = ytdl(result,  { filter : 'audioonly' });
             			const dispatcher = connection.playStream(stream, streamOptions);
