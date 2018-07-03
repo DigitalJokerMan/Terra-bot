@@ -42,7 +42,7 @@ client.on('message', message => {
 		}
 });
 
-function handleCommand(message, command, args) {
+async function handleCommand(message, command, args) {
 	const serverQueue = queue.get(message.guild.id);
 	console.log("RUNNING COMMAND " + command + " WITH ARGS " + args);
 	if (command == "google") {
