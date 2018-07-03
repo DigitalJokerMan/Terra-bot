@@ -254,4 +254,5 @@ function handleCommand(message, command, args) {
 
 
 	}
+}
 client.login(process.env.TOKEN);
