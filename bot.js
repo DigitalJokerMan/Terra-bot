@@ -154,8 +154,12 @@ function handleCommand(message, command, args) {
 	}
 	if (command == "skip") {
 		message.reply("Skipping...");
+		try {
 		servers[message.channel.guild.id].queue.shift();
 		servers[message.channel.guild.id].songname.shift();
+		} catch(e) {
+			message.reply("I'm not playing anything!");
+		}
 	}
 	if (command == "mute") {
 		let member = message.mentions.members.first() || message.guild.members.get(args[0]);
