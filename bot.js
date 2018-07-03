@@ -87,9 +87,8 @@ function handleCommand(message, command, args) {
 			    }
 				 let result;
 				 let resultname;
-			    try {
 			    search(args.join(' '), opts, function(err, results) {
- 				 if(err) return console.log(err);
+ 				 if(err) return;
 				 result = results[0].link;
 				 resultname = results[0].title;
 			    });
@@ -104,9 +103,6 @@ function handleCommand(message, command, args) {
 					return;
 				})
 			     })
-			     } catch(e) {
-				    console.log("ERROR!");
-			    }
 		    } else {
    			   message.reply('You need to join a voice channel first!');
 			   return;
