@@ -111,7 +111,7 @@ function handleCommand(message, command, args) {
 						message.member.voiceChannel.leave();
 						return;
 					}
-					message.channel.send(`Next up, ${resultname}`
+					message.channel.send(`Next up, ${resultname}`);
 					servers[id].queue.shift();
 				})
 			     })
