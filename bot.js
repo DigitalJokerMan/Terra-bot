@@ -100,13 +100,11 @@ function handleCommand(message, command, args) {
 				    message.reply("You must specify a name!");
 				    return;
 			    }
-			    if (message.channel.guild.voiceConnection) {
-				    message.reply("I'm already in a voice channel!");
-				    return;
-			    }
 				 let result;
 				 let resultname;
-			    search(args.join(' '), opts, function(err, results) {
+			    	var bool = true;
+			 
+			    while (bool) {   search(args.join(' '), opts, function(err, results) {
  				 if(err) return;
 				 result = results[0].link;
 				 resultname = results[0].title;
@@ -114,18 +112,21 @@ function handleCommand(message, command, args) {
 				servers[message.channel.guild.id].queue.push(result);
  			     const connection = message.member.voiceChannel.join().then(connection => {
 			     message.reply(`Now playing ${resultname}`);
-            			const stream = ytdl(result,  { filter : 'audioonly' });
+            			const stream = ytdl(servers[message.channel.guild.id].queue[0],  { filter : 'audioonly' });
             			const dispatcher = connection.playStream(stream, streamOptions);
 				dispatcher.on('end', () => {
 					if (servers[message.channel.guild.id].queue.lengh == 0) {
 						message.channel.send("Queue over, disconnecting...");
 						message.member.voiceChannel.leave();
+						bool = false;
 						return;
 					}
 					message.channel.send(`Next up, ${resultname}`);
 					servers[message.channel.guild.id].queue.shift();
+					
 				})
 			     })
+			     }
 		    } else {
    			   message.reply('You need to join a voice channel first!');
 			   return;
@@ -138,6 +139,7 @@ function handleCommand(message, command, args) {
 				    message.reply("You're not in the same voice channel as me!")
 				    return;
 			    } else { 
+				    server[key].queue = [];
 				    message.member.voiceChannel.leave();
 			    }
 			    	} catch(e) {
@@ -152,6 +154,9 @@ function handleCommand(message, command, args) {
 		message.reply(server[message.channel.guild.id].queue);
 		return;
 	}
+	if (command == "skip") {
+		message.reply("Skipping...");
+		servers[message.channel.guild.id].queue.shift();
 	if (command == "mute") {
 		let member = message.mentions.members.first() || message.guild.members.get(args[0]);
 		let time = args[1];
