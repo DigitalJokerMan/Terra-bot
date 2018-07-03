@@ -34,18 +34,7 @@ client.on('guildMemberAdd', member => {
        console.log(`${member.user.username} has joined`);
 });
 client.on('message', message => {
-	try {
-	if (!message.guild.roles.find("name", "terra-mute")) {
-	message.guild.createRole({
-  		name: 'terra-mute',
- 		color: 'BLUE',
-		SEND_MESSAGES: false
-	})
-	}
-	} catch(e) {
-		console.log("Can't create a mute role!");
-	}
-	if (message.content.toLowercase() == "owo") {
+	if (message.content == "owo") {
 		message.channel.send("https://media.discordapp.net/attachments/461069635165487137/463796448576929815/CatDance.gif");
 	}
 		let msg = message.content;
