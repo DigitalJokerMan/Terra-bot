@@ -162,7 +162,7 @@ function handleCommand(message, command, args) {
 			});
     			message.channel.send(`${member.user.tag} has been kicked by ${message.author.tag} because: ${reason}`);
  	}
-	if (command == "help") {
+	/*if (command == "help") {
 		const embed = new Discord.RichEmbed()
 		.setColor(530118)
 		.setFooter(`Terrabot operating in ${client.guilds.size} servers`, 'https://cdn.discordapp.com/embed/avatars/4.png')
@@ -173,7 +173,7 @@ function handleCommand(message, command, args) {
 		.addField("Music", "`play` `stop`", false)
 		.addField("Fun", "`dice`", false);
 		message.channel.send(embed)
-	}
+	} */
 	if (command == "code") {
 		message.channel.send('https://github.com/Terradice/Terra-bot');
 	}
