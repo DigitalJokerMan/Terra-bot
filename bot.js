@@ -110,7 +110,7 @@ function handleCommand(message, command, args) {
             			const stream = ytdl(servers[message.guild.id].queue[0],  { filter : 'audioonly' });
             			const dispatcher = connection.playStream(stream, streamOptions);
 				dispatcher.on('end', () => {
-					message.channel.send(`Next up, ${resultname}`);
+					message.channel.send(`Next up, ${results[0].title}`);
 					servers[message.guild.id].queue.shift();
 					if (servers[message.guild.id].queue.lengh == 0) {
 						message.channel.send("Queue over, disconnecting...");
