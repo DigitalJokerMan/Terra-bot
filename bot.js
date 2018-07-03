@@ -100,13 +100,12 @@ function handleCommand(message, command, args) {
 				 let result;
 				 let resultname;
 			    	var bool = true;
-			 
 			    while (bool) {  
 			search(args.join(' '), opts, function(err, results) {
  				 if(err) return;
 				 result = results[0].link;
 				 resultname = results[0].title;
-			    });
+			    })
 				servers[message.channel.guild.id].queue.push(result);
  			     const connection = message.member.voiceChannel.join().then(connection => {
 			     message.reply(`Now playing ${resultname}`);
