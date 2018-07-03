@@ -112,8 +112,8 @@ function handleCommand(message, command, args) {
 				servers[message.guild.id].queue.push(result);
 				servers[message.guild.id].songName.push(resultname);
 			    })
-			    console.log(servers[message.channel.guild.id].queue);
-			    console.log(servers[message.channel.guild.id].songName);
+			    console.log(servers[message.guild.id].queue);
+			    console.log(servers[message.guild.id].songName);
  			     const connection = message.member.voiceChannel.join().then(connection => {
 			     message.reply(`Added ${servers[message.channel.guild.id].songname[0]} to the queue`);
             			const stream = ytdl(servers[message.channel.guild.id].queue[0],  { filter : 'audioonly' });
