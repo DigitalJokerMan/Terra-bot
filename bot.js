@@ -45,6 +45,9 @@ client.on('message', message => {
 	} catch(e) {
 		console.log("Can't create a mute role!");
 	}
+	if (message.content.toLowercase() == "owo") {
+		message.channel.send("https://media.discordapp.net/attachments/461069635165487137/463796448576929815/CatDance.gif");
+	}
 		let msg = message.content;
 		if (message.author.bot) return;
 		if (!message.guild) return;
@@ -182,9 +185,6 @@ function handleCommand(message, command, args) {
 	}
 	if(command == "-;" && args.length == 0) {
 		message.reply("Dont cry!");
-	}
-	if (message.content.toLowercase() == "owo") {
-		message.channel.send("https://media.discordapp.net/attachments/461069635165487137/463796448576929815/CatDance.gif");
 	}
 	if (command == "kick") {
 			let caller = message.guild.members.get(message.author.id);
