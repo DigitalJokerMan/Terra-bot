@@ -6,7 +6,6 @@ const ytdl = require("ytdl-core");
 var search = require('youtube-search');
 const client = new Discord.Client();
 const streamOptions = { seek: 0, volume: 1 };
-var promise = "";
 var prefix = config.prefix;
 var opts = {
   maxResults: 10,
