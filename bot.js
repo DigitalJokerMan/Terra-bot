@@ -112,7 +112,7 @@ function handleCommand(message, command, args) {
 			    })
  			     const connection = message.member.voiceChannel.join().then(connection => {
 			     message.reply(`Added ${resultname} to the queue`);
-            			const stream = ytdl(servers[message.channel.guild.id].queue[0],  { filter : 'audioonly' });
+            			const stream = ytdl(servers[key].queue[0],  { filter : 'audioonly' });
             			const dispatcher = connection.playStream(stream, streamOptions);
 				dispatcher.on('end', () => {
 					message.channel.send(`Next up, ${resultname}`);
@@ -153,10 +153,11 @@ function handleCommand(message, command, args) {
 		return;
 	}
 	if (command == "skip") {
-		message.reply("Skipping...");
+		
 		try {
 		servers[message.channel.guild.id].queue.shift();
 		servers[message.channel.guild.id].songname.shift();
+		message.reply("Skipping...");
 		} catch(e) {
 			message.reply("I'm not playing anything!");
 		}
