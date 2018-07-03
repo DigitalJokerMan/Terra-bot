@@ -175,7 +175,7 @@ function handleCommand(message, command, args) {
 		.setFooter(`Terrabot operating in ${client.guilds.size} servers`, 'https://cdn.discordapp.com/embed/avatars/4.png')
 		.setAuthor("Help", client.user.avatarURL)
 		.addField("Bot Info","`help` `uptime` `code` `id`", false)
-		.addField("Utilities", "`google`", false)
+		.addField("Utilities", "`google` `say`", false)
 		.addField("Admin", "`kick` `mute` `ban`", false)
 		.addField("Music", "`play` `stop`", false)
 		.addField("Fun", "`dice`", false);
