@@ -106,6 +106,7 @@ function handleCommand(message, command, args) {
             			const dispatcher = connection.playStream(stream, streamOptions);
 				dispatcher.on('end', () => {
 					console.log("Song done");
+					message.member.voiceChannel.leave();
 					servers[message.guild.id].queue.shift();
 					if (servers[message.guild.id].queue.lengh == 0) {
 						console.log("queue over");
