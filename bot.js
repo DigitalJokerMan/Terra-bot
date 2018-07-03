@@ -143,7 +143,7 @@ function handleCommand(message, command, args) {
     			}
 		  }
 	if (command == "queue") {
-		message.reply(server[message.channel.guild.id].queue);
+		message.reply(servers[message.channel.guild.id].queue);
 		return;
 	}
 	if (command == "skip") {
