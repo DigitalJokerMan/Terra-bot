@@ -91,7 +91,7 @@ function handleCommand(message, command, args) {
 				 console.log(result);
 				 console.log(resultname);
  			     const connection = message.member.voiceChannel.join().then(connection => {
-			    if (promise.channel.guild.voiceConnection) {
+			    if (connection.channel.guild.voiceConnection) {
 				    message.reply("I'm already in a voice channel!");
 				    return;
 			    }
