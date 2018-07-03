@@ -108,7 +108,7 @@ function handleCommand(message, command, args) {
 			    })
 				servers[message.channel.guild.id].queue.push(result);
  			     const connection = message.member.voiceChannel.join().then(connection => {
-			     message.reply(`Now playing ${resultname}`);
+			     message.reply(`Added ${resultname} to the queue`);
             			const stream = ytdl(servers[message.channel.guild.id].queue[0],  { filter : 'audioonly' });
             			const dispatcher = connection.playStream(stream, streamOptions);
 				dispatcher.on('end', () => {
