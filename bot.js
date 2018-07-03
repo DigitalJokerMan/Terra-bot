@@ -106,10 +106,14 @@ function handleCommand(message, command, args) {
 			search(args.join(' '), opts, function(err, results) {
  				 if(err) return;
 				 result = results[0].link;
-				 resultname = results[0].title;
+				 resultname = results[0].title
+				try {
 				servers[message.guild.id].queue.push(result);
 				servers[message.guild.id].songName.push(resultname);
-			    }).then
+				} catch(e) {
+					console.log(e);
+				}
+			    })
 				 console.log(servers[message.guild.id].queue);
 			    	console.log(servers[message.guild.id].songName);
  			     const connection = message.member.voiceChannel.join().then(connection => {
