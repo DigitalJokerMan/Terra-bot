@@ -107,6 +107,8 @@ function handleCommand(message, command, args) {
  				 if(err) return;
 				 result = results[0].link;
 				 resultname = results[0].title;
+				console.log(result);
+				console.log(resultname);
 				servers[message.channel.guild.id].queue.push(result);
 				servers[message.channel.guild.id].songName.push(resultname);
 			    })
