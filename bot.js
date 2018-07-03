@@ -34,13 +34,16 @@ client.on('guildMemberAdd', member => {
        console.log(`${member.user.username} has joined`);
 });
 client.on('message', message => {
+	try {
 	if (!message.guild.roles.find("name", "terra-mute")) {
 	message.guild.createRole({
   		name: 'terra-mute',
  		color: 'BLUE',
 		SEND_MESSAGES: false
 	})
-	
+	}
+	} catch(e) {
+		console.log("Can't create a mute role!");
 	}
 		let msg = message.content;
 		if (message.author.bot) return;
