@@ -81,23 +81,24 @@ async function handleCommand(message, command, args) {
 		message.channel.send(`${message.author} Says: ${args.join(" ")}`);
 	}
 	if (command == "play") {
-				const voiceChannel = msg.member.voiceChannel;
-				if (!voiceChannel) return msg.channel.send('I\'m sorry but you need to be in a voice channel to play music!');
-				const permissions = voiceChannel.permissionsFor(msg.client.user);
+		const url = args[1] ? args[1].replace(/<(.+)>/g, '$1') : '';
+				const voiceChannel = message.member.voiceChannel;
+				if (!voiceChannel) return message.channel.send('I\'m sorry but you need to be in a voice channel to play music!');
+				const permissions = voiceChannel.permissionsFor(message.client.user);
 				if (!permissions.has('CONNECT')) {
-					return msg.channel.send('I cannot connect to your voice channel, make sure I have the proper permissions!');
+					return message.channel.send('I cannot connect to your voice channel, make sure I have the proper permissions!');
 					}
 				if (!permissions.has('SPEAK')) {
-					return msg.channel.send('I cannot speak in this voice channel, make sure I have the proper permissions!');
+					return message.channel.send('I cannot speak in this voice channel, make sure I have the proper permissions!');
 				}
 				if (url.match(/^https?:\/\/(www.youtube.com|youtube.com)\/playlist(.*)$/)) {
 					const playlist = await youtube.getPlaylist(url);
 					const videos = await playlist.getVideos();
 					for (const video of Object.values(videos)) {
 						const video2 = await youtube.getVideoByID(video.id); // eslint-disable-line no-await-in-loop
-						await handleVideo(video2, msg, voiceChannel, true); // eslint-disable-line no-await-in-loop
+						await handleVideo(video2, message, voiceChannel, true); // eslint-disable-line no-await-in-loop
 					}
-					return msg.channel.send(`✅ Playlist: **${playlist.title}** has been added to the queue!`);
+					return message.channel.send(`✅ Playlist: **${playlist.title}** has been added to the queue!`);
 				} else {
 					try {
 						var video = await youtube.getVideo(url);
@@ -105,7 +106,7 @@ async function handleCommand(message, command, args) {
 						try {
 							var videos = await youtube.searchVideos(args, 10);
 							let index = 0;
-							msg.channel.send(`
+							message.channel.send(`
 		__**Song selection:**__
 		
 		${videos.map(video2 => `**${++index} -** ${video2.title}`).join('\n')}
@@ -114,35 +115,35 @@ async function handleCommand(message, command, args) {
 							`);
 							// eslint-disable-next-line max-depth
 							try {
-								var response = await msg.channel.awaitMessages(msg2 => msg2.content > 0 && msg2.content < 11, {
+								var response = await message.channel.awaitMessages(msg2 => msg2.content > 0 && msg2.content < 11, {
 									maxMatches: 1,
 									time: 10000,
 									errors: ['time']
 								});
 							} catch (err) {
 								console.error(err);
-								return msg.channel.send('No or invalid value entered, cancelling video selection.');
+								return message.channel.send('No or invalid value entered, cancelling video selection.');
 							}
 							const videoIndex = parseInt(response.first().content);
 							var video = await youtube.getVideoByID(videos[videoIndex - 1].id);
 						} catch (err) {
 							console.error(err);
-							return msg.channel.send('🆘 I could not obtain any search results.');
+							return message.channel.send('🆘 I could not obtain any search results.');
 						}
 					}
-					return handleVideo(video, msg, voiceChannel);
+					return handleVideo(video, message, voiceChannel);
 				}
 			}
 	if (command == "stop") {
-		if (!msg.member.voiceChannel) return msg.channel.send('You are not in a voice channel!');
-		if (!serverQueue) return msg.channel.send('There is nothing playing that I could stop for you.');
+		if (!message.member.voiceChannel) return message.channel.send('You are not in a voice channel!');
+		if (!serverQueue) return message.channel.send('There is nothing playing that I could stop for you.');
 		serverQueue.songs = [];
 		serverQueue.connection.dispatcher.end('Stop command has been used!');
 		return undefined;
 		  }
 	if (command == "queue") {
-		if (!serverQueue) return msg.channel.send('There is nothing playing.');
-		return msg.channel.send(`
+		if (!serverQueue) return message.channel.send('There is nothing playing.');
+		return message.channel.send(`
 __**Song queue:**__
 
 ${serverQueue.songs.map(song => `**-** ${song.title}`).join('\n')}
@@ -151,8 +152,8 @@ ${serverQueue.songs.map(song => `**-** ${song.title}`).join('\n')}
 		`);
 	}
 	if (command == "skip") {
-		if (!msg.member.voiceChannel) return msg.channel.send('You are not in a voice channel!');
-		if (!serverQueue) return msg.channel.send('There is nothing playing that I could skip for you.');
+		if (!message.member.voiceChannel) return message.channel.send('You are not in a voice channel!');
+		if (!serverQueue) return message.channel.send('There is nothing playing that I could skip for you.');
 		serverQueue.connection.dispatcher.end('Skip command has been used!');
 		return undefined;
 	}
@@ -160,15 +161,15 @@ ${serverQueue.songs.map(song => `**-** ${song.title}`).join('\n')}
 	if (serverQueue && serverQueue.playing) {
 		serverQueue.playing = false;
 		serverQueue.connection.dispatcher.pause();
-		return msg.channel.send('⏸ Paused the music for you!');
+		return message.channel.send('⏸ Paused the music for you!');
 	}
 	} if (command === 'resume') {
 	if (serverQueue && !serverQueue.playing) {
 		serverQueue.playing = true;
 		serverQueue.connection.dispatcher.resume();
-		return msg.channel.send('▶ Resumed the music for you!');
+		return message.channel.send('▶ Resumed the music for you!');
 	}
-	return msg.channel.send('There is nothing playing.');
+	return message.channel.send('There is nothing playing.');
 }
 	if (command == "mute") {
 		let member = message.mentions.members.first() || message.guild.members.get(args[0]);
