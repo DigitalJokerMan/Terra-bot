@@ -5,7 +5,6 @@ const ytdl = require("ytdl-core");
 const search = require('youtube-search');
 
 var servers = {};
-
 const client = new Discord.Client();
 const streamOptions = { seek: 0, volume: 1 };
 var prefix = config.prefix;
@@ -21,6 +20,7 @@ client.on('ready', () => {
 		servers["" + id]["queue"] = [];
 	}*/
 	for(var key of client.guilds.keys()) {
+		 servers[key] = {}
 		console.log(key);
 		console.log(servers);
 		servers["" + key]["queue"] = [];
