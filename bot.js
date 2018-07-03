@@ -23,10 +23,6 @@ client.on('ready', () => {
 		 servers[key] = {}
 		servers["" + key]["queue"] = [];
 	}
-	for(var songName of client.guilds.keys()) {
-		 servers[songName] = {}
-		servers["" + songName]["songname"] = [];
-	}
 });
 client.voiceConnections.forEach(channel => channel.disconnect())
 function byefaggots() {
@@ -106,15 +102,9 @@ function handleCommand(message, command, args) {
 			search(args.join(' '), opts, function(err, results) {
  				 if(err) return;
 				 result = results[0].link;
-				 resultname = results[0].title
-				try {
-				servers[message.guild.id].queue.push(result);
-				} catch(e) {
-					console.log("Error!");
-				}
+				 resultname = results[0].title;
 			    })
-			    var currentsong = servers[message.channel.guild.id].queue[0];
-				 console.log(servers[message.guild.id].queue);
+				servers[message.channel.guild.id].queue.push(result);
  			     const connection = message.member.voiceChannel.join().then(connection => {
 			     message.reply(`Added ${resultname} to the queue`);
             			const stream = ytdl(servers[message.channel.guild.id].queue[0],  { filter : 'audioonly' });
@@ -142,7 +132,6 @@ function handleCommand(message, command, args) {
 				    return;
 			    } else { 
 				    server[key].queue = [];
-				    servers[songName].songname = [];
 				    message.member.voiceChannel.leave();
 			    }
 			    	} catch(e) {
@@ -154,19 +143,13 @@ function handleCommand(message, command, args) {
     			}
 		  }
 	if (command == "queue") {
-		message.reply(servers[message.channel.guild.id].songname);
+		message.reply(server[message.channel.guild.id].queue);
 		return;
 	}
 	if (command == "skip") {
-		
-		try {
-		servers[message.channel.guild.id].queue.shift();
-		servers[message.channel.guild.id].songname.shift();
 		message.reply("Skipping...");
-		} catch(e) {
-			message.reply("I'm not playing anything!");
-		}
 	}
+		servers[message.channel.guild.id].queue.shift();
 	if (command == "mute") {
 		let member = message.mentions.members.first() || message.guild.members.get(args[0]);
 		let time = args[1];
