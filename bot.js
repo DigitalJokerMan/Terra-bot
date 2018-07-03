@@ -7,6 +7,7 @@ const client = new Discord.Client();
 const streamOptions = { seek: 0, volume: 1 };
 var prefix = config.prefix;
 var servers = {};
+var queue = [];
 var opts = {
   maxResults: 10,
   key: process.env.youtubekey
