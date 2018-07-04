@@ -1,5 +1,5 @@
 {
-"prefix": ";",
+"prefix": "\",
   "commands": {
     "cmd_eval": {
 		"display_in_help": false,
