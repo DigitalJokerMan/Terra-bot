@@ -83,7 +83,8 @@ function handleCommand(message, command, args) {
 	}
 	if (command == "face") {
 		if (!args[0]) {
-			message.reply("You need to specify a number!
+			message.reply("You need to specify a number!");
+			return;
 		}
 		switch (args[0]) {
 			 	case 1: message.channel.send("( .-. )"); break;
