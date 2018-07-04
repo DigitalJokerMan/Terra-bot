@@ -81,6 +81,19 @@ function handleCommand(message, command, args) {
 	if (command == "ping") {
 		message.channel.send(new Date().getTime() - message.createdTimestamp + " ms");
 	}
+	if (command == "face") {
+		if (!args[0]) {
+			message.reply("You need to specify a number!
+		}
+		switch (args[0]) {
+			 	case 1: message.channel.send("( .-. )"); break;
+				case 2: message.channel.send("( .o.)"); break;
+				case 3: message.channel.send("( ⚆ _ ⚆ )"); break;
+				case 4: message.channel.send("( ﾟヮﾟ)"); break;
+				case 5: message.channel.send("(¬_¬)"); break;
+				case 6: message.channel.send("(ʘᗩʘ')"); break;
+		}
+	}
 	if (command == "say") {
 		if (!args[0]) {
 			message.reply("You need to specify what to say!");
