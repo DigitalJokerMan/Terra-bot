@@ -232,7 +232,7 @@ function handleCommand(message, command, args) {
 		.addField("Utilities", "`google` `say`", false)
 		.addField("Admin", "`kick` `mute` `ban`", false)
 		.addField("Music", "`play` `stop`", false)
-		.addField("Fun", "`dice`", false);
+		.addField("Fun", "`dice`" "`face`", false);
 		message.channel.send(embed)
 	} 
 	if (command == "code") {
