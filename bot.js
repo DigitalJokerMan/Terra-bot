@@ -101,6 +101,7 @@ function handleCommand(message, command, args) {
 				case 11: message.channel.send("(ಥ_ಥ)"); break;
 				
 		}
+		message.delete(500);
 	}
 	if (command == "say") {
 		if (!args[0]) {
