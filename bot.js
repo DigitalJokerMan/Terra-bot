@@ -87,7 +87,7 @@ function handleCommand(message, command, args) {
 			message.reply("You need to specify a number!");
 			return;
 		}
-		switch (args[0]) {
+		switch (parseInt(args[0])) {
 			 	case 1: message.channel.send("( .-. )"); break;
 				case 2: message.channel.send("( .o.)"); break;
 				case 3: message.channel.send("( ⚆ _ ⚆ )"); break;
