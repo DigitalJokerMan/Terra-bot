@@ -94,6 +94,12 @@ function handleCommand(message, command, args) {
 				case 4: message.channel.send("( ﾟヮﾟ)"); break;
 				case 5: message.channel.send("(¬_¬)"); break;
 				case 6: message.channel.send("(ʘᗩʘ')"); break;
+				case 7: message.channel.send("( ︶︿︶)"); break;
+				case 8: message.channel.send("(¬‿¬)"); break;
+				case 9: message.channel.send("(ʘ‿ʘ)"); break;
+				case 10: message.channel.send("(ಠ_ಠ)"); break;
+				case 11: message.channel.send("(ಥ_ಥ)"); break;
+				
 		}
 	}
 	if (command == "say") {
