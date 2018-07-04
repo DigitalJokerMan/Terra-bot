@@ -82,6 +82,7 @@ function handleCommand(message, command, args) {
 		message.channel.send(new Date().getTime() - message.createdTimestamp + " ms");
 	}
 	if (command == "face") {
+		console.log("face");
 		if (!args[0]) {
 			message.reply("You need to specify a number!");
 			return;
