@@ -229,7 +229,15 @@ function handleCommand(message, command, args) {
     			member.ban(reason)
 			});
     			message.channel.send(`${member.user.tag} has been banned by ${message.author.tag} because: ${reason}`);
- 	}
+	 }
+	 if (command == "8ball") {
+		 var rand = Math.floor(Math.random()*(2-1+1)+1);
+		 if (rand == 1) {
+			 message.reply("No");
+		 } else if (rand == 2) {
+			 message.reply("Yes");
+		 }
+	 }
 	if (command == "help") {
 		const embed = new Discord.RichEmbed()
 		.setColor(530118)
