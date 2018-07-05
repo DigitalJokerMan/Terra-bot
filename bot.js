@@ -127,12 +127,12 @@ function handleCommand(message, command, args) {
 				 let resultname;
 			search(args.join(' '), opts, function(err, results) {
  				 if(err) return;
-				 result = results[0].link;
+				 result = results[0].link; //servers[message.guild.id].queue.push(result);
 				 resultname = results[0].title;
 				message.reply(`Added ${results[0].title} to the queue`);
 			    })
  			     const connection = message.member.voiceChannel.join().then(connection => {
-			     servers[message.guild.id].queue.push(result);
+			     servers[message.guild.id].queue.push("https://www.youtube.com/watch?v=dQw4w9WgXcQ");
             			const stream = ytdl(servers[message.guild.id].queue[0],  { filter : 'audioonly' });
             			const dispatcher = connection.playStream(stream, streamOptions);
 				     console.log("Song playing");
