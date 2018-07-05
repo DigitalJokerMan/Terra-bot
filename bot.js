@@ -112,10 +112,15 @@ function handleCommand(message, command, args) {
 	}
 	if (command == "play") {
 		    if (message.member.voiceChannel) {
+		if (message.member.voiceChannelID !== message.guild.voiceConnection.channel.id) {
+			message.reply("You're not in the same voice channel as me!")
+			return;
+		}
 			    if (!args[0]) {
 				    message.reply("You must specify a name!");
 				    return;
 			    	}
+			    
 				 let result;
 				 let resultname;
 			search(args.join(' '), opts, function(err, results) {
@@ -128,6 +133,12 @@ function handleCommand(message, command, args) {
 			     servers[message.guild.id].queue.push(result);
             			const stream = ytdl(servers[message.guild.id].queue[0],  { filter : 'audioonly' });
             			const dispatcher = connection.playStream(stream, streamOptions);
+	if (command == "pause") {
+		dispatcher.pause();
+	}
+	if (command == "resume") {
+		dispatcher.resume();
+	}
 				dispatcher.on('end', () => {
 					//console.log("Song done");
 					//message.member.voiceChannel.leave();
@@ -149,28 +160,6 @@ function handleCommand(message, command, args) {
 			   return;
     			}
 		  }
-	if (command == "pause") {
-		if (!message.member.voiceChannel) {
-			message.reply("You're not in a voice channel!");
-			return;
-		}
-		if (message.member.voiceChannelID !== message.guild.voiceConnection.channel.id) {
-			message.reply("You're not in the same voice channel as me!")
-			return;
-		}
-		dispatcher.pause;
-	}
-	if (command == "resume") {
-		if (!message.member.voiceChannel) {
-			message.reply("You're not in a voice channel!");
-			return;
-		}
-		if (message.member.voiceChannelID !== message.guild.voiceConnection.channel.id) {
-			message.reply("You're not in the same voice channel as me!")
-			return;
-		}
-		dispatcher.resume
-	}
 	if (command == "stop") {
 		    if (message.member.voiceChannel) {
 			    if (message.member.voiceChannelID !== message.guild.voiceConnection.channel.id) {
