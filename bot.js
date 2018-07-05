@@ -138,7 +138,9 @@ function handleCommand(message, command, args) {
 				     console.log("Song playing");
 				dispatcher.on('end', () => {
 					console.log("Song over");
+					console.log(servers[message.guild.id].queue.length);
 					servers[message.guild.id].queue.shift();
+					console.log(servers[message.guild.id].queue.length);
 					playQueue(message, results);
 					})
 			     	})
