@@ -138,7 +138,7 @@ function handleCommand(message, command, args) {
 				dispatcher.on('end', () => {
 					console.log(`Next up, ${results[0].title}`);
 					servers[message.guild.id].queue.shift();
-						playQueue(message);
+						playQueue(message, results);
 					})
 			     	})
 			     } else {
@@ -270,7 +270,7 @@ function handleCommand(message, command, args) {
 		.addField("Minutes", Math.round(client.uptime / (1000 * 60)) % 60, true);
 		message.channel.send(embed)
 	}}
-function playQueue(msg) {
+function playQueue(msg, results) {
 	if (servers[message.guild.id].queue.length == 0) {
 		console.log("queue over");
 		message.channel.send("Queue over, disconnecting...");
@@ -278,7 +278,11 @@ function playQueue(msg) {
 		return;
 	} else { 
 		 message.channel.send(`Next up, ${results[0].title}`); 
-		playQueue(msg);
+		 const stream = ytdl(servers[message.guild.id].queue[0],  { filter : 'audioonly' });
+            	const dispatcher = connection.playStream(stream, streamOptions);
+		dispatcher.on('end', () => {
+		playQueue(msg, results);
+		})
 		}
 }
 client.login(process.env.TOKEN);
