@@ -139,8 +139,6 @@ function handleCommand(message, command, args) {
 				dispatcher.on('end', () => {
 					console.log("Song over");
 					console.log(servers[message.guild.id].queue.length);
-					servers[message.guild.id].queue.shift();
-					console.log(servers[message.guild.id].queue.length);
 					playQueue(message, resultname);
 					})
 			     	})
@@ -274,6 +272,7 @@ function handleCommand(message, command, args) {
 		message.channel.send(embed)
 	}}
 function playQueue(msg, results) {
+	servers[msg.guild.id].queue.shift();
 	console.log("func working");
 	if (servers[msg.guild.id].queue.length == 0) {
 		console.log("queue over");
