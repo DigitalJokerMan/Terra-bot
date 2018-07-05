@@ -130,8 +130,8 @@ function handleCommand(message, command, args) {
 				 result = results[0].link; //servers[message.guild.id].queue.push(result);
 				 resultname = results[0].title;
 				message.reply(`Added ${results[0].title} to the queue`);
+				servers[message.guild.id].queue.push(results[0].link);
 			    })
-			    servers[message.guild.id].queue.push(result);
  			     const connection = message.member.voiceChannel.join().then(connection => {
             			const stream = ytdl(servers[message.guild.id].queue[0],  { filter : 'audioonly' });
             			const dispatcher = connection.playStream(stream, streamOptions);
@@ -139,7 +139,7 @@ function handleCommand(message, command, args) {
 				dispatcher.on('end', () => {
 					console.log("Song over");
 					console.log(servers[message.guild.id].queue.length);
-					playQueue(message, resultname);
+					playQueue(message, resultname, connection);
 					})
 			     	})
 			     } else {
@@ -271,7 +271,7 @@ function handleCommand(message, command, args) {
 		.addField("Minutes", Math.round(client.uptime / (1000 * 60)) % 60, true);
 		message.channel.send(embed)
 	}}
-function playQueue(msg, results) {
+function playQueue(msg, results, connection) {
 	servers[msg.guild.id].queue.shift();
 	console.log("func working");
 	if (servers[msg.guild.id].queue.length == 0) {
