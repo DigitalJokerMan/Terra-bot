@@ -149,6 +149,28 @@ function handleCommand(message, command, args) {
 			   return;
     			}
 		  }
+	if (command == "pause") {
+		if (!message.member.voiceChannel) {
+			message.reply("You're not in a voice channel!");
+			return;
+		}
+		if (message.member.voiceChannelID !== message.guild.voiceConnection.channel.id) {
+			message.reply("You're not in the same voice channel as me!")
+			return;
+		}
+		dispatcher.pause;
+	}
+	if (command == "resume") {
+		if (!message.member.voiceChannel) {
+			message.reply("You're not in a voice channel!");
+			return;
+		}
+		if (message.member.voiceChannelID !== message.guild.voiceConnection.channel.id) {
+			message.reply("You're not in the same voice channel as me!")
+			return;
+		}
+		dispatcher.resume
+	}
 	if (command == "stop") {
 		    if (message.member.voiceChannel) {
 			    if (message.member.voiceChannelID !== message.guild.voiceConnection.channel.id) {
@@ -165,13 +187,6 @@ function handleCommand(message, command, args) {
 			    return;
     			}
 		  }
-	if (command == "queue") {
-		message.reply(servers[message.channel.guild.id].queue);
-		return;
-	}
-	if (command == "skip") {
-		message.reply("Skipping...");
-	}
 		servers[message.channel.guild.id].queue.shift();
 	if (command == "mute") {
 		let member = message.mentions.members.first() || message.guild.members.get(args[0]);
@@ -246,7 +261,7 @@ function handleCommand(message, command, args) {
 		.addField("Bot Info","`help` `uptime` `code` `id`", false)
 		.addField("Utilities", "`google` `say`", false)
 		.addField("Admin", "`kick` `mute` `ban`", false)
-		.addField("Music", "`play` `stop`", false)
+		.addField("Music", "`play` `stop` `pause` `resume`", false)
 		.addField("Fun", "`dice` `face` `8ball`", false);
 		message.channel.send(embed)
 	} 
