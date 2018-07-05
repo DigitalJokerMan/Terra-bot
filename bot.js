@@ -275,14 +275,14 @@ function handleCommand(message, command, args) {
 	}}
 function playQueue(msg, results) {
 	console.log("func working");
-	if (servers[message.guild.id].queue.length == 0) {
+	if (servers[msg.guild.id].queue.length == 0) {
 		console.log("queue over");
-		message.channel.send("Queue over, disconnecting...");
-		message.member.voiceChannel.leave();
+		msg.channel.send("Queue over, disconnecting...");
+		msg.member.voiceChannel.leave();
 		return;
 	} else { 
-		 message.channel.send(`Next up, ${resultname}`); 
-		 const stream = ytdl(servers[message.guild.id].queue[0],  { filter : 'audioonly' });
+		 msg.channel.send(`Next up, ${resultname}`); 
+		 const stream = ytdl(servers[msg.guild.id].queue[0],  { filter : 'audioonly' });
             	const dispatcher = connection.playStream(stream, streamOptions);
 		dispatcher.on('end', () => {
 		playQueue(msg, results);
