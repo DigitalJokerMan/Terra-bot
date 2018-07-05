@@ -112,10 +112,12 @@ function handleCommand(message, command, args) {
 	}
 	if (command == "play") {
 		    if (message.member.voiceChannel) {
+		try {
 		if (message.member.voiceChannelID !== message.guild.voiceConnection.channel.id) {
 			message.reply("You're not in the same voice channel as me!")
 			return;
 		}
+		} catch (e) {}
 			    if (!args[0]) {
 				    message.reply("You must specify a name!");
 				    return;
