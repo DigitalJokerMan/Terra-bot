@@ -138,14 +138,7 @@ function handleCommand(message, command, args) {
 				dispatcher.on('end', () => {
 					console.log(`Next up, ${results[0].title}`);
 					servers[message.guild.id].queue.shift();
-					
-					if (servers[message.guild.id].queue.length == 0) {
-						console.log("queue over");
-						message.channel.send("Queue over, disconnecting...");
-						message.member.voiceChannel.leave();
-						return;
-					} else { message.channel.send(`Next up, ${results[0].title}`);
-						
+						playQueue(message);
 					})
 			     	})
 			     } else {
@@ -277,4 +270,15 @@ function handleCommand(message, command, args) {
 		.addField("Minutes", Math.round(client.uptime / (1000 * 60)) % 60, true);
 		message.channel.send(embed)
 	}}
+function playQueue(msg) {
+	if (servers[message.guild.id].queue.length == 0) {
+		console.log("queue over");
+		message.channel.send("Queue over, disconnecting...");
+		message.member.voiceChannel.leave();
+		return;
+	} else { 
+		 message.channel.send(`Next up, ${results[0].title}`); 
+		playQueue(msg);
+		}
+}
 client.login(process.env.TOKEN);
