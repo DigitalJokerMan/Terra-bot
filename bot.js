@@ -273,8 +273,9 @@ function handleCommand(message, command, args) {
 		message.channel.send(embed)
 	}}
 function playQueue(msg, results, connection) {
-	console.log("func working");
 	servers[msg.guild.id].queue.shift();
+	console.log(servers[msg.guild.id].queue.length);
+	console.log("func working");
 	if (servers[msg.guild.id].queue.length < 0) {
 		console.log("queue over");
 		msg.channel.send("Queue over, disconnecting...");
