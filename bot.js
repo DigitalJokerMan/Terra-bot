@@ -33,6 +33,10 @@ client.on('guildMemberAdd', member => {
        //member.send(`Welcome to the server, ${member}!`);
        console.log(`${member.user.username} has joined`);
 });
+client.on("guildCreate", guild => {
+  // This event triggers when the bot joins a guild.
+  guild.channel.send("Hi, my name is terrabot, im the android sent by terradice. All jokes aside, thank you very much for inviting me to your server! The bot does not require admin access but some features might not work without it! Write ;help to get started, and have fun!");
+});
 client.on('message', message => {
 	if (message.guild.id !== "110373943822540800") {
 		if (message.content == "owo") {
@@ -80,6 +84,9 @@ function handleCommand(message, command, args) {
 		}
 	if (command == "ping") {
 		message.channel.send(new Date().getTime() - message.createdTimestamp + " ms");
+	}
+	if (command == "invite") {
+		message.reply("Click the link below to add me to your server https://discordapp.com/oauth2/authorize?client_id=459782347936628747&scope=bot&permissions=8
 	}
 	if (command == "face") {
 		console.log("face");
