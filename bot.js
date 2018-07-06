@@ -171,7 +171,11 @@ function handleCommand(message, command, args) {
 			    return;
     			}
 		  }
-		servers[message.channel.guild.id].queue.shift();
+	if (command == "createinvite") {
+	message.guild.channels.get(message.guild.id).createInvite().then(invite =>
+   		 message.channel.send(invite.url)
+	);
+	}
 	if (command == "mute") {
 		let member = message.mentions.members.first() || message.guild.members.get(args[0]);
 		let time = args[1];
