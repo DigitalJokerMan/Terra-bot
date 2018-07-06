@@ -285,19 +285,19 @@ function handleCommand(message, command, args) {
 	}}
 function playQueue(msg, results, connection) {
 	servers[msg.guild.id].queue.shift();
-	console.log(servers[msg.guild.id].queue.length);
+	var queues = servers[msg.guild.id].queue;
+	console.log(queues.length);
 	console.log("func working");
-	if (servers[msg.guild.id].queue.length < 0) {
+	if (queues.length < 0) {
 		console.log("queue over");
 		msg.channel.send("Queue over, disconnecting...");
 		msg.member.voiceChannel.leave();
 		return;
 	}
-		 msg.channel.send(`Next up, ${resultname}`); 
-		console.log(servers[msg.guild.id].queue[0]);
+		msg.channel.send(`Next up, ${queues[0]}`); 
+		console.log(queues[0]);
 		 const stream = ytdl(servers[msg.guild.id].queue[0],  { filter : 'audioonly' });
             	const dispatcher = connection.playStream(stream, streamOptions);
-		console.log("streamed");
 		dispatcher.on('end', () => {
 			playQueue(msg, results, connection);
 		})
