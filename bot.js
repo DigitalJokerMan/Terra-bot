@@ -144,7 +144,7 @@ function handleCommand(message, command, args) {
 				console.log(servers[message.guild.id].queue.length);
 			    })
  			     const connection = message.member.voiceChannel.join().then(connection => {
-				     const stream = ytdl(servers[msg.guild.id].queue[0],  { filter : 'audioonly' });
+				     const stream = ytdl(servers[message.guild.id].queue[0],  { filter : 'audioonly' });
             				const dispatcher = connection.playStream(stream, streamOptions);
 				dispatcher.on('end', () => {
 					dispatcher.destroy();
