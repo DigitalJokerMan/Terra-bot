@@ -141,14 +141,9 @@ function handleCommand(message, command, args) {
 				console.log(servers[message.guild.id].queue.length);
 			    })
  			     const connection = message.member.voiceChannel.join().then(connection => {
-            			const stream = ytdl(servers[message.guild.id].queue[0],  { filter : 'audioonly' });
-            			const dispatcher = connection.playStream(stream, streamOptions);
 				     console.log("Song playing");
-				dispatcher.on('end', () => {
-					console.log("Song over");
 					console.log(servers[message.guild.id].queue.length);
 					playQueue(message, resultname, connection);
-					})
 			     	})
 			     } else {
    			   message.reply('You need to join a voice channel first!');
@@ -294,7 +289,7 @@ function playQueue(msg, results, connection) {
 		msg.member.voiceChannel.leave();
 		return;
 	}
-		msg.channel.send(`Next up, ${queues[0]}`); 
+		msg.channel.send(`Next up, ${results}`); 
 		console.log(queues[0]);
 		 const stream = ytdl(servers[msg.guild.id].queue[0],  { filter : 'audioonly' });
             	const dispatcher = connection.playStream(stream, streamOptions);
