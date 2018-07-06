@@ -274,7 +274,8 @@ function handleCommand(message, command, args) {
 	}}
 function playQueue(msg, results, connection) {
 	console.log("func working");
-	if (servers[msg.guild.id].queue.length == 0) {
+	servers[msg.guild.id].queue.shift();
+	if (servers[msg.guild.id].queue.length < 0) {
 		console.log("queue over");
 		msg.channel.send("Queue over, disconnecting...");
 		msg.member.voiceChannel.leave();
