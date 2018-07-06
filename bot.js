@@ -86,7 +86,7 @@ function handleCommand(message, command, args) {
 		message.channel.send(new Date().getTime() - message.createdTimestamp + " ms");
 	}
 	if (command == "invite") {
-		message.reply("Click the link below to add me to your server https://discordapp.com/oauth2/authorize?client_id=459782347936628747&scope=bot&permissions=8
+		message.reply("Click the link below to add me to your server https://discordapp.com/oauth2/authorize?client_id=459782347936628747&scope=bot&permissions=8");
 	}
 	if (command == "face") {
 		console.log("face");
