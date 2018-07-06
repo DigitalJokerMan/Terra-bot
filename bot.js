@@ -284,6 +284,7 @@ function playQueue(msg, results, connection) {
 		 msg.channel.send(`Next up, ${resultname}`); 
 		 const stream = ytdl(servers[msg.guild.id].queue[0],  { filter : 'audioonly' });
             	const dispatcher = connection.playStream(stream, streamOptions);
+		console.log("streamed");
 		dispatcher.on('end', () => {
 			playQueue(msg, results, connection);
 		})
