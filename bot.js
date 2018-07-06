@@ -131,6 +131,7 @@ function handleCommand(message, command, args) {
 				 resultname = results[0].title;
 				message.reply(`Added ${results[0].title} to the queue`);
 				servers[message.guild.id].queue.push(results[0].link);
+				console.log(servers[message.guild.id].queue.length);
 			    })
  			     const connection = message.member.voiceChannel.join().then(connection => {
             			const stream = ytdl(servers[message.guild.id].queue[0],  { filter : 'audioonly' });
@@ -284,7 +285,7 @@ function playQueue(msg, results, connection) {
 		 const stream = ytdl(servers[msg.guild.id].queue[0],  { filter : 'audioonly' });
             	const dispatcher = connection.playStream(stream, streamOptions);
 		dispatcher.on('end', () => {
-		playQueue(msg, results);
+			playQueue(msg, results, connection);
 		})
 		}
 }
