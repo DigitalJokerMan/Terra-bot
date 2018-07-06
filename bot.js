@@ -282,7 +282,7 @@ function playQueue(msg, results, connection) {
 		msg.channel.send("Queue over, disconnecting...");
 		msg.member.voiceChannel.leave();
 		return;
-	} else { 
+	}
 		 msg.channel.send(`Next up, ${resultname}`); 
 		console.log(servers[msg.guild.id].queue[0]);
 		 const stream = ytdl(servers[msg.guild.id].queue[0],  { filter : 'audioonly' });
@@ -291,6 +291,5 @@ function playQueue(msg, results, connection) {
 		dispatcher.on('end', () => {
 			playQueue(msg, results, connection);
 		})
-		}
 }
 client.login(process.env.TOKEN);
