@@ -281,8 +281,9 @@ function playQueue(msg, results, connection) {
 		msg.member.voiceChannel.leave();
 		return;
 	} else { 
+		const nextSong = servers[msg.guild.id].queue.shift();
 		 msg.channel.send(`Next up, ${resultname}`); 
-		 const stream = ytdl(servers[msg.guild.id].queue[0],  { filter : 'audioonly' });
+		 const stream = ytdl(nextSong,  { filter : 'audioonly' });
             	const dispatcher = connection.playStream(stream, streamOptions);
 		dispatcher.on('end', () => {
 			playQueue(msg, results, connection);
