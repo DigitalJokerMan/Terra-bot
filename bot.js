@@ -208,7 +208,6 @@ function handleCommand(message, command, args) {
 			message.channel.send(`${member} Has been muted by ${caller} for ${time} minutes!`); 
 			member.removeRole(muterole);
 			}, newtime);
-		})
 	}
 	if(command == "-;" && args.length == 0) {
 		message.reply("Dont cry!");
