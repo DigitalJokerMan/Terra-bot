@@ -195,19 +195,22 @@ async function handleCommand(message, command, args) {
    		 message.channel.send(invite.url)
 	);
 	}
-	if (command == "mute") {
-		let member = message.mentions.members.first() || message.guild.members.get(args[0]);
-		let time = args[1];
-		let caller = message.guild.members.get(message.author.id);
-		let has_mute = caller.hasPermission("MUTE_MEMBERS");
-		if(!has_mute) return message.reply("Sorry, you don't have permissions to use this!");
-		if(!member) return message.reply("Please mention a valid member of this server");
-		let muterole = message.guild.roles.find("name", "terra-mute");
-		let newtime = time * 60 * 1000;
-		member.addRole(muterole).then(msg => {
-			message.channel.send(`${member} Has been muted by ${caller} for ${time} minutes!`); 
-			member.removeRole(muterole);
-			}, newtime);
+	if (command === "mute") {
+	    if (!message.member.hasPermission("MANAGE_ROLES")) return message.reply("You dont have permission to use this");
+ 	   let member =  message.mentions.members.first() || message.guild.members.get(args[0]);
+  	  if (!member) return message.reply("Please mention a member to mute!");
+	let has_mute = caller.hasPermission("MANAGE_RULES");
+        if(!has_mute) return message.reply("Sorry, you don't have permissions to use this!");
+  	  let time = args[1] * 60000;
+	  let newtime = time * 60 * 1000;
+ 	   if (!time) return message.reply("Specify a time!");
+ 	   if (time.isNan()) return message.reply("Time must be an integer");
+ 	   let muterole = message.guild.roles.find(`name`, "terra-mute");
+	    member.addRole(muterole);
+	     message.channel.send(`${member} Has been muted by ${caller} for ${time} minutes!`); 
+	    setTimeout(() => {
+ 	       member.removeRole(muterole);
+ 	   }, time);
 	}
 	if(command == "-;" && args.length == 0) {
 		message.reply("Dont cry!");
