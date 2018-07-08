@@ -290,6 +290,7 @@ function handleCommand(message, command, args) {
 		message.channel.send(embed)
 	}}
 function playQueue(msg, results, connection) {
+	try {
 	servers[msg.guild.id].queue.shift();
 	var queues = servers[msg.guild.id].queue;
 	console.log(queues.length);
@@ -308,5 +309,6 @@ function playQueue(msg, results, connection) {
 			dispatcher.destroy();
 			playQueue(msg, results, connection);
 		})
+	} catch(e) msg.reply(`Undefined error! ${e}`); return;
 }
 client.login(process.env.TOKEN);
