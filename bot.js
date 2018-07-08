@@ -45,7 +45,7 @@ if (!message.guild.roles.find("name", "terra-mute")) {
    			 })
 			}
 			let muterole = message.guild.roles.find("name", "terra-mute");
-	for(var key of message.guild.channels()) {
+	for(var key of message.guild.channels) {
 		 message.key.overwritePermissions(muterole, {
  				 SEND_MESSAGES: false //overwrite
 			})
