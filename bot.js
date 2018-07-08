@@ -34,9 +34,9 @@ client.on('guildMemberAdd', member => {
 });
 client.on("guildCreate", guild => {
 	let first = false;
-      message.guild.channels.forEach(async (c) => {
+      guild.channels.forEach(async (c) => {
 	if (!first) {
-        if (c.permissionsFor(Client.user.id).has('SEND_MESSAGES')) {
+        if (c.permissionsFor(client.user.id).has('SEND_MESSAGES')) {
                 c.send("Hi, my name is terrabot, thank you very much for inviting me to your server! The bot does not require admin access but some features might not work without it! Write ;help to get started, and have fun!");
                 first = true;
             }
