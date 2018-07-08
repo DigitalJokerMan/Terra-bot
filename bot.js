@@ -33,8 +33,15 @@ client.on('guildMemberAdd', member => {
        console.log(`${member.user.username} has joined`);
 });
 client.on("guildCreate", guild => {
-  // This event triggers when the bot joins a guild.
-  guild.defaultChannel.send("Hi, my name is terrabot, thank you very much for inviting me to your server! The bot does not require admin access but some features might not work without it! Write ;help to get started, and have fun!");
+	let first = false;
+      message.guild.channels.forEach(async (c) => {
+	if (!first) {
+        if (c.permissionsFor(Client.user.id).has('SEND_MESSAGES')) {
+                c.send("Hi, my name is terrabot, thank you very much for inviting me to your server! The bot does not require admin access but some features might not work without it! Write ;help to get started, and have fun!");
+                first = true;
+            }
+	}
+            })
 });
 client.on('message', message => {
 	if (message.guild.id !== "110373943822540800") {
