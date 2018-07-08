@@ -191,7 +191,7 @@ async function handleCommand(message, command, args) {
     			}
 		  }
 	if (command == "createinvite") {
-	message.guild.channels.get(message.guild.id).createInvite().then(invite =>
+	message.guild.id.createInvite().then(invite =>
    		 message.channel.send(invite.url)
 	);
 	}
