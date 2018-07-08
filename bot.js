@@ -64,13 +64,13 @@ async function handleCommand(message, command, args) {
    			 })
 			}
 			let muterole = message.guild.roles.find("name", "terra-mute");
-	    let cIDS = await message.guild.channels.forEach(c => c.id);
-	for(var key of message.guild.channels) {
-		 message.cIDS.overwritePermissions(muterole, {
- 				 SEND_MESSAGES: false //overwrite
-			})
+	msg.guild.channels.forEach(c => {
+	    await c.overwritePermissions(muterole, {
+   	 	    SEND_MESSAGES: false //overwrite
+ 	   })
+	})
 	}
-	} catch (e) {)
+	} catch (e) {}
 	console.log("RUNNING COMMAND " + command + " WITH ARGS " + args);
 	if (command == "google") {
 			var lookup = args.join(" ");
