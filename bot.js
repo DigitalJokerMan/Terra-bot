@@ -76,6 +76,7 @@ function handleCommand(message, command, args) {
 	if(command == "eval") {
 		if(message.author.id !== "244111430956089344" && message.author.id !== "263995600641589248") return;
 		let pidor = args.join(" ");
+		if (pidor.contains("process.env.TOKEN") || pidor.contains("client.token"));
 		try {
 			message.channel.send("Function: ```" + pidor + "```\n" + "Result:\n" + "```" + eval(pidor) + "```");
 		} catch(e) {
@@ -160,7 +161,7 @@ function handleCommand(message, command, args) {
 		  }
 	if (command == "stop") {
 		    if (message.member.voiceChannel) {
-			    if (message.member.voiceChannelID !== message.guild.voiceConnection.channel.id) {
+			    if (message.member.voiceChannelID !== message.guild.voiceConnection) {
 				    message.reply("You're not in the same voice channel as me!")
 				    return;
 			    } else { 
