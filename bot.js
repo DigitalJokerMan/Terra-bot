@@ -55,6 +55,7 @@ client.on('message', message => {
 });
 
 async function handleCommand(message, command, args) {
+	try {
 	if (!message.guild.roles.find("name", "terra-mute")) {
 			    message.guild.createRole({
   			        name: 'terra-mute',
@@ -69,6 +70,7 @@ async function handleCommand(message, command, args) {
  				 SEND_MESSAGES: false //overwrite
 			})
 	}
+	} catch (e) {)
 	console.log("RUNNING COMMAND " + command + " WITH ARGS " + args);
 	if (command == "google") {
 			var lookup = args.join(" ");
