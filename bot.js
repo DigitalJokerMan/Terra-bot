@@ -205,7 +205,7 @@ async function handleCommand(message, command, args) {
   	  let time = args[1] * 60000;
 	  let newtime = time * 60 * 1000;
  	   if (!time) return message.reply("Specify a time!");
- 	   if (time.isNan()) return message.reply("Time must be an integer");
+ 	   if (isNaN(time)) return message.reply("Time must be an integer");
  	   let muterole = message.guild.roles.find(`name`, "terra-mute");
 	    member.addRole(muterole);
 	     message.channel.send(`${member} Has been muted by ${caller} for ${time} minutes!`); 
