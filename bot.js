@@ -168,7 +168,6 @@ function handleCommand(message, command, args) {
 				    message.reply("You're not in the same voice channel as me!")
 				    return;
 			    } else { 
-				    servers[message.guild.id].queue = [];
 				    console.log("queue over");
 						message.member.voiceChannel.leave();
 						return;
