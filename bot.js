@@ -249,7 +249,7 @@ function handleCommand(message, command, args) {
 		.setColor(530118)
 		.setFooter(`Terrabot operating in ${client.guilds.size} servers`, 'https://cdn.discordapp.com/embed/avatars/4.png')
 		.setAuthor("Help", client.user.avatarURL)
-		.addField("Bot Info","`help` `uptime` `code` `id`", false)
+		.addField("Bot Info","`help` `uptime` `code` `id` `invite`", false)
 		.addField("Utilities", "`google` `say`", false)
 		.addField("Admin", "`kick` `mute` `ban`", false)
 		.addField("Music", "`play` `stop` `pause` `resume`", false)
