@@ -65,7 +65,7 @@ async function handleCommand(message, command, args) {
 			}
 			let muterole = message.guild.roles.find("name", "terra-mute");
 	message.guild.channels.forEach(c => {
-	    await c.overwritePermissions(muterole, {
+	    async await c.overwritePermissions(muterole, {
    	 	    SEND_MESSAGES: false //overwrite
  	   })
 	})
