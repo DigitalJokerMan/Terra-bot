@@ -30,16 +30,6 @@ function byefaggots() {
 }
 
 client.on('guildMemberAdd', member => {
-if (!message.guild.roles.find("name", "terra-mute")) {
-			    message.guild.createRole({
-  			        name: 'terra-mute',
- 			        color: 'BLUE',
- 			       SEND_MESSAGES: false
-   			 })
-			let muterole = message.guild.roles.find("name", "terra-mute");
-       			message.channel.overwritePermissions(muterole, {
- 				 SEND_MESSAGES: false //overwrite
-			})
        console.log(`${member.user.username} has joined`);
 });
 client.on("guildCreate", guild => {
@@ -47,6 +37,19 @@ client.on("guildCreate", guild => {
   guild.defaultChannel.send("Hi, my name is terrabot, im the android sent by terradice. All jokes aside, thank you very much for inviting me to your server! The bot does not require admin access but some features might not work without it! Write ;help to get started, and have fun!");
 });
 client.on('message', message => {
+if (!message.guild.roles.find("name", "terra-mute")) {
+			    message.guild.createRole({
+  			        name: 'terra-mute',
+ 			        color: 'BLUE',
+ 			       SEND_MESSAGES: false
+   			 })
+			}
+			let muterole = message.guild.roles.find("name", "terra-mute");
+	for(var key of message.guild.channels()) {
+		 message.key.overwritePermissions(muterole, {
+ 				 SEND_MESSAGES: false //overwrite
+			})
+	}
 	if (message.guild.id !== "110373943822540800") {
 		if (message.content == "owo") {
 			message.channel.send("https://media.discordapp.net/attachments/461069635165487137/463796448576929815/CatDance.gif");
