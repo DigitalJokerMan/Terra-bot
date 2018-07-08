@@ -200,7 +200,7 @@ async function handleCommand(message, command, args) {
  	   let member =  message.mentions.members.first() || message.guild.members.get(args[0]);
   	  if (!member) return message.reply("Please mention a member to mute!");
 	let caller = message.guild.members.get(message.author.id);
-	let has_mute = caller.hasPermission("MANAGE_RULES");
+	let has_mute = caller.hasPermission("MANAGE_ROLES");
         if(!has_mute) return message.reply("Sorry, you don't have permissions to use this!");
   	  let time = args[1] * 60000;
 	  let newtime = time * 60 * 1000;
