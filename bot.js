@@ -191,7 +191,7 @@ async function handleCommand(message, command, args) {
     			}
 		  }
 	if (command == "createinvite") {
-	message.guild.id.createInvite().then(invite =>
+	message.channel.createInvite().then(invite =>
    		 message.channel.send(invite.url)
 	);
 	}
@@ -263,7 +263,8 @@ async function handleCommand(message, command, args) {
 		.addField("Utilities", "`google` `say`", false)
 		.addField("Admin", "`kick` `mute` `ban`", false)
 		.addField("Music", "`play` `stop` `pause` `resume`", false)
-		.addField("Fun", "`dice` `face` `8ball`", false);
+		.addField("Fun", "`dice` `face` `8ball`", false)
+		.addField("Server", "`createinvite`", false);
 		message.channel.send(embed)
 	} 
 	if (command == "code") {
