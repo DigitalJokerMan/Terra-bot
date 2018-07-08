@@ -34,7 +34,7 @@ client.on('guildMemberAdd', member => {
 });
 client.on("guildCreate", guild => {
   // This event triggers when the bot joins a guild.
-  guild.defaultChannel.send("Hi, my name is terrabot, im the android sent by terradice. All jokes aside, thank you very much for inviting me to your server! The bot does not require admin access but some features might not work without it! Write ;help to get started, and have fun!");
+  guild.defaultChannel.send("Hi, my name is terrabot, thank you very much for inviting me to your server! The bot does not require admin access but some features might not work without it! Write ;help to get started, and have fun!");
 });
 client.on('message', message => {
 	if (message.guild.id !== "110373943822540800") {
