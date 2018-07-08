@@ -30,12 +30,21 @@ function byefaggots() {
 }
 
 client.on('guildMemberAdd', member => {
-       //member.send(`Welcome to the server, ${member}!`);
+if (!message.guild.roles.find("name", "terra-mute")) {
+			    message.guild.createRole({
+  			        name: 'terra-mute',
+ 			        color: 'BLUE',
+ 			       SEND_MESSAGES: false
+   			 })
+			let muterole = message.guild.roles.find("name", "terra-mute");
+       			message.channel.overwritePermissions(muterole, {
+ 				 SEND_MESSAGES: false //overwrite
+			})
        console.log(`${member.user.username} has joined`);
 });
 client.on("guildCreate", guild => {
   // This event triggers when the bot joins a guild.
-  guild.channel.send("Hi, my name is terrabot, im the android sent by terradice. All jokes aside, thank you very much for inviting me to your server! The bot does not require admin access but some features might not work without it! Write ;help to get started, and have fun!");
+  guild.defaultChannel.send("Hi, my name is terrabot, im the android sent by terradice. All jokes aside, thank you very much for inviting me to your server! The bot does not require admin access but some features might not work without it! Write ;help to get started, and have fun!");
 });
 client.on('message', message => {
 	if (message.guild.id !== "110373943822540800") {
@@ -194,15 +203,6 @@ function handleCommand(message, command, args) {
 		let newtime = time * 60 * 1000;
 		member.addRole(muterole).then(msg => {
 			message.channel.send(`${member} Has been muted by ${caller} for ${time} minutes!`); 
-			message.channel.overwritePermissions(member, {
- 				 SEND_MESSAGES: false
-			})
-			console.log("muted");
-			setTimeout(() => { 
-			message.channel.overwritePermissions(member, {
- 				 SEND_MESSAGES: true
-			})
-			console.log("unmuted");
 			member.removeRole(muterole);
 			}, newtime);
 		})
