@@ -64,11 +64,11 @@ async function handleCommand(message, command, args) {
    			 })
 			}
 			let muterole = message.guild.roles.find("name", "terra-mute");
-	message.guild.channels.forEach(c => {
-	    async await c.overwritePermissions(muterole, {
-   	 	    SEND_MESSAGES: false //overwrite
- 	   })
-	})
+		msg.guild.channels.forEach(async (c) => {
+ 		   await c.overwritePermissions(muterole, {
+  		      SEND_MESSAGES: false //overwrite
+ 		   })
+		})
 	}
 	} catch (e) {}
 	console.log("RUNNING COMMAND " + command + " WITH ARGS " + args);
