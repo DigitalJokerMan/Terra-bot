@@ -309,6 +309,6 @@ function playQueue(msg, results, connection) {
 			dispatcher.destroy();
 			playQueue(msg, results, connection);
 		})
-	} catch(e) msg.reply(`Undefined error! ${e}`); return;
+	} catch(e) msg.reply(`Undefined error! ${e}`);
 }
 client.login(process.env.TOKEN);
