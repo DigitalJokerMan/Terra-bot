@@ -169,6 +169,7 @@ function handleCommand(message, command, args) {
 				    return;
 			    } else { 
 				    console.log("queue over");
+				    		servers[message.guild.id].queue = []
 						message.member.voiceChannel.leave();
 						return;
 			    }
@@ -295,7 +296,7 @@ function playQueue(msg, results, connection) {
 	var queues = servers[msg.guild.id].queue;
 	console.log(queues.length);
 	console.log("func working");
-	if (queues.length < 0) {
+	if(!queues[0]) {
 		console.log("queue over");
 		msg.channel.send("Queue over, disconnecting...");
 		msg.member.voiceChannel.leave();
