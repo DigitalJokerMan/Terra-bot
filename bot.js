@@ -1,6 +1,3 @@
-try {
-
-
 const Discord = require('discord.js');
 const google = require('google');
 const config = require("./config.json");
@@ -18,10 +15,6 @@ var opts = {
 client.on('ready', () => {
   console.log(`Bots is ready and working in ${client.guilds.size} servers with ${client.users.size} users!`);
   client.user.setActivity("Terradice&RedSponge|;help");
-	/*for(var id of client.guilds.keys()) {
-		console.log(id);
-		servers["" + id]["queue"] = [];
-	}*/
 	for(var key of client.guilds.keys()) {
 		 servers[key] = {}
 		servers["" + key]["queue"] = [];
@@ -66,6 +59,7 @@ client.on('message', message => {
 });
 
 async function handleCommand(message, command, args) {
+	var color = Math.floor(Math.random()*(16777216-0+1)+0);
 	if (!message.guild.roles.find("name", "terra-mute")) {
 			    message.guild.createRole({
   			        name: 'terra-mute',
@@ -148,8 +142,6 @@ async function handleCommand(message, command, args) {
 		message.channel.send(`${message.author} Says: ${args.join(" ")}`);
 	}
 	if (command == "play") {
-		message.reply("Under maintenance");
-		return;
 		    if (message.member.voiceChannel) {
 		try {
 		if (message.member.voiceChannelID !== message.guild.voiceConnection.channel.id) {
@@ -274,7 +266,7 @@ async function handleCommand(message, command, args) {
 	 }
 	if (command == "help") {
 		const embed = new Discord.RichEmbed()
-		.setColor(530118)
+		.setColor(color)
 		.setFooter(`Terrabot operating in ${client.guilds.size} servers`, 'https://cdn.discordapp.com/embed/avatars/4.png')
 		.setAuthor("Help", client.user.avatarURL)
 		.addField("Bot Info","`help` `uptime` `code` `id` `invite`", false)
@@ -308,7 +300,7 @@ async function handleCommand(message, command, args) {
 	}
 	if (command == "uptime") {
 			const embed = new Discord.RichEmbed()
-		.setColor(530118)
+		.setColor(color)
 		.setFooter(`Terrabot operating in ${client.guilds.size} servers`, 'https://cdn.discordapp.com/embed/avatars/4.png')
 		.setAuthor("Uptime", client.user.avatarURL)
 		.addField("Hours",Math.round(client.uptime / (1000 * 60 * 60)), true )
@@ -339,7 +331,3 @@ function playQueue(msg, results, connection) {
 	} catch(e) { msg.reply(`Undefined error! ${e}`); return; }
 }
 client.login(process.env.TOKEN);
-	
-} catch(e) {
-	console.log(e);	
-}
