@@ -217,7 +217,10 @@ async function handleCommand(message, command, args) {
 	  let newtime = time * 60 * 1000;
  	   if (!time) return message.reply("Specify a time!");
  	   if (isNaN(time)) return message.reply("Time must be an integer");
- 	   let muterole = message.guild.roles.find(`name`, "terra-mute");
+		let muterole = message.guild.roles.find(`name`, "terra-mute");
+		   if(user.roles.has(muterole)){
+				message.reply(`${member} is already muted!`)
+		   }
 	    member.addRole(muterole);
 	     message.channel.send(`${member} Has been muted by ${caller} for ${time} minutes!`); 
 	    setTimeout(() => {
@@ -290,7 +293,7 @@ async function handleCommand(message, command, args) {
 	}
 	if (command == "avatar") {
 		if (args[0]) {
-			var user = message.mentions.users.first;
+			var user = message.mentions.users.first();
 			message.reply(`Here you go! ${user.avatarURL}`)
 		} else {
 			message.reply(`Here you go! ${message.author.avatarURL}`)
