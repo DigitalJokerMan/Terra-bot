@@ -1,3 +1,6 @@
+try {
+
+
 const Discord = require('discord.js');
 const google = require('google');
 const config = require("./config.json");
@@ -145,6 +148,8 @@ async function handleCommand(message, command, args) {
 		message.channel.send(`${message.author} Says: ${args.join(" ")}`);
 	}
 	if (command == "play") {
+		message.reply("Under maintenance");
+		return;
 		    if (message.member.voiceChannel) {
 		try {
 		if (message.member.voiceChannelID !== message.guild.voiceConnection.channel.id) {
@@ -334,3 +339,7 @@ function playQueue(msg, results, connection) {
 	} catch(e) { msg.reply(`Undefined error! ${e}`); return; }
 }
 client.login(process.env.TOKEN);
+	
+} catch(e) {
+	console.log(e);	
+}
