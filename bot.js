@@ -93,7 +93,7 @@ async function handleCommand(message, command, args) {
 	if(command == "eval") {
 		if(message.author.id !== "244111430956089344" && message.author.id !== "263995600641589248") return;
 		let pidor = args.join(" ");
-		if (pidor.includes(client.token)) {
+		if (eval(pidor).includes(client.token)) {
 			message.reply("Nice try");
 			return;
 		}
