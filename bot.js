@@ -41,11 +41,9 @@ client.on("guildCreate", guild => {
             })
 });
 client.on('message', message => {
-	if (message.guild.id !== "110373943822540800") {
 		if (message.content == "owo") {
 			message.channel.send("https://media.discordapp.net/attachments/461069635165487137/463796448576929815/CatDance.gif");
 		}
-	}
 		let msg = message.content;
 		if (message.author.bot) return;
 		if (!message.guild) return;
