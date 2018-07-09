@@ -130,7 +130,7 @@ async function handleCommand(message, command, args) {
 				case 9: message.channel.send("(ʘ‿ʘ)"); break;
 				case 10: message.channel.send("(ಠ_ಠ)"); break;
 				case 11: message.channel.send("(ಥ_ಥ)"); break;
-			case default: message.reply("Unknown face!"); break;
+			default: message.reply("Unknown face!"); break;
 				
 		}
 		message.delete(500);
