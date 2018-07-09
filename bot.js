@@ -22,6 +22,7 @@ client.on('ready', () => {
 	for(var key of client.guilds.keys()) {
 		 servers[key] = {}
 		servers["" + key]["queue"] = [];
+		servers["" + key]["playing"] = false;
 	}
 });
 client.voiceConnections.forEach(channel => channel.disconnect())
@@ -155,7 +156,6 @@ async function handleCommand(message, command, args) {
 				    message.reply("You must specify a name!");
 				    return;
 			    	}
-			    
 				 let result;
 				 let resultname;
 			search(args.join(' '), opts, function(err, results) {
@@ -165,7 +165,8 @@ async function handleCommand(message, command, args) {
 				message.reply(`Added ${results[0].title} to the queue`);
 				servers[message.guild.id].queue.push(results[0].link);
 				console.log(servers[message.guild.id].queue.length);
-			    })
+				})
+				await (!servers[message.guild.id].queue[0]);
  			     const connection = message.member.voiceChannel.join().then(connection => {
 				     const stream = ytdl(servers[message.guild.id].queue[0],  { filter : 'audioonly' });
             				const dispatcher = connection.playStream(stream, streamOptions);
@@ -173,6 +174,7 @@ async function handleCommand(message, command, args) {
 					dispatcher.destroy();
 				     console.log("Song playing");
 					console.log(servers[message.guild.id].queue.length);
+					servers[message.guild.id].playing = true;
 					playQueue(message, resultname, connection);
 				})
 			     	})
@@ -182,13 +184,17 @@ async function handleCommand(message, command, args) {
     			}
 		  }
 	if (command == "stop") {
+		if (!servers[message.guild.id].playing) {
+			message.reply("I'm not playing anything!")
+		}
 		    if (message.member.voiceChannel) {
 			    if (message.member.voiceChannelID !== message.guild.me.voiceChannelID) {
 				    message.reply("You're not in the same voice channel as me!")
 				    return;
 			    } else { 
-				    console.log("queue over");
-				    		servers[message.guild.id].queue = []
+					console.log("queue over");
+						servers[message.guild.id].playing = false;
+				    	servers[message.guild.id].queue = []
 						message.member.voiceChannel.leave();
 						return;
 			    }
@@ -312,6 +318,7 @@ function playQueue(msg, results, connection) {
 	console.log("func working");
 	if(!queues[0]) {
 		console.log("queue over");
+		servers[message.guild.id].playing = false;
 		msg.channel.send("Queue over, disconnecting...");
 		msg.member.voiceChannel.leave();
 		return;
