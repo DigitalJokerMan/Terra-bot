@@ -287,6 +287,14 @@ async function handleCommand(message, command, args) {
 		}
 		message.channel.send(`ID:  ${message.author.id}`);
 	}
+	if (command == "avatar") {
+		if (args[0]) {
+			var user = message.mentions.users.first;
+			message.reply(`Here you go! ${user.avatarURL}`)
+		} else {
+			message.reply(`Here you go! ${message.author.avatarURL}`)
+		}
+	}
 	if (command == "dice") {
 		let roll = "";
 		let rolls = Number(args[0]) || 1;
