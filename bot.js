@@ -314,7 +314,7 @@ async function handleCommand(message, command, args) {
 		.addField("Music", "`play` `stop` `pause` `resume`", false)
 		.addField("Fun", "`dice` `face` `8ball`", false)
 		.addField("Server", "`createinvite`", false)
-		.addField("Minecraft", "`skin` `mc-achievement", false);
+		.addField("Minecraft", "`skin` `mc-achievement`", false);
 		message.channel.send(embed)
 	} 
 	if (command == "code") {
