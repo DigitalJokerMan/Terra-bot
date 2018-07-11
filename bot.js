@@ -114,12 +114,7 @@ async function handleCommand(message, command, args) {
 			case "xbox": platform = "xbl"; break;
 			case "ps4": platform = "psn"; break;
 		}
-		
-		try {
-				     fortnite.user(parameter, platform).then(message.channel.send);
-		} catch(e) {
-			console.log(e);
-		}
+		fortnite.user(parameter, platform).then(message.channel.send);
 	}
 	if (command == "ascii") {
 		try {
