@@ -110,6 +110,16 @@ async function handleCommand(message, command, args) {
 	if (command == "queue") {
 		message.reply( servers[message.guild.id].queue );
 	}	
+	if (command == "skin") {
+		var parameter = args[0];
+		var link = "https://minotar.net/body/GTR";
+		if (!parameter) {
+			message.reply("You need to specify a name!");
+			return;
+		}
+		link = link.replace("GTR", parameter);
+		message.reply("If the skin is steve instead of the actual skin, you made a typo or some kind of error happend and im stupid" + link);
+	}
 	if (command == "face") {
 		console.log("face");
 		if (!args[0]) {
