@@ -286,7 +286,8 @@ async function handleCommand(message, command, args) {
 		.addField("Admin", "`kick` `mute` `ban`", false)
 		.addField("Music", "`play` `stop` `pause` `resume`", false)
 		.addField("Fun", "`dice` `face` `8ball`", false)
-		.addField("Server", "`createinvite`", false);
+		.addField("Server", "`createinvite`", false)
+		.addField("Minecraft", "`skin`", false);
 		message.channel.send(embed)
 	} 
 	if (command == "code") {
