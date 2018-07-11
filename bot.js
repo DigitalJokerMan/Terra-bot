@@ -105,6 +105,7 @@ async function handleCommand(message, command, args) {
 			return;
 		}
 	if (command == "mc-achievement") {
+		console.log("mc-achievement");
 		var title = args[0];
 		var description = args[1];
 		if (!title) {
@@ -112,7 +113,7 @@ async function handleCommand(message, command, args) {
 			return;
 		}
 		if (!description) {
-			message.reply("You need to specify a description!")
+			message.reply("You need to specify a description!");
 		}
 		var link = "http://www.minecraftachievement.net/achievement/a.php?i=2&h=title&t=description";
 		link = link.replace("title", title);
