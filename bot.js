@@ -103,7 +103,11 @@ async function handleCommand(message, command, args) {
 		let text = "```" + ascii_text_generator(input_text,"2") + "```";
  		
 		console.log(text);
+		try {
 		message.channel.send(text);
+		} catch(e) {
+			message.reply("The message is too long to be sent!"	
+		}
 	}
 	if (command == "maze") {
 		var random = Math.floor(Math.random()*(20180711082441-1+1)+1);
@@ -312,7 +316,7 @@ async function handleCommand(message, command, args) {
 		.setFooter(`Terrabot operating in ${client.guilds.size} servers`, 'https://cdn.discordapp.com/embed/avatars/4.png')
 		.setAuthor("Help", client.user.avatarURL)
 		.addField("Bot Info","`help` `uptime` `code` `id` `invite`", false)
-		.addField("Utilities", "`google` `say`", false)
+		.addField("Utilities", "`google` `say` `ascii`", false)
 		.addField("Admin", "`kick` `mute` `ban`", false)
 		.addField("Music", "`play` `stop` `pause` `resume`", false)
 		.addField("Fun", "`dice` `face` `8ball`", false)
@@ -323,6 +327,7 @@ async function handleCommand(message, command, args) {
 	if (command == "code") {
 		message.channel.send('https://github.com/Terradice/Terra-bot');
 	}
+	
 	if (command =="id") {
 		if (args[0]) {
  		   message.channel.send(`ID:  ${message.mentions.members.first().id}`);
