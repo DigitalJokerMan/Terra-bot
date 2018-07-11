@@ -3,7 +3,9 @@ const google = require('google');
 const config = require("./config.json");
 const ytdl = require("ytdl-core");
 const search = require('youtube-search');
-let ascii_text_generator = require('ascii-text-generator');
+const fortnite = require('fortnite');
+const fortnite = new Client(process.env.fortnite);
+const ascii_text_generator = require('ascii-text-generator');
 
 var servers = {};
 const client = new Discord.Client();
@@ -97,6 +99,28 @@ async function handleCommand(message, command, args) {
 	}
 	if (command == "queue") {
 		message.reply( servers[message.guild.id].queue );
+	}
+	if (command == "fortnitestats") {
+		let parameter = args[0];
+		let platform = args[1];
+		if (!parameter) {
+			message.reply("You need to specify a user!");
+			return;	
+		}
+		if (!platform) {
+			message.reply("You need to specify a platform! EX: xbox, pc, ps4");
+			return;
+		}
+		switch (platform) {
+			case "xbox": platform = "xbl"; break;
+			case "ps4": platform = "psn"; break;
+		}
+		
+		try {
+				     fortnite.user(parameter, platform).then(message.channel.send);
+		} catch(e) {
+			console.log(e);
+		}
 	}
 	if (command == "ascii") {
 		try {
@@ -326,7 +350,8 @@ async function handleCommand(message, command, args) {
 		.addField("Music", "`play` `stop` `pause` `resume`", false)
 		.addField("Fun", "`dice` `face` `8ball`", false)
 		.addField("Server", "`createinvite`", false)
-		.addField("Minecraft", "`skin` `mc-achievement`", false);
+		.addField("Minecraft", "`skin` `mc-achievement`", false)
+		.addField("Fortnite", "`fortnitestats`", false);
 		message.channel.send(embed)
 	} 
 	if (command == "code") {
