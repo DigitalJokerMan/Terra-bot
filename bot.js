@@ -118,7 +118,8 @@ async function handleCommand(message, command, args) {
 			return;
 		}
 		link = link.replace("GTR", parameter);
-		message.reply(link);
+		message.channel.send("").attachments
+		["",{url:link }];
 	}
 	if (command == "face") {
 		console.log("face");
