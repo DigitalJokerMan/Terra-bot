@@ -104,8 +104,15 @@ async function handleCommand(message, command, args) {
 			message.reply("You need to specify a name!");
 			return;
 		}
+		link = link.replace("GTR", parameter);
+		try {
+		message.channel.send("").attachments
+		["",{url:link }];
+		} catch (e) {
+			message.channel.send(link);	
+		}
+	}
 	if (command == "mc-achievement") {
-		console.log("mc-achievement");
 		var title = args[0];
 		var description = args[1];
 		if (!title) {
@@ -119,14 +126,6 @@ async function handleCommand(message, command, args) {
 		link = link.replace("title", title);
 		link = link.replace("description", description);
 		message.channel.send(link);
-	}
-		link = link.replace("GTR", parameter);
-		try {
-		message.channel.send("").attachments
-		["",{url:link }];
-		} catch (e) {
-			message.channel.send(link);	
-		}
 	}
 	if (command == "face") {
 		console.log("face");
