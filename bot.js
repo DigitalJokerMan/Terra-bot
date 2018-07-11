@@ -118,7 +118,7 @@ async function handleCommand(message, command, args) {
 			return;
 		}
 		link = link.replace("GTR", parameter);
-		message.reply("If the skin is steve instead of the actual skin, you made a typo or some kind of error happend and im stupid" + link);
+		message.reply(link);
 	}
 	if (command == "face") {
 		console.log("face");
