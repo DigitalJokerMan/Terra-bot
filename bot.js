@@ -126,7 +126,7 @@ async function handleCommand(message, command, args) {
 		var link = "http://www.minecraftachievement.net/achievement/a.php?i=2&h=title&t=description";
 		link = link.replace("title", title);
 		link = link.replace("description", description);
-		message.channel.send({files: [link]});
+		message.channel.send(link);
 	}
 	if (command == "face") {
 		console.log("face");
