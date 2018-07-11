@@ -96,7 +96,14 @@ async function handleCommand(message, command, args) {
 	}
 	if (command == "queue") {
 		message.reply( servers[message.guild.id].queue );
-	}	
+	}
+	if (command == "maze") {
+		var random = Math.floor(Math.random()*(20180711082441-1+1)+1);
+		var link = "http://www.mazegenerator.net/ImageGenerator.ashx?Tag=test&MazeType=1&Solution=0";
+		link = link.replace("test", random);
+		message.channel.send("").attachments
+		["",{url:link }];
+	}
 	if (command == "skin") {
 		var parameter = args[0];
 		var link = "https://minotar.net/body/GTR";
@@ -125,7 +132,8 @@ async function handleCommand(message, command, args) {
 		var link = "http://www.minecraftachievement.net/achievement/a.php?i=2&h=title&t=description";
 		link = link.replace("title", title);
 		link = link.replace("description", description);
-		message.channel.send(link);
+		message.channel.send("").attachments
+		["",{url:link }];
 	}
 	if (command == "face") {
 		console.log("face");
