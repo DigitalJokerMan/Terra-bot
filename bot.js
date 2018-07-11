@@ -58,21 +58,6 @@ client.on('message', message => {
 
 async function handleCommand(message, command, args) {
 	var color = Math.floor(Math.random()*(16777216-0+1)+0);
-	try {
-	if (!message.guild.roles.find("name", "terra-mute")) {
-			    message.guild.createRole({
-  			        name: 'terra-mute',
- 			        color: 'BLUE',
- 			       SEND_MESSAGES: false
-   			 })
-			}
-			let muterole = message.guild.roles.find("name", "terra-mute");
-		message.guild.channels.forEach(async (c) => {
- 		   await c.overwritePermissions(muterole, {
-  		      SEND_MESSAGES: false //overwrite
- 		   })
-		})
-	} catch(e) {}
 	console.log("RUNNING COMMAND " + command + " WITH ARGS " + args);
 	if (command == "google") {
 			var lookup = args.join(" ");
@@ -222,6 +207,23 @@ async function handleCommand(message, command, args) {
 	);
 	}
 	if (command === "mute") {
+	try {
+	if (!message.guild.roles.find("name", "terra-mute")) {
+			    message.guild.createRole({
+  			        name: 'terra-mute',
+ 			        color: 'BLUE',
+ 			       SEND_MESSAGES: false
+   			 })
+			}
+			let muterole = message.guild.roles.find("name", "terra-mute");
+		message.guild.channels.forEach(async (c) => {
+ 		   await c.overwritePermissions(muterole, {
+  		      SEND_MESSAGES: false //overwrite
+ 		   })
+		})
+	} catch(e) {
+	message.reply("I dont have permissions to create a mute role therefore i cant mute!");
+	}
 	    if (!message.member.hasPermission("MANAGE_ROLES")) return message.reply("You dont have permission to use this");
  	   let member =  message.mentions.members.first() || message.guild.members.get(args[0]);
   	  if (!member) return message.reply("Please mention a member to mute!");
@@ -233,6 +235,9 @@ async function handleCommand(message, command, args) {
  	   if (!time) return message.reply("Specify a time!");
  	   if (isNaN(time)) return message.reply("Time must be an integer");
 		let muterole = message.guild.roles.find(`name`, "terra-mute");
+		if (!muterole) {
+			message.reply("I dont have the right permissions to create a muterole! therefore i cant mute");	
+		}
 		   if(user.roles.has(muterole)){
 				message.reply(`${member} is already muted!`)
 		   }
