@@ -101,7 +101,7 @@ async function handleCommand(message, command, args) {
 		var random = Math.floor(Math.random()*(20180711082441-1+1)+1);
 		var link = "http://www.mazegenerator.net/ImageGenerator.ashx?Tag=test&MazeType=1&Solution=0";
 		link = link.replace("test", random);
-		message.channel.send("").attachments
+		message.channel.send.attachments
 		["",{url:link }];
 	}
 	if (command == "skin") {
