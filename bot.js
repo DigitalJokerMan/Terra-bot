@@ -111,11 +111,7 @@ async function handleCommand(message, command, args) {
 			return;
 		}
 		link = link.replace("GTR", parameter);
-		try {
-		message.channel.send({files: [link]})
-		} catch (e) {
-			message.channel.send(link);	
-		}
+		message.channel.send({files: [link]});
 	}
 	if (command == "mc-achievement") {
 		var title = args[0];
