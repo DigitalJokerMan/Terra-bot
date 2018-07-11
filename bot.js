@@ -3,6 +3,7 @@ const google = require('google');
 const config = require("./config.json");
 const ytdl = require("ytdl-core");
 const search = require('youtube-search');
+let ascii_text_generator = require('ascii-text-generator');
 
 var servers = {};
 const client = new Discord.Client();
@@ -96,6 +97,17 @@ async function handleCommand(message, command, args) {
 	}
 	if (command == "queue") {
 		message.reply( servers[message.guild.id].queue );
+	}
+	if (command == "ascii") {
+		let input_text = args.join(" ");
+		let text ="/*\n" + ascii_text_generator(input_text,"2") + "\n*/";
+ 		
+		fs.outputFile("./build/file.js", text, function (err) {
+		    if(err){
+		        throw new Error(err);
+		    }else{
+ 		   }
+		});	
 	}
 	if (command == "maze") {
 		var random = Math.floor(Math.random()*(20180711082441-1+1)+1);
