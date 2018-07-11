@@ -16,7 +16,8 @@
     "node-opus": "^0.3.0",
     "opusscript": "0.0.3",
     "youtube-search": "^1.1.1",
-    "google": "^2.1.0"
+    "google": "^2.1.0",
+    "ascii-text-generator": "^1.0.5"
   },
     "devDependencies": {
     "eslint": "^4.0.0",
