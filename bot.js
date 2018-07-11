@@ -100,7 +100,7 @@ async function handleCommand(message, command, args) {
 	}
 	if (command == "ascii") {
 		let input_text = args.join(" ");
-		let text = ascii_text_generator(input_text,"2");
+		let text = "```" + ascii_text_generator(input_text,"2") + "```";
  		
 		console.log(text);
 		message.channel.send(text);
