@@ -101,9 +101,7 @@ async function handleCommand(message, command, args) {
 		var random = Math.floor(Math.random()*(20180711082441-1+1)+1);
 		var link = "http://www.mazegenerator.net/ImageGenerator.ashx?Tag=test&MazeType=1&Solution=0";
 		link = link.replace("test", random);
-		message.channel.send('', {
-            	url:link
-           	 });
+		message.channel.send({files: [{attachment: link}]})
 	}
 	if (command == "skin") {
 		var parameter = args[0];
@@ -114,9 +112,7 @@ async function handleCommand(message, command, args) {
 		}
 		link = link.replace("GTR", parameter);
 		try {
-		message.channel.send('', {
-            	url:link
-           	 });
+		message.channel.send({files: [{attachment: link}]})
 		} catch (e) {
 			message.channel.send(link);	
 		}
@@ -134,9 +130,7 @@ async function handleCommand(message, command, args) {
 		var link = "http://www.minecraftachievement.net/achievement/a.php?i=2&h=title&t=description";
 		link = link.replace("title", title);
 		link = link.replace("description", description);
-		message.channel.send('', {
-            	url:link
-           	 });
+		message.channel.send({files: [{attachment: link}]})
 	}
 	if (command == "face") {
 		console.log("face");
