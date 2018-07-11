@@ -106,7 +106,7 @@ async function handleCommand(message, command, args) {
 		try {
 		message.channel.send(text);
 		} catch(e) {
-			message.reply("The message is too long to be sent!"	
+			message.reply("The message is too long to be sent!");
 		}
 	}
 	if (command == "maze") {
