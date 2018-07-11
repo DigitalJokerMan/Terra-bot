@@ -105,7 +105,7 @@ async function handleCommand(message, command, args) {
 	}
 	if (command == "skin") {
 		var parameter = args[0];
-		var link = "https://minotar.net/body/GTR";
+		var link = "https://minotar.net/body/GTR.png";
 		if (!parameter) {
 			message.reply("You need to specify a name!");
 			return;
