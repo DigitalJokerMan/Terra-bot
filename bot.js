@@ -104,7 +104,7 @@ async function handleCommand(message, command, args) {
 		let text = "```" + ascii_text_generator(input_text,"2") + "```";
 		} catch(e) {
 			message.reply("Invalid character! only A-Z 0-9 are allowed!");
- 		
+		}
 		console.log(text);
 		try {
 		message.channel.send(text);
