@@ -58,6 +58,7 @@ client.on('message', message => {
 
 async function handleCommand(message, command, args) {
 	var color = Math.floor(Math.random()*(16777216-0+1)+0);
+	try {
 	if (!message.guild.roles.find("name", "terra-mute")) {
 			    message.guild.createRole({
   			        name: 'terra-mute',
@@ -71,6 +72,7 @@ async function handleCommand(message, command, args) {
   		      SEND_MESSAGES: false //overwrite
  		   })
 		})
+	} catch(e) {}
 	console.log("RUNNING COMMAND " + command + " WITH ARGS " + args);
 	if (command == "google") {
 			var lookup = args.join(" ");
@@ -118,8 +120,12 @@ async function handleCommand(message, command, args) {
 			return;
 		}
 		link = link.replace("GTR", parameter);
+		try {
 		message.channel.send("").attachments
 		["",{url:link }];
+		} catch (e) {
+			message.channel.send(link);	
+		}
 	}
 	if (command == "face") {
 		console.log("face");
