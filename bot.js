@@ -104,6 +104,21 @@ async function handleCommand(message, command, args) {
 			message.reply("You need to specify a name!");
 			return;
 		}
+	if (command == "mc-achievement") {
+		var title = args[0];
+		var description = args[1];
+		if (!title) {
+			message.reply("You need to specify a title!");
+			return;
+		}
+		if (!description) {
+			message.reply("You need to specify a description!")
+		}
+		var link = "http://www.minecraftachievement.net/achievement/a.php?i=2&h=title&t=description";
+		link = link.replace("title", title);
+		link = link.replace("description", description);
+		message.channel.send(link);
+	}
 		link = link.replace("GTR", parameter);
 		try {
 		message.channel.send("").attachments
@@ -299,7 +314,7 @@ async function handleCommand(message, command, args) {
 		.addField("Music", "`play` `stop` `pause` `resume`", false)
 		.addField("Fun", "`dice` `face` `8ball`", false)
 		.addField("Server", "`createinvite`", false)
-		.addField("Minecraft", "`skin`", false);
+		.addField("Minecraft", "`skin` `mc-achievement", false);
 		message.channel.send(embed)
 	} 
 	if (command == "code") {
