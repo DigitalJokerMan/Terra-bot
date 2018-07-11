@@ -99,8 +99,11 @@ async function handleCommand(message, command, args) {
 		message.reply( servers[message.guild.id].queue );
 	}
 	if (command == "ascii") {
+		try {
 		let input_text = args.join(" ");
 		let text = "```" + ascii_text_generator(input_text,"2") + "```";
+		} catch(e) {
+			message.reply("Invalid character! only A-Z 0-9 are allowed!");
  		
 		console.log(text);
 		try {
