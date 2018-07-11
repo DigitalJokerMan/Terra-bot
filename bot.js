@@ -112,7 +112,7 @@ async function handleCommand(message, command, args) {
 		}
 		link = link.replace("GTR", parameter);
 		try {
-		message.channel.send({files: [{attachment: link}]})
+		message.channel.send({files: link})
 		} catch (e) {
 			message.channel.send(link);	
 		}
