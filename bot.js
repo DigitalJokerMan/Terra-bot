@@ -3,11 +3,10 @@ const google = require('google');
 const config = require("./config.json");
 const ytdl = require("ytdl-core");
 const search = require('youtube-search');
-const fortnite = require('fortnite');
-const fortnite = new Client(process.env.fortnite);
+const fortniteinit = require('fortnite');
 const ascii_text_generator = require('ascii-text-generator');
-
 var servers = {};
+const fortnite = new fortniteinit(process.env.fortnite);
 const client = new Discord.Client();
 const streamOptions = { seek: 0, volume: 1 };
 var prefix = config.prefix;
