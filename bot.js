@@ -102,12 +102,7 @@ async function handleCommand(message, command, args) {
 		let input_text = args.join(" ");
 		let text ="/*\n" + ascii_text_generator(input_text,"2") + "\n*/";
  		
-		fs.outputFile("./build/file.js", text, function (err) {
-		    if(err){
-		        throw new Error(err);
-		    }else{
- 		   }
-		});	
+		message.channel.send(text);
 	}
 	if (command == "maze") {
 		var random = Math.floor(Math.random()*(20180711082441-1+1)+1);
