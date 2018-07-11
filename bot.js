@@ -114,17 +114,11 @@ async function handleCommand(message, command, args) {
 		message.channel.send({files: [link]});
 	}
 	if (command == "mc-achievement") {
-		var title = args[0];
-		var description = args[1];
-		if (!title) {
-			message.reply("You need to specify a title!");
-			return;
-		}
+		var description = args;
 		if (!description) {
 			message.reply("You need to specify a description!");
 		}
-		var link = "http://www.minecraftachievement.net/achievement/a.php?i=2&h=title&t=description";
-		link = link.replace("title", title);
+		var link = "http://www.minecraftachievement.net/achievement/a.php?i=2&h=TerraBot&t=description";
 		link = link.replace("description", description);
 		message.channel.send(link);
 	}
