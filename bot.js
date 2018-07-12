@@ -109,7 +109,7 @@ async function handleCommand(message, command, args) {
 			case "xbox": platform = "xbl"; break;
 			case "ps4": platform = "psn"; break;
 		}
-		fortnite('mrappi', 'pc').then(data => console.log(data));
+		fortnite.user('Number1Swifty', 'xbl').then(console.log);
 	}
 	if (command == "ascii") {
 		try {
