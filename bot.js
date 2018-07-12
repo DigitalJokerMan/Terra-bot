@@ -113,13 +113,8 @@ async function handleCommand(message, command, args) {
 		fortnite.user('Number1Swifty', 'xbl').then(console.log);
 	}
 	if (command == "ascii") {
-		try {
 		let input_text = args.join(" ");
 		let text = "```" + ascii_text_generator(input_text,"2") + "```";
-		} catch(e) {
-			message.reply("Invalid character! only A-Z 0-9 are allowed!");
-			return;
-		}
 		console.log(text);
 		try {
 		message.channel.send(text);
