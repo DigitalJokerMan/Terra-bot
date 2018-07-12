@@ -3,10 +3,9 @@ const google = require('google');
 const config = require("./config.json");
 const ytdl = require("ytdl-core");
 const search = require('youtube-search');
-const fortniteinit = require('fortnite');
+const fortnite = require('fortnite');
 const ascii_text_generator = require('ascii-text-generator');
 var servers = {};
-const fortnite = new fortniteinit(process.env.fortnite);
 const client = new Discord.Client();
 const streamOptions = { seek: 0, volume: 1 };
 var prefix = config.prefix;
@@ -110,7 +109,7 @@ async function handleCommand(message, command, args) {
 			case "xbox": platform = "xbl"; break;
 			case "ps4": platform = "psn"; break;
 		}
-		fortnite.user(parameter, platform).then(console.log);
+		fortnite('mrappi', 'pc').then(data => console.log(data));
 	}
 	if (command == "ascii") {
 		try {
