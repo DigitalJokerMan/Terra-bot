@@ -132,12 +132,6 @@ async function handleCommand(message, command, args) {
 			return;
 		}
 	}
-	if (command == "maze") {
-		var random = Math.floor(Math.random()*(20180711082441-1+1)+1);
-		var link = "http://www.mazegenerator.net/ImageGenerator.ashx?Tag=test&MazeType=1&Solution=0";
-		link = link.replace("test", random);
-		message.channel.send(link);
-	}
 	if (command == "skin") {
 		var parameter = args[0];
 		var link = "https://minotar.net/body/GTR.png";
@@ -154,7 +148,7 @@ async function handleCommand(message, command, args) {
 			message.reply("You need to specify a description!");
 		}
 		var link = "http://www.minecraftachievement.net/achievement/a.php?i=2&h=TerraBot&t=description";
-		link = link.replace("description", description);
+		link = link.replace("description", description.join(" "));
 		message.channel.send(link);
 	}
 	if (command == "face") {
