@@ -93,10 +93,6 @@ async function handleCommand(message, command, args) {
 			 if(err) return;
 			let result = results[0].link;
 			let resultname = results[0].title;
-		const embed = new Discord.RichEmbed()
-			.setColor(color)
-			.addField(resultname);
-		message.channel.send(embed)
 		message.channel.send(result);
 		})
 	}
