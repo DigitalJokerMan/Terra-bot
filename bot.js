@@ -384,5 +384,4 @@ function playQueue(msg, results, connection) {
 			playQueue(msg, results, connection);
 		})
 	}
-}
 client.login(process.env.TOKEN);
