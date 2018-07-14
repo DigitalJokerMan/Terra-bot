@@ -105,7 +105,7 @@ async function handleCommand(message, command, args) {
 			.setColor(color)
 			.setFooter(`Terrabot operating in ${client.guilds.size} servers`)
 			.setAuthor("Terrabot", client.user.avatarURL)
-			.setTitle([title](link))
+			.setTitle("[" + title + "]" + "(" + link + ")")
 			.addField("Definition", description , false)
 			.addField("examples", example, false)
 			.addField("tags", tags, false)
