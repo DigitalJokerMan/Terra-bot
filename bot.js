@@ -103,9 +103,7 @@ async function handleCommand(message, command, args) {
 			let tags = result.tags.join(" ");
 			const embed = new Discord.RichEmbed()
 			.setColor(color)
-			.setFooter(`Terrabot operating in ${client.guilds.size} servers`)
-			.setAuthor("Terrabot", client.user.avatarURL)
-			.setTitle(title).setURL(link)
+			.setAuthor(title).setURL(link)
 			.addField("Definition", description , false)
 			.addField("examples", example, false)
 			.addField("tags", tags, false)
