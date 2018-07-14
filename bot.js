@@ -93,26 +93,26 @@ async function handleCommand(message, command, args) {
 	}
 	if (command == "urban") {
 		let search = args.join(" ");
-		let result = urban(search);
-		let title = result.Definition.word;
-		let description = result.definition;
-		let example = result.example;
-		let upvote = result.thumbsUp
-		let downvote = result.thumbsDown;
-		let link = result.urbanURL;
-		let tags = result.tags;
-		
-		const embed = new Discord.RichEmbed()
-		.setColor(color)
-		.setFooter(`Terrabot operating in ${client.guilds.size} servers`)
-		.setAuthor("Terrabot", client.user.avatarURL)
-		.setTitle([title](link))
-		.addField("Definition", description , false)
-		.addField("examples", example, false)
-		.addField("tags", tags, false)
-		.addField("Upvotes",":thumbsup:" + upvote, true)
-		.addField("Downvotes",":thumbsdown:" + downvote, true);
+		urban(search).then(result => {
+			let title = result.word;
+			let description = result.definition;
+			let example = result.example;
+			let upvote = result.thumbsUp
+			let downvote = result.thumbsDown;
+			let link = result.urbanURL;
+			let tags = result.tags;
+			const embed = new Discord.RichEmbed()
+			.setColor(color)
+			.setFooter(`Terrabot operating in ${client.guilds.size} servers`)
+			.setAuthor("Terrabot", client.user.avatarURL)
+			.setTitle([title](link))
+			.addField("Definition", description , false)
+			.addField("examples", example, false)
+			.addField("tags", tags, false)
+			.addField("Upvotes",":thumbsup:" + upvote, true)
+			.addField("Downvotes",":thumbsdown:" + downvote, true);
 		message.channel.send(embed)
+		})
 	}
 	if (command == "queue") {
 		message.reply( servers[message.guild.id].queue );
