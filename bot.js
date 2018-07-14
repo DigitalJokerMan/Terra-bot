@@ -345,7 +345,7 @@ async function handleCommand(message, command, args) {
 		.setFooter(`Terrabot operating in ${client.guilds.size} servers`, 'https://cdn.discordapp.com/embed/avatars/4.png')
 		.setAuthor("Help", client.user.avatarURL)
 		.addField(":question: Bot Info","`help` `uptime` `code` `id` `invite`", false)
-		.addField(":wrench: Utilities", "`google` `say` `ascii` `ping` `avatar`", false)
+		.addField(":wrench: Utilities", "`google` `say` `ascii` `ping` `avatar` `urban` `youtube`", false)
 		.addField("Admin", "`kick` `mute` `ban`", false)
 		.addField("Music", "`play` `stop` `pause` `resume`", false)
 		.addField("Fun", "`dice` `face` `8ball`", false)
