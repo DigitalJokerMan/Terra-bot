@@ -90,8 +90,13 @@ async function handleCommand(message, command, args) {
 	}
 	if (command == "youtube") {
 		search(args.join(' '), opts, function(err, results) {
-			let link = results.link[0];
-			message.reply(link);
+			 if(err) return;
+			let result = results[0].link;
+			let resultname = results[0].title;
+		const embed = new Discord.RichEmbed()
+			.setColor(color)
+			.addField(resultname, result,)
+		message.channel.send(embed)
 		})
 	}
 	if (command == "invite") {
