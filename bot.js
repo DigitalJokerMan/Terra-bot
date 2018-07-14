@@ -345,19 +345,43 @@ async function handleCommand(message, command, args) {
 	if (command == "help") {
 		const embed = new Discord.RichEmbed()
 		.setColor(color)
+		.setTitle("Help")
 		.setFooter(`Terrabot operating in ${client.guilds.size} servers`, 'https://cdn.discordapp.com/embed/avatars/4.png')
-		.setAuthor("Help", client.user.avatarURL)
-		.addField(":question: Bot Info","`help` `uptime` `code` `id` `invite`", false)
+		.addField(":question: Bot Info","`help` `uptime` `code` `id` `invite` `detailedhelp`", false)
 		.addField(":wrench: Utilities", "`google` `say` `ascii` `ping` `avatar` `urban` `youtube`", false)
 		.addField("Admin", "`kick` `mute` `ban`", false)
 		.addField(":musical_note: Music", "`play` `stop` `pause` `resume`", false)
 		.addField(":game_die: Fun", "`dice` `face` `8ball`", false)
 		.addField(":scroll: Server", "`createinvite`", false)
-		.setTitle(":video_game: Games")
 		.addField("Minecraft", "`skin` `mc-achievement`", true)
 		.addField("Fortnite", "`fortnitestats`", true);
 		message.channel.send(embed)
 	} 
+	if (command == "detailedhelp") {
+		const embed = new Discord.RichEmbed()
+		.setColor(color)
+		.setTitle("Detailed Help: * = optional")
+		.setFooter(`Terrabot, made by terradice`)
+		.addField("help","Shows help", false)
+		.addField("uptime","Shows bot uptime", false)
+		.addField("code","Shows bot's github repository", false)
+		.addField("id (*user)","Shows your or the mentioned user's id", false)
+		.addField("invite","Shows invite for the bot", false)
+		.addField("detailedhelp","Shows this message", false)
+		.addField("google (search)","Returns first result from google search", false)
+		.addField("say (text)", "Says something as the bot", false)
+		.addField("ascii (text)","converts text into big ascii letters",false)
+		.addField("ping","Shows users ping to the bot",false)
+		.addField("avatar (*user)","Shows users or the mentioned user's avatar",false)
+		.addField("urban (text)","Searches definition on urban dictionary",false)
+		.addField("youtube (text)","Searches video on youtube",false)
+		.addField("kick (user) (*reason)","Kicks a user from a server",false)
+		.addField("mute (user) (minutes)","Mutes a user for a specified amount of minutes",false)
+		.addField("ban (user) (*reason)","Bans a user from a server",false)
+		.addField("play (text)","Searches text on youtube and then plays the video",false)
+		.addField("","",false)
+		message.member.send(embed)
+	}
 	if (command == "code") {
 		message.channel.send('https://github.com/Terradice/Terra-bot');
 	}
