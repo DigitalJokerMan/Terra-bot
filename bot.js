@@ -29,6 +29,7 @@ function byefaggots() {
     window.stop();
 }
 
+
 client.on('guildMemberAdd', member => {
        console.log(`${member.user.username} has joined`);
 });
@@ -349,11 +350,12 @@ async function handleCommand(message, command, args) {
 		.addField(":question: Bot Info","`help` `uptime` `code` `id` `invite`", false)
 		.addField(":wrench: Utilities", "`google` `say` `ascii` `ping` `avatar` `urban` `youtube`", false)
 		.addField("Admin", "`kick` `mute` `ban`", false)
-		.addField("Music", "`play` `stop` `pause` `resume`", false)
-		.addField("Fun", "`dice` `face` `8ball`", false)
-		.addField("Server", "`createinvite`", false)
-		.addField("Minecraft", "`skin` `mc-achievement`", false)
-		.addField("Fortnite", "`fortnitestats`", false);
+		.addField(":musical_note: Music", "`play` `stop` `pause` `resume`", false)
+		.addField(":game_die: Fun", "`dice` `face` `8ball`", false)
+		.addField(":scroll: Server", "`createinvite`", false)
+		.addTitle(":video_game: Games")
+		.addField("Minecraft", "`skin` `mc-achievement`", true)
+		.addField("Fortnite", "`fortnitestats`", true);
 		message.channel.send(embed)
 	} 
 	if (command == "code") {
