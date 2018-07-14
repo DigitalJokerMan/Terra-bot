@@ -88,6 +88,12 @@ async function handleCommand(message, command, args) {
 	if (command == "ping") {
 		message.channel.send(new Date().getTime() - message.createdTimestamp + " ms");
 	}
+	if (command == "youtube") {
+		search(args.join(' '), opts, function(err, results) {
+			let link = results.link[0];
+			message.reply(link);
+		})
+	}
 	if (command == "invite") {
 		message.reply("Click the link below to add me to your server https://discordapp.com/oauth2/authorize?client_id=459782347936628747&scope=bot&permissions=8");
 	}
