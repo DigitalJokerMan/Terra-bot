@@ -96,7 +96,7 @@ async function handleCommand(message, command, args) {
 		return;
 		let search = args.join(" ");
 		let result = urban(search);
-		let title = result.word;
+		let title = result.Definition.word;
 		let description = result.definition;
 		let example = result.example;
 		let upvote = result.thumbsUp
