@@ -353,7 +353,7 @@ async function handleCommand(message, command, args) {
 		.addField(":musical_note: Music", "`play` `stop` `pause` `resume`", false)
 		.addField(":game_die: Fun", "`dice` `face` `8ball`", false)
 		.addField(":scroll: Server", "`createinvite`", false)
-		.addTitle(":video_game: Games")
+		.setTitle(":video_game: Games")
 		.addField("Minecraft", "`skin` `mc-achievement`", true)
 		.addField("Fortnite", "`fortnitestats`", true);
 		message.channel.send(embed)
