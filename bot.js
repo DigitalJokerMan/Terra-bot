@@ -103,7 +103,7 @@ async function handleCommand(message, command, args) {
 			let tags = result.tags.join(" ");
 			const embed = new Discord.RichEmbed()
 			.setColor(color)
-			.setAuthor(title).setURL(link)
+			.setTitle(title).setURL(link)
 			.addField("Definition", description , false)
 			.addField("examples", example, false)
 			.addField("tags", tags, false)
