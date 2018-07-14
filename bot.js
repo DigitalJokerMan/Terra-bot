@@ -95,8 +95,9 @@ async function handleCommand(message, command, args) {
 			let resultname = results[0].title;
 		const embed = new Discord.RichEmbed()
 			.setColor(color)
-			.addField(resultname, result,)
+			.addField(resultname);
 		message.channel.send(embed)
+		message.channel.send(result);
 		})
 	}
 	if (command == "invite") {
