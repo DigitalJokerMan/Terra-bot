@@ -350,7 +350,7 @@ async function handleCommand(message, command, args) {
 		.addField(":question: Bot Info","`help` `uptime` `code` `id` `invite` `detailedhelp`", false)
 		.addField(":wrench: Utilities", "`google` `say` `ascii` `ping` `avatar` `urban` `youtube`", false)
 		.addField("Admin", "`kick` `mute` `ban`", false)
-		.addField(":musical_note: Music", "`play` `stop` `pause` `resume`", false)
+		.addField(":musical_note: Music", "`play` `stop`", false)
 		.addField(":game_die: Fun", "`dice` `face` `8ball`", false)
 		.addField(":scroll: Server", "`createinvite`", false)
 		.addField("Minecraft", "`skin` `mc-achievement`", true)
@@ -379,7 +379,16 @@ async function handleCommand(message, command, args) {
 		.addField("mute (user) (minutes)","Mutes a user for a specified amount of minutes",false)
 		.addField("ban (user) (*reason)","Bans a user from a server",false)
 		.addField("play (text)","Searches text on youtube and then plays the video",false)
+		.addField("stop","Stops playing music",false)
+		.addField("dice (*rolls) (*min) (*max)","Rolls a dice with the given parameters, if no parameters default is 1 1 6",false)
+		.addField("face (number)","Sends a face from a database",false)
+		.addField("8ball (question)","Answers yes or no to a question",false)
+		.addField("createinvite","Creates an invite to the server",false)
+		.addField("skin (Minecraft user)","Returns a minecraft account's skin",false)
+		.addField("mc-achievement (Text)","Makes a minecraft achievement with the text as the description",false)
+		.addField("fortnitestats (player) (platform)","Shows stats of a fortnite account (WIP)",false)
 		message.member.send(embed)
+		message.reply("Check DM's!");
 	}
 	if (command == "code") {
 		message.channel.send('https://github.com/Terradice/Terra-bot');
