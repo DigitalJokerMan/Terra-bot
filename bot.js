@@ -261,7 +261,6 @@ async function handleCommand(message, command, args) {
 	  let newtime = time * 60 * 1000;
  	   if (!time) return message.reply("Specify a time!");
  	   if (isNaN(time)) return message.reply("Time must be an integer");
-		let muterole = message.guild.roles.find(`name`, "terra-mute");
 		if (!muterole) {
 			message.reply("I dont have the right permissions to create a muterole! therefore i cant mute");	
 		}
