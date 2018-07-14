@@ -92,6 +92,8 @@ async function handleCommand(message, command, args) {
 		message.reply("Click the link below to add me to your server https://discordapp.com/oauth2/authorize?client_id=459782347936628747&scope=bot&permissions=8");
 	}
 	if (command == "urban") {
+		urban('hello').then(console.log);
+		return;
 		let search = args.join(" ");
 		let result = urban(search);
 		let title = result.word;
