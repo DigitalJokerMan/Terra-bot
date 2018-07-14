@@ -379,7 +379,6 @@ async function handleCommand(message, command, args) {
 		.addField("mute (user) (minutes)","Mutes a user for a specified amount of minutes",false)
 		.addField("ban (user) (*reason)","Bans a user from a server",false)
 		.addField("play (text)","Searches text on youtube and then plays the video",false)
-		.addField("","",false)
 		message.member.send(embed)
 	}
 	if (command == "code") {
