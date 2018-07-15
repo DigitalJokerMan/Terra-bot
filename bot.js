@@ -129,11 +129,12 @@ async function handleCommand(message, command, args) {
 			//{files: [link]}
 			  const url = booru.url(post.file_url)
   			const name = `${post.md5}.${post.file_ext}`
+			msg.delete();
 			const embed = new Discord.RichEmbed()
 			.setColor(color)
 			.setTitle(name).setURL(url)
 			.setImage(url)
-		msg.edit(embed)
+		message.channel.send.(embed)
 		})
 		})
 	}
