@@ -134,7 +134,7 @@ async function handleCommand(message, command, args) {
 			.setColor(color)
 			.setTitle(name).setURL(url)
 			.setImage(url)
-		message.channel.send(embed)
+		msg.edit(embed);
 		})
 		})
 	}
