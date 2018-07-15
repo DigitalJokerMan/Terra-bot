@@ -3,9 +3,8 @@ const google = require('google');
 const config = require("./config.json");
 const ytdl = require("ytdl-core");
 const search = require('youtube-search');
-const Client = require('fortnite');
 const urban = require('relevant-urban');
-const fortnite = new Client(process.env.fortnite);
+const request = require('snekfetch');
 const ascii_text_generator = require('ascii-text-generator');
 var servers = {};
 const client = new Discord.Client();
@@ -156,8 +155,11 @@ async function handleCommand(message, command, args) {
 			message.reply("You need to specify a username!");
 			return;
 		}
-		 platform = fortnite.getPlatform(platform);
 		console.log(platform + username);
+		request.get(`https://api.fortnitetracker.com/v1/profile/${platform}/${username}`)
+  		.send({ process.env.fortnite })
+  		.then(r => console.log(r.body))
+		return;
 		let data = fortnite.user(username, 'pc').then(data => {
 			console.log(data);
 		const embed = new Discord.RichEmbed()
