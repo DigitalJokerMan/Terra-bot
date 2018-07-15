@@ -143,6 +143,7 @@ async function handleCommand(message, command, args) {
 		message.reply( servers[message.guild.id].queue );
 	}
 	if (command == "fortnitestats") {
+		/*
 		    const platforms = ['pc', 'xbl', 'psn'];
    		 const username = args.slice(1).join(' ');
  		   let platform = args[0];
@@ -176,6 +177,7 @@ async function handleCommand(message, command, args) {
 		}).catch(e => {
 			console.log(e);	
 		});
+		*/ message.reply("WIP");
 	}
 	if (command == "ascii") {
 		let input_text = args.join(" ");
