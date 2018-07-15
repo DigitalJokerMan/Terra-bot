@@ -121,18 +121,20 @@ async function handleCommand(message, command, args) {
 		message.reply("Click the link below to add me to your server https://discordapp.com/oauth2/authorize?client_id=459782347936628747&scope=bot&permissions=8");
 	}
 	if (command == "danbooru") {
-		booru.posts({ tags: 'rating:e order:favcount limit:100' }).then(posts => {
-			  const index = Math.floor(Math.random() * posts.length);
-			  const post = posts[index];
+		message.channel.send("<a:googling:426453223310622740>" + " Loading...").then(msg => {
+		booru.posts({ tags: 'rating:e order:favcount limit:200' }).then(posts => {
+			  const index = Math.floor(Math.random() * posts.length)
+			  const post = posts[index]
 
 			//{files: [link]}
-			const url = booru.url(post.file_url);
-  			const name = `${post.md5}.${post.file_ext}`;
+			  const url = booru.url(post.file_url)
+  			const name = `${post.md5}.${post.file_ext}`
 			const embed = new Discord.RichEmbed()
 			.setColor(color)
 			.setTitle(name).setURL(url)
 			.setImage(url)
-		message.channel.send({embed});
+		msg.edit({embed}).catch(console.error);
+		})
 		})
 	}
 	if (command == "urban") {
