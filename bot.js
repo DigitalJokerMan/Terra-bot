@@ -123,8 +123,8 @@ async function handleCommand(message, command, args) {
 	if (command == "danbooru") {
 		booru.posts({ limit: 200, tags: args.join("_") }).then(async (posts) => {
 			  const index = Math.floor(Math.random() * posts.length);
-			const url = booru.url(post.file_url);
-  			const name = `${post.md5}`;
+			const url = booru.url(posts.file_url);
+  			const name = posts.md5;
 			//{files: [link]}
 			const embed = new Discord.RichEmbed()
 			.setColor(color)
