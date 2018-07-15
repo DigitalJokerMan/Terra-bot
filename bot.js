@@ -9,9 +9,7 @@ const request = require('snekfetch');
 const ascii_text_generator = require('ascii-text-generator');
 var servers = {};
 const client = new Discord.Client();
-const login = 'login';
-const key = process.env.danbooru;
-const booru = new Danbooru(login + ':' + key);
+const booru = new Danbooru();
 
 const streamOptions = { seek: 0, volume: 1 };
 var prefix = config.prefix;
