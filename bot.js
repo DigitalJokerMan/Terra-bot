@@ -123,18 +123,18 @@ async function handleCommand(message, command, args) {
 	if (command == "danbooru") {
 		message.channel.send("<a:googling:426453223310622740>" + " Loading...").then(mg => {
 		booru.posts({ tags: 'rating:e order:favcount limit:200' }).then(posts => {
-			  const index = Math.floor(Math.random() * posts.length)
-			  const post = posts[index]
+			  const index = Math.floor(Math.random() * posts.length);
+			  const post = posts[index];
 
 			//{files: [link]}
-			  const url = booru.url(post.file_url)
-  			const name = `${post.md5}.${post.file_ext}`
-			msg.delete();
+			  const url = booru.url(post.file_url);
+  			const name = `${post.md5}.${post.file_ext}`;
+			console.log("embed");
 			const embed = new Discord.RichEmbed()
 			.setColor(color)
 			.setTitle(name).setURL(url)
 			.setImage(url)
-		mg.edit(embed).catch(console.error);
+		mg.edit(embed).catch();
 		})
 		})
 	}
