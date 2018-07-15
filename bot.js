@@ -134,7 +134,7 @@ async function handleCommand(message, command, args) {
 			.setColor(color)
 			.setTitle(name).setURL(url)
 			.setImage(url)
-		mg.edit("", {embed: embed }).catch(console.error);
+		mg.edit(embed).catch(console.error);
 		})
 		})
 	}
