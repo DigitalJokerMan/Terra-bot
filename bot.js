@@ -24,7 +24,7 @@ client.on('ready', () => {
 		 servers[key] = {}
 		servers["" + key]["queue"] = [];
 		servers["" + key]["playing"] = false;
-		servers[message.guild.id].danbooru = false;
+		servers["" + key]["danbooru"] = false;
 	}
 });
 
