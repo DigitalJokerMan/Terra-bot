@@ -131,7 +131,7 @@ async function handleCommand(message, command, args) {
 			const embed = new Discord.RichEmbed()
 			.setColor(color)
 			.setTitle(name).setURL(url)
-			.setImage({files: [url]})
+			.setImage(url)
 		message.channel.send(embed)
 		})
 	}
