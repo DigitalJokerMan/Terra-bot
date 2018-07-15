@@ -132,12 +132,8 @@ async function handleCommand(message, command, args) {
 			return;	
 		}
 		if (!platform) {
-			message.reply("You need to specify a platform! EX: xbox, pc, ps4");
+			message.reply("You need to specify a platform! EX: xbl, pc, psn");
 			return;
-		}
-		switch (platform) {
-			case "xbox": platform = "xbl"; break;
-			case "ps4": platform = "psn"; break;
 		}
 		if (platform !== "psn" && platform !== "xbl" && platform !== "pc") {
 			message.reply("Incorrect platform! use xbox, pc or ps4");
