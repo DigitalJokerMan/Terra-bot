@@ -9,6 +9,7 @@ const fortnite = new Client(process.env.fortnite);
 const ascii_text_generator = require('ascii-text-generator');
 var servers = {};
 const client = new Discord.Client();
+
 const streamOptions = { seek: 0, volume: 1 };
 var prefix = config.prefix;
 var opts = {
@@ -24,16 +25,30 @@ client.on('ready', () => {
 		servers["" + key]["playing"] = false;
 	}
 });
-client.voiceConnections.forEach(channel => channel.disconnect())
-function byefaggots() {
-    window.stop();
-}
-
 
 client.on('guildMemberAdd', member => {
        console.log(`${member.user.username} has joined`);
+	let first = false;
+	guild.channels.forEach(async (c) => {
+	if (!first) {
+       	 	if (c.topic && c.topic.includes("{welcome}")) {
+			first = true;
+			c.send(`${member.user} has joined!`);
+	}
 });
+client.on("guildMemberRemove", (member) => {
+	let first = false;
+	guild.channels.forEach(async (c) => {
+	if (!first) {
+       	 	if (c.topic && c.topic.includes("{welcome}")) {
+			first = true;
+			c.send(`${member.user.username} has left!`);
+	}
+});
+
 client.on("guildCreate", guild => {
+	guild.owner.send("I'm terrabot, made by terradice, thanks for inviting me, Heres some special information, to declare a welcome channel, put {welcome} in its description,);
+	
 	let first = false;
       guild.channels.forEach(async (c) => {
 	if (!first) {
@@ -139,7 +154,11 @@ async function handleCommand(message, command, args) {
 			message.reply("Incorrect platform! use xbox, pc or ps4");
 			return;
 		}
-		fortnite.user(parameter, platform).then(message.channel.send).catch(e => console.log(`ERROR: ${e}`));
+		let data = fortnite.user(parameter, platform).then(data => {
+				message.channel.send(
+		}).catch(e => {
+			console.log(e);	
+		});
 	}
 	if (command == "ascii") {
 		let input_text = args.join(" ");
