@@ -318,14 +318,22 @@ async function handleCommand(message, command, args) {
 		if (!muterole) {
 			message.reply("I dont have the right permissions to create a muterole! therefore i cant mute");	
 		}
-		   if(user.roles.has(muterole)){
+		   if(member.user.roles.has(muterole)){
 				message.reply(`${member} is already muted!`)
+			   return;
 		   }
 	    member.addRole(muterole);
 	     message.channel.send(`${member} Has been muted by ${caller} for ${time} minutes!`); 
 	    setTimeout(() => {
  	       member.removeRole(muterole);
  	   }, newtime);
+	}
+	if (command == "unmute") {
+		if(!member.user.roles.has(muterole)){
+				message.reply(`${member} isnt muted!`)
+			return;
+		   } 
+		member.removeRole(muterole);
 	}
 	if (command == "kick") {
 			let caller = message.guild.members.get(message.author.id);
