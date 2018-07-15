@@ -29,7 +29,7 @@ client.on('ready', () => {
 client.on('guildMemberAdd', member => {
        console.log(`${member.user.username} has joined`);
 	let first = false;
-	guild.channels.forEach(async (c) => {
+	member.guild.channels.forEach(async (c) => {
 	if (!first) {
        	 	if (c.topic && c.topic.includes("{welcome}")) {
 			first = true;
@@ -40,7 +40,7 @@ client.on('guildMemberAdd', member => {
 })
 client.on("guildMemberRemove", (member) => {
 	let first = false;
-	guild.channels.forEach(async (c) => {
+	member.guild.channels.forEach(async (c) => {
 	if (!first) {
        	 	if (c.topic && c.topic.includes("{welcome}")) {
 			first = true;
