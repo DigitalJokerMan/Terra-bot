@@ -156,8 +156,9 @@ async function handleCommand(message, command, args) {
 			return;
 		}
 		console.log(platform + username);
+		let key = process.env.fortnite;
 		request.get(`https://api.fortnitetracker.com/v1/profile/${platform}/${username}`)
-  		.send({ process.env.fortnite })
+  		.send({key})
   		.then(r => console.log(r.body))
 		return;
 		let data = fortnite.user(username, 'pc').then(data => {
