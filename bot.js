@@ -60,7 +60,7 @@ client.on('message', message => {
 
 async function handleCommand(message, command, args) {
 	var color = Math.floor(Math.random()*(16777216-0+1)+0);
-	console.log("RUNNING COMMAND " + command + " WITH ARGS " + args);
+	console.log("RUNNING COMMAND " + command + " WITH ARGS " + args + "IN SERVER" + message.guild);
 	if (command == "google") {
 			var lookup = args.join(" ");
 			message.channel.send("<a:googling:426453223310622740>" + " Loading...").then(msg => {
