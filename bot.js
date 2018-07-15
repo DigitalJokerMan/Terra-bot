@@ -34,8 +34,10 @@ client.on('guildMemberAdd', member => {
        	 	if (c.topic && c.topic.includes("{welcome}")) {
 			first = true;
 			c.send(`${member.user} has joined!`);
+		}
 	}
-});
+	});
+})
 client.on("guildMemberRemove", (member) => {
 	let first = false;
 	guild.channels.forEach(async (c) => {
@@ -43,11 +45,13 @@ client.on("guildMemberRemove", (member) => {
        	 	if (c.topic && c.topic.includes("{welcome}")) {
 			first = true;
 			c.send(`${member.user.username} has left!`);
+		}
 	}
+	})
 });
 
 client.on("guildCreate", guild => {
-	guild.owner.send("I'm terrabot, made by terradice, thanks for inviting me, Heres some special information, to declare a welcome channel, put {welcome} in its description,);
+	guild.owner.send("I'm terrabot, made by terradice, thanks for inviting me, Heres some special information, to declare a welcome channel, put {welcome} in its description,");
 	
 	let first = false;
       guild.channels.forEach(async (c) => {
@@ -155,7 +159,7 @@ async function handleCommand(message, command, args) {
 			return;
 		}
 		let data = fortnite.user(parameter, platform).then(data => {
-				message.channel.send(
+				message.channel.send(data);
 		}).catch(e => {
 			console.log(e);	
 		});
