@@ -121,9 +121,8 @@ async function handleCommand(message, command, args) {
 		message.reply("Click the link below to add me to your server https://discordapp.com/oauth2/authorize?client_id=459782347936628747&scope=bot&permissions=8");
 	}
 	if (command == "danbooru") {
-		booru.posts({ tags: "rating:explicit:favcount:>50"}).then(async (posts) => {
+		booru.posts({ limit: 200, tags: args.join("_") }).then(async (posts) => {
 			  const index = Math.floor(Math.random() * posts.length);
- 			  posts = await booru.posts({ limit: 200, tags: args.join("_") })
 			const url = booru.url(post.file_url);
   			const name = `${post.md5}`;
 			//{files: [link]}
