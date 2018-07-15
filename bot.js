@@ -122,7 +122,7 @@ async function handleCommand(message, command, args) {
 	}
 	if (command == "danbooru") {
 		message.channel.send("<a:googling:426453223310622740>" + " Loading...").then(msg => {
-		booru.posts({ tags: 'rating:e order:favcount limit:200' }).then(posts => {
+		booru.posts({ tags: 'rating:e order:favcount limit:200 -filetype:swf -filetype:zip' }).then(posts => {
 			  const index = Math.floor(Math.random() * posts.length)
 			  const post = posts[index]
 
