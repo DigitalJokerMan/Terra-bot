@@ -127,7 +127,7 @@ async function handleCommand(message, command, args) {
 			  const post = posts[index];
 
 			//{files: [link]}
-			  const url = booru.url(post.file_url);
+			const url = booru.url(post.file_url).catch();
   			const name = `${post.md5}.${post.file_ext}`;
 			const embed = new Discord.RichEmbed()
 			.setColor(color)
