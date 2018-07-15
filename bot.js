@@ -127,9 +127,6 @@ async function handleCommand(message, command, args) {
 			  const post = posts[index];
 
 			//{files: [link]}
-			if (!booru.url(post.file_url)) {
-				msg.edit("Error!");	
-			}
 			  const url = booru.url(post.file_url);
   			const name = `${post.md5}.${post.file_ext}`;
 			const embed = new Discord.RichEmbed()
