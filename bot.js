@@ -2,7 +2,6 @@ const Discord = require('discord.js');
 const google = require('google');
 const config = require("./config.json");
 const Danbooru = require('danbooru')
-const booru = new Danbooru()
 const ytdl = require("ytdl-core");
 const search = require('youtube-search');
 const urban = require('relevant-urban');
@@ -10,6 +9,7 @@ const request = require('snekfetch');
 const ascii_text_generator = require('ascii-text-generator');
 var servers = {};
 const client = new Discord.Client();
+const booru = new Danbooru()
 
 const streamOptions = { seek: 0, volume: 1 };
 var prefix = config.prefix;
