@@ -123,7 +123,7 @@ async function handleCommand(message, command, args) {
 	if (command == "danbooru") {
 		booru.posts({ tags: "rating:explicit:favcount:>50"}).then(posts => {
 			  const index = Math.floor(Math.random() * posts.length);
- 			  const posts = await booru.posts({ limit: 200, tags: args.join("_") })
+ 			 async const posts = await booru.posts({ limit: 200, tags: args.join("_") })
 			const url = booru.url(post.file_url);
   			const name = `${post.md5}`;
 			//{files: [link]}
