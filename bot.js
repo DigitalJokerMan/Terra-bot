@@ -1,6 +1,7 @@
 const Discord = require('discord.js');
 const google = require('google');
 const config = require("./config.json");
+const Danbooru = require('danbooru')
 const login = '123q123q'
 const key = process.env.danbooru;
 const booru = new Danbooru(login + ':' + key)
