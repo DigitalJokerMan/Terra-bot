@@ -126,13 +126,15 @@ async function handleCommand(message, command, args) {
 			  const post = posts[index]
 
 			//{files: [link]}
+			message.channel.send("<a:googling:426453223310622740>" + " Loading...").then(msg => {
 			  const url = booru.url(post.file_url)
   			const name = `${post.md5}.${post.file_ext}`
 			const embed = new Discord.RichEmbed()
 			.setColor(color)
 			.setTitle(name).setURL(url)
 			.setImage(url)
-		message.channel.send(embed)
+		msg.edit(embed)
+		})
 		})
 	}
 	if (command == "urban") {
