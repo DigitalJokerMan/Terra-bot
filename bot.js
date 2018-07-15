@@ -155,8 +155,8 @@ async function handleCommand(message, command, args) {
 			message.reply("You need to specify a username!");
 			return;
 		}
-		console.log(platform + username);
 		let key = process.env.FORTNITE;
+		console.log(key);
 		request.get(`https://api.fortnitetracker.com/v1/profile/${platform}/${username}`)
   		.set('TRN-Api-Key', key)
   		.then(r => console.log(r.body))
