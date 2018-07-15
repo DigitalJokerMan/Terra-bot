@@ -129,7 +129,7 @@ async function handleCommand(message, command, args) {
 			return;
 		}, 2500);
 		} else {
-		booru.posts({ tags: "rating:explicit"}).then(posts => {
+		booru.posts({ tags: "rating:explicit:limit:200"}).then(posts => {
 			  const index = Math.floor(Math.random() * posts.length);
  			  const post = posts[index];
 			  
