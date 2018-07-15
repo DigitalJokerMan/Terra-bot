@@ -139,7 +139,11 @@ async function handleCommand(message, command, args) {
 			case "xbox": platform = "xbl"; break;
 			case "ps4": platform = "psn"; break;
 		}
-		fortnite.user('Number1Swifty', 'xbl').then(console.log);
+		if (platform !== "psn" && platform !== "xbl" && platform !== "pc") {
+			message.reply("Incorrect platform! use xbox, pc or ps4");
+			return;
+		}
+		fortnite.user(parameter, platform).then(message.channel.send).catch(message.reply("Incorrect username!");
 	}
 	if (command == "ascii") {
 		let input_text = args.join(" ");
