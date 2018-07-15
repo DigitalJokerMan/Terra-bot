@@ -156,9 +156,9 @@ async function handleCommand(message, command, args) {
 			return;
 		}
 		let key = process.env.FORTNITE;
-		console.log(key);
 		request.get(`https://api.fortnitetracker.com/v1/profile/${platform}/${username}`)
   		.set('TRN-Api-Key', key)
+		console.log("keying");
   		.then(r => console.log(r.body))
 		return;
 		let data = fortnite.user(username, 'pc').then(data => {
