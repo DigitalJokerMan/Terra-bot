@@ -144,22 +144,30 @@ async function handleCommand(message, command, args) {
 		message.reply( servers[message.guild.id].queue );
 	}
 	if (command == "fortnitestats") {
-		let parameter = args[0];
-		let platform = args[1];
-		if (!parameter) {
-			message.reply("You need to specify a user!");
+		    const platforms = ['pc', 'xbl', 'psn'];
+   		 const username = args.slice(1).join(' ');
+ 		   let platform = args[0];
+
+ 	 	if (!platforms.includes(platform)) {
+			message.reply("You need to specify a correct platform! EX: xbl, pc, psn");
 			return;	
 		}
-		if (!platform) {
-			message.reply("You need to specify a platform! EX: xbl, pc, psn");
+  	  	if (!username) {
+			message.reply("You need to specify a username!");
 			return;
 		}
-		if (platform !== "psn" && platform !== "xbl" && platform !== "pc") {
-			message.reply("Incorrect platform! use xbox, pc or ps4");
-			return;
-		}
-		let data = fortnite.user(parameter, platform).then(data => {
-				message.channel.send(data);
+		 platform = fortnite.getPlatform(platform);
+		let data = fortnite.user(username, platform).then(data => {
+		const embed = new Discord.RichEmbed()
+			.setColor(color)
+			.setTitle(`${data.username}`)
+			.setDescription(`**Top Placement**\n\n**Top 3s:** *${data.stats.lifetime[2]['Top 3s']}*\n**Top 5s:** *${data.stats.lifetime[1]['Top 5s']}*\n**Top 6s:** *${data.stats.lifetime[3]['Top 6s']}*\n**Top 12s:** *${data.stats.lifetime[4]['Top 12s']}*\n**Top 25s:** *${data.stats.lifetime[5]['Top 25s']}*`)
+			.addField('Matches Played', data.stats.lifetime[7]['Matches Played'], true)
+			 .addField('Wins', data.stats.lifetime[8]['Wins'], true)
+           		 .addField('Win Percentage', data.stats.lifetime[9]['Win%'], true)
+           		 .addField('Kills', data.stats.lifetime[10]['Kills'], true)
+          		  .addField('K/D Ratio', data.stats.lifetime[11]['K/d'], true);
+		message.channel.send(embed)
 		}).catch(e => {
 			console.log(e);	
 		});
