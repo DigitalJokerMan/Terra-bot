@@ -156,7 +156,7 @@ async function handleCommand(message, command, args) {
 			return;
 		}
 		console.log(platform + username);
-		let key = process.env.fortnite;
+		let key = process.env.FORTNITE;
 		request.get(`https://api.fortnitetracker.com/v1/profile/${platform}/${username}`)
   		.set('TRN-Api-Key', key)
   		.then(r => console.log(r.body))
