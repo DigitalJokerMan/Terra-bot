@@ -121,18 +121,18 @@ async function handleCommand(message, command, args) {
 		message.reply("Click the link below to add me to your server https://discordapp.com/oauth2/authorize?client_id=459782347936628747&scope=bot&permissions=8");
 	}
 	if (command == "danbooru") {
-		message.channel.send("<a:googling:426453223310622740>" + " Loading...").then(msg => {
-		booru.posts({ tags: 'rating:e order:favcount limit:200 -filetype:swf -filetype:zip' }).then(posts => {
+		message.channel.send("<a:googling:426453223310622740>" + " Loading...").then(mg => {
+		booru.posts({ tags: 'rating:e order:favcount limit:200' }).then(posts => {
 			  const index = Math.floor(Math.random() * posts.length)
-			  const post = posts[index
-					     console.log(booru.url(post.file_url));
-			const url = booru.url(post.file_url);
+			  const post = posts[index]
+			  const url = booru.url(post.file_url)
   			const name = `${post.md5}.${post.file_ext}`
+			msg.delete();
 			const embed = new Discord.RichEmbed()
 			.setColor(color)
 			.setTitle(name).setURL(url)
 			.setImage(url)
-		msg.edit({embed}).catch(console.error);
+		mg.edit({embed}).catch(console.error);
 		})
 		})
 	}
