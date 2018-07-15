@@ -121,7 +121,7 @@ async function handleCommand(message, command, args) {
 		message.reply("Click the link below to add me to your server https://discordapp.com/oauth2/authorize?client_id=459782347936628747&scope=bot&permissions=8");
 	}
 	if (command == "danbooru") {
-		booru.posts({ tags: 'rating:e order:rank' }).then(posts => {
+		booru.posts({ tags: 'rating:e order:favcount' }).then(posts => {
 			  const index = Math.floor(Math.random() * posts.length)
 			  const post = posts[index]
 
