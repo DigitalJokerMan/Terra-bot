@@ -121,7 +121,7 @@ async function handleCommand(message, command, args) {
 		message.reply("Click the link below to add me to your server https://discordapp.com/oauth2/authorize?client_id=459782347936628747&scope=bot&permissions=8");
 	}
 	if (command == "danbooru") {
-		message.channel.send("<a:googling:426453223310622740>" + " Loading...").then(mg => {
+		message.channel.send("<a:googling:426453223310622740>" + " Loading...").then(msg => {
 		booru.posts({ tags: 'rating:e order:favcount limit:200' }).then(posts => {
 			  const index = Math.floor(Math.random() * posts.length);
 			  const post = posts[index];
@@ -134,7 +134,7 @@ async function handleCommand(message, command, args) {
 			.setColor(color)
 			.setTitle(name).setURL(url)
 			.setImage(url)
-		mg.edit(embed).catch();
+		msg.edit({embed});
 		})
 		})
 	}
