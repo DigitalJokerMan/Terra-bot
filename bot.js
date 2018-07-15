@@ -157,6 +157,7 @@ async function handleCommand(message, command, args) {
 			return;
 		}
 		 platform = fortnite.getPlatform(platform);
+		console.log(platform + username);
 		let data = fortnite.user(username, platform).then(data => {
 			console.log(data);
 		const embed = new Discord.RichEmbed()
