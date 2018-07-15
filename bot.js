@@ -1,6 +1,7 @@
 const Discord = require('discord.js');
 const google = require('google');
 const config = require("./config.json");
+const Danbooru = require('danbooru')
 const ytdl = require("ytdl-core");
 const search = require('youtube-search');
 const urban = require('relevant-urban');
@@ -399,6 +400,7 @@ async function handleCommand(message, command, args) {
 		.addField(":musical_note: Music", "`play` `stop`", false)
 		.addField(":game_die: Fun", "`dice` `face` `8ball`", false)
 		.addField(":scroll: Server", "`createinvite`", false)
+		.addField("NSFW", "`danbooru`", false)
 		.addField("Minecraft", "`skin` `mc-achievement`", true)
 		.addField("Fortnite", "`fortnitestats`", true);
 		message.channel.send(embed)
