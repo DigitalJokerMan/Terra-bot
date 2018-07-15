@@ -24,6 +24,7 @@ client.on('ready', () => {
 		 servers[key] = {}
 		servers["" + key]["queue"] = [];
 		servers["" + key]["playing"] = false;
+		servers[message.guild.id].danbooru = false;
 	}
 });
 
@@ -121,11 +122,18 @@ async function handleCommand(message, command, args) {
 		message.reply("Click the link below to add me to your server https://discordapp.com/oauth2/authorize?client_id=459782347936628747&scope=bot&permissions=8");
 	}
 	if (command == "danbooru") {
+		if (servers[message.guild.id].danbooru) {
+			message.reply("You need to wait 2 seconds before doing that again!");
+		setTimeout(() => {
+			servers[message.guild.id].danbooru = false;
+			return;
+		}, 2500);
+		} else {
 		booru.posts({ tags: "rating:explicit"}).then(posts => {
 			  const index = Math.floor(Math.random() * posts.length);
  			  const post = posts[index];
 			  
-			   const url = booru.url(post.file_url);
+			const url = booru.url(post.file_url);
   			const name = `${post.md5}`;
 			//{files: [link]}
 			const embed = new Discord.RichEmbed()
@@ -134,6 +142,8 @@ async function handleCommand(message, command, args) {
 			.setImage(url)
 		message.channel.send(embed)
 		})
+		servers[message.guild.id].danbooru = true;
+		}
 	}
 	if (command == "urban") {
 		let search = args.join(" ");
