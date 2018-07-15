@@ -121,18 +121,18 @@ async function handleCommand(message, command, args) {
 		message.reply("Click the link below to add me to your server https://discordapp.com/oauth2/authorize?client_id=459782347936628747&scope=bot&permissions=8");
 	}
 	if (command == "danbooru") {
-		message.channel.send("<a:googling:426453223310622740>" + " Loading...").then(msg => {
-		booru.posts({ tags: 'rating:e order:favcount limit:200' }).then(async (posts) => {
-			  const index = Math.floor(Math.random() * posts.length)
-			  const post = await posts[index]
-			  if(!post) console.log('error');
-  			const name = `${post.md5}.${post.file_ext}`
-			const embed = new Discord.RichEmbed()
-			.setColor(color)
-			.setTitle(name).setURL(url)
-			.setImage(url)
-		msg.edit({embed}).catch(console.error);
-		})
+		//message.channel.send("<a:googling:426453223310622740>" + " Loading...").then(msg => {
+			booru.posts({ tags: 'rating:e order:favcount limit:200' }).then(async (posts) => {
+				  const index = Math.floor(Math.random() * posts.length);
+				  const post = await posts[index];
+				  if(!post) console.log('error');
+  				const name = `${post.md5}.${post.file_ext}`
+				const embed = new Discord.RichEmbed()
+				.setColor(color)
+				.setTitle(name).setURL(url)
+				.setImage(url)
+			message.channel.send({embed}).catch(console.error);
+			//})
 		})
 	}
 	if (command == "urban") {
