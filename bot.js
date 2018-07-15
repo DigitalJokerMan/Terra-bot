@@ -121,11 +121,11 @@ async function handleCommand(message, command, args) {
 		message.reply("Click the link below to add me to your server https://discordapp.com/oauth2/authorize?client_id=459782347936628747&scope=bot&permissions=8");
 	}
 	if (command == "danbooru") {
-		booru.posts({ tags: `rating:${args.join(" ")}:rank`}).then(posts => {
-			  const index = Math.floor(Math.random() * posts.length)
- 			  const post = posts[index]
+		booru.posts({ tags: args}).then(posts => {
+			  const index = Math.floor(Math.random() * posts.length);
+ 			  const post = posts[index];
 			  
-			   const url = booru.url(post.file_url)
+			   const url = booru.url(post.file_url);
   			const name = `${post.md5}`;
 			//{files: [link]}
 			const embed = new Discord.RichEmbed()
