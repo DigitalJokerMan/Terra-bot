@@ -125,7 +125,7 @@ async function handleCommand(message, command, args) {
 		booru.posts({ tags: 'rating:e order:favcount limit:200' }).then(async (posts) => {
 			  const index = Math.floor(Math.random() * posts.length)
 			  const post = await posts[index]
-			  if(!post) return console.log('error');
+			  if(!post) console.log('error');
   			const name = `${post.md5}.${post.file_ext}`
 			const embed = new Discord.RichEmbed()
 			.setColor(color)
