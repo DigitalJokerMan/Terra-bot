@@ -158,6 +158,7 @@ async function handleCommand(message, command, args) {
 		}
 		 platform = fortnite.getPlatform(platform);
 		let data = fortnite.user(username, platform).then(data => {
+			console.log(data);
 		const embed = new Discord.RichEmbed()
 			.setColor(color)
 			.setTitle(`${data.username}`)
