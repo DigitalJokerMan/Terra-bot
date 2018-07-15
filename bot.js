@@ -2,9 +2,7 @@ const Discord = require('discord.js');
 const google = require('google');
 const config = require("./config.json");
 const Danbooru = require('danbooru')
-const login = '123q123q'
-const key = process.env.danbooru;
-const booru = new Danbooru(login + ':' + key)
+const booru = new Danbooru()
 const ytdl = require("ytdl-core");
 const search = require('youtube-search');
 const urban = require('relevant-urban');
@@ -127,7 +125,7 @@ async function handleCommand(message, command, args) {
 		booru.posts({ tags: 'rating:e order:favcount limit:200 -filetype:swf -filetype:zip' }).then(posts => {
 			  const index = Math.floor(Math.random() * posts.length)
 			  const post = posts[index
-			//{files: [link]}
+					     console.log(booru.url(post.file_url));
 			const url = booru.url(post.file_url);
   			const name = `${post.md5}.${post.file_ext}`
 			const embed = new Discord.RichEmbed()
