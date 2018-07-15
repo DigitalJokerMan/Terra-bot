@@ -139,7 +139,7 @@ async function handleCommand(message, command, args) {
 			message.reply("Incorrect platform! use xbox, pc or ps4");
 			return;
 		}
-		fortnite.user(parameter, platform).then(message.channel.send).catch(e => console.log(`ERROR: ${e}`));
+		fortnite.User(parameter, platform).then(message.channel.send).catch(e => console.log(`ERROR: ${e}`));
 	}
 	if (command == "ascii") {
 		let input_text = args.join(" ");
