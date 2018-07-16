@@ -119,7 +119,7 @@ async function handleCommand(message, command, args) {
 			message.reply("That channel already exists!");
 			return;
 		}
-		message.guild.createChannel(args.join("-")).then(c => {c.setName("newChannel"); c.reply("Here you go!");})
+		message.guild.createChannel(args.join("-")).then(c => {c.setName(args.join("-")); c.reply("Here you go!");})
 	}
 	if (command == "servers") {
 		message.channel.send("I am currently running in `" + client.guilds.size + "` servers!");
