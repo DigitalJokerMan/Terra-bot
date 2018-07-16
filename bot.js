@@ -129,7 +129,7 @@ async function handleCommand(message, command, args) {
 			return;
 		}
 		message.channel.send("<a:googling:426453223310622740>" + " Loading...").then(msg => {
-			for (var i = false; i == true; i = i;) {
+			for (var i = false; i == true; i = i) {
 			booru.posts({ tags: 'rating:e order:favcount limit:200' }).then(posts => {
 				console.log(posts instanceof Array);
 				if (posts instanceof Array) {
