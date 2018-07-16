@@ -127,7 +127,11 @@ async function handleCommand(message, command, args) {
 		}
 		message.channel.send("<a:googling:426453223310622740>" + " Loading...").then(msg => {
 			booru.posts({ tags: 'rating:e order:favcount limit:200' }).then(async (posts) => {
-				let post = PostInvalid(post, posts);
+				const index = Math.floor(Math.random() * posts.length);
+				const post = await posts[index];  
+				if (!post) {
+					post = PostInvalid(post, posts);
+				}
 				const url = booru.url(post.file_url)
   				const name = `${post.md5}.${post.file_ext}`
 				const embed = new Discord.RichEmbed()
