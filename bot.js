@@ -114,6 +114,16 @@ async function handleCommand(message, command, args) {
 	if (command == "ping") {
 		message.channel.send(new Date().getTime() - message.createdTimestamp + " ms");
 	}
+	if (command == "createchannel") {
+		if (message.guild.roles.find("name", args.join("-"))) {
+			message.reply("That channel already exists!");
+			return;
+		}
+		message.guild.createChannel(args.join("-")).then(c => {c.setName("newChannel"); c.reply("Here you go!");})
+	}
+	if (command == "servers") {
+		message.channel.send("I am currently running in `" + client.guilds.size + "` servers!");
+	}
 	if (command == "youtube") {
 		search(args.join(' '), opts, function(err, results) {
 			 if(err) return;
@@ -409,7 +419,7 @@ async function handleCommand(message, command, args) {
 		.setColor(color)
 		.setTitle("Help")
 		.setFooter(`Terrabot operating in ${client.guilds.size} servers`, 'https://cdn.discordapp.com/embed/avatars/4.png')
-		.addField(":question: Bot Info","`help` `uptime` `code` `id` `invite` `detailedhelp`", false)
+		.addField(":question: Bot Info","`help` `uptime` `code` `id` `invite` `detailedhelp` `servers", false)
 		.addField(":wrench: Utilities", "`google` `say` `ascii` `ping` `avatar` `urban` `youtube`", false)
 		.addField("Admin", "`kick` `mute` `ban`", false)
 		.addField(":musical_note: Music", "`play` `stop`", false)
