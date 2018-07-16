@@ -65,7 +65,7 @@ client.on("guildCreate", guild => {
             })
 });
 client.on('message', message => {
-		const swearWords = ["fuck", "shit", "damn", "nigger", "fucker", "motherfucker", "dick", "pussy"];
+		const swearWords = ["fuck", "shit", "damn", "nigger", "fucker", "motherfucker", "dick", "pussy", "dumbass", "faggot", "fag"];
 		if(swearWords.some(word => message.content.includes(word)) ) {
 		  message.delete();
 		}
