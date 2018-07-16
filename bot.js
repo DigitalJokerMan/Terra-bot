@@ -134,7 +134,7 @@ async function handleCommand(message, command, args) {
 				const post = await posts[index];  
 				if(!post) {
 					const index = Math.floor(Math.random() * posts.length);
-					const post = await posts[index];  
+					await const post = await posts[index];  
 					if (!post) {
 						msg.edit("An error has occured");	
 					}
