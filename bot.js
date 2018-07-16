@@ -127,9 +127,9 @@ async function handleCommand(message, command, args) {
 		}
 		message.channel.send("<a:googling:426453223310622740>" + " Loading...").then(msg => {
 			booru.posts({ tags: 'rating:e order:favcount limit:200' }).then(async (posts) => {
+				console.log(posts);
 				  const index = Math.floor(Math.random() * posts.length);
 				  const post = await posts[index];
-				console.log(posts);
 				  if(!post) {
 				  const index = Math.floor(Math.random() * posts.length);
 				  const post = await posts[index];
