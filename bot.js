@@ -131,7 +131,11 @@ async function handleCommand(message, command, args) {
 				  const post = await posts[index];
 				  if(!post) {
 				  const index = Math.floor(Math.random() * posts.length);
-				  const post = await posts[index];  
+				  const post = await posts[index];
+					  if(!post) {
+				  	const index = Math.floor(Math.random() * posts.length);
+				 	 const post = await posts[index];  
+					  }
 				  }
 				const url = booru.url(post.file_url)
   				const name = `${post.md5}.${post.file_ext}`
