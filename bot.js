@@ -129,13 +129,10 @@ async function handleCommand(message, command, args) {
 			return;
 		}
 		message.channel.send("<a:googling:426453223310622740>" + " Loading...").then(msg => {
-			for (var i = 0; i = 1; i = i) {
 			booru.posts({ tags: 'rating:e order:favcount limit:200' }).then(posts => {
 				console.log(posts instanceof Array);
 				if (posts instanceof Array) {
-					i = 1;	
-				} else {
-					return;	
+					posts =	booru.posts({ tags: 'rating:e order:favcount limit:200' });
 				}
 				const newPosts = posts.filter(item => item !== undefined);
 				const index = Math.floor(Math.random() * newPosts.length);
