@@ -121,7 +121,7 @@ async function handleCommand(message, command, args) {
 		message.reply("Click the link below to add me to your server https://discordapp.com/oauth2/authorize?client_id=459782347936628747&scope=bot&permissions=8");
 	}
 	if (command == "danbooru") {
-		if (message.channel.nsfw) {
+		if (!message.channel.nsfw) {
 			message.reply("Shh! there are kids in here!");
 			return;
 		}
