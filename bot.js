@@ -121,6 +121,10 @@ async function handleCommand(message, command, args) {
 		message.reply("Click the link below to add me to your server https://discordapp.com/oauth2/authorize?client_id=459782347936628747&scope=bot&permissions=8");
 	}
 	if (command == "danbooru") {
+		if (message.channel.nsfw) {
+			message.reply("Shh! there are kids in here!");
+			return;
+		}
 		message.channel.send("<a:googling:426453223310622740>" + " Loading...").then(msg => {
 			booru.posts({ tags: 'rating:e order:favcount limit:200' }).then(async (posts) => {
 				  const index = Math.floor(Math.random() * posts.length);
