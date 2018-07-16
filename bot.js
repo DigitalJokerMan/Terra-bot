@@ -132,8 +132,10 @@ async function handleCommand(message, command, args) {
 			booru.posts({ tags: 'rating:e order:favcount limit:200' }).then(posts => {
 				console.log(posts instanceof Array);
 				if (posts instanceof Array) {
-					posts =	booru.posts({ tags: 'rating:e order:favcount limit:200' });
-				}
+					  console.log('posts is an array')
+					} else {
+ 				 console.log(JSON.stringify(posts))
+					}
 				const newPosts = posts.filter(item => item !== undefined);
 				const index = Math.floor(Math.random() * newPosts.length);
 				const post = newPosts[index]; 
