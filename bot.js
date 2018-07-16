@@ -130,7 +130,7 @@ async function handleCommand(message, command, args) {
 		}
 		message.channel.send("<a:googling:426453223310622740>" + " Loading...").then(msg => {
 			booru.posts({ tags: 'rating:e order:favcount limit:200' }).then(posts => {
-				console.log(posts instanceof Array);
+				console.log(posts instanceof);
 				if (posts instanceof Array) {
 					  console.log('posts is an array')
 					} else {
