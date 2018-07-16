@@ -128,7 +128,9 @@ async function handleCommand(message, command, args) {
 			message.reply("Shh! there are kids in here!");
 			return;
 		}
-		fetchPosts(message);
+		message.channel.send("<a:googling:426453223310622740>" + " Loading...").then(msg => {
+			fetchPosts(message);
+		})
 	}
 	if (command == "urban") {
 		let search = args.join(" ");
@@ -507,8 +509,7 @@ function playQueue(msg, results, connection) {
 			playQueue(msg, results, connection);
 		})
 }
-function fetchPosts(message) {
-	message.channel.send("<a:googling:426453223310622740>" + " Loading...").then(msg => {
+function fetchPosts(message, color, msg) {
 		booru.posts({ tags: 'rating:e order:favcount limit:200' }).then(posts => {
 			if ('success' in posts && !posts.success) {
 				setTimeout(() => {
@@ -532,7 +533,6 @@ function fetchPosts(message) {
 		msg.edit({embed}).catch(console.error);
 			  }
 		})
-	})
 }
 
 
