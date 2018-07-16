@@ -129,6 +129,7 @@ async function handleCommand(message, command, args) {
 			booru.posts({ tags: 'rating:e order:favcount limit:200' }).then(async (posts) => {
 				  const index = Math.floor(Math.random() * posts.length);
 				  const post = await posts[index];
+				console.log(posts);
 				  if(!post) {
 				  const index = Math.floor(Math.random() * posts.length);
 				  const post = await posts[index];
