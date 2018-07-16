@@ -65,10 +65,13 @@ client.on("guildCreate", guild => {
             })
 });
 client.on('message', message => {
-		const swearWords = ["fuck", "shit", "damn", "nigger", "fucker", "motherfucker", "dick", "pussy", "dumbass", "faggot", "fag"];
-		if(swearWords.some(word => message.content.includes(word)) ) {
-		  message.delete();
-		}
+       	 		if (message.channel.topic && message.channel.topic.includes("{safe}")) {
+				const swearWords = ["fuck", "shit", "damn", "nigger", "fucker", "motherfucker", "dick", "pussy", "dumbass", "faggot", "fag"];
+				if(swearWords.some(word => message.content.includes(word)) ) {
+				  message.delete();
+				}
+				}
+			})
 		let msg = message.content;
 		if (message.author.bot) return;
 		if (!message.guild) return;
