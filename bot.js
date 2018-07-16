@@ -128,30 +128,7 @@ async function handleCommand(message, command, args) {
 			message.reply("Shh! there are kids in here!");
 			return;
 		}
-		message.channel.send("<a:googling:426453223310622740>" + " Loading...").then(msg => {
-			booru.posts({ tags: 'rating:e order:favcount limit:200' }).then(posts => {
-				console.log(typeof posts);
-				if (posts instanceof array) {
-					  console.log('posts is an array')
-					} else {
- 				 console.log(JSON.stringify(posts))
-					}
-				const newPosts = posts.filter(item => item !== undefined);
-				const index = Math.floor(Math.random() * newPosts.length);
-				const post = newPosts[index]; 
-				const url = booru.url(post.file_url)
-  				const name = `${post.md5}.${post.file_ext}`
-				if (post.file_ext == ".mp4") {
-					msg.edit(url);
-					return;
-				}
-				const embed = new Discord.RichEmbed()
-				.setColor(color)
-				.setTitle(name).setURL(url)
-				.setImage(url)
-			msg.edit({embed}).catch(console.error);
-			})
-		})
+		fetchPosts(message);
 	}
 	if (command == "urban") {
 		let search = args.join(" ");
@@ -530,5 +507,33 @@ function playQueue(msg, results, connection) {
 			playQueue(msg, results, connection);
 		})
 }
+function fetchPosts(message) {
+	message.channel.send("<a:googling:426453223310622740>" + " Loading...").then(msg => {
+		booru.posts({ tags: 'rating:e order:favcount limit:200' }).then(posts => {
+			if ('success' in posts && !posts.success) {
+				setTimeout(() => {
+				  console.log(`Error: ${posts.message}\nRetrying in 1 second...`)
+				  fetchPosts(message);
+				}, 1000)
+			  } else {
+			const newPosts = posts.filter(item => item !== undefined);
+			const index = Math.floor(Math.random() * newPosts.length);
+			const post = newPosts[index]; 
+			const url = booru.url(post.file_url)
+			  const name = `${post.md5}.${post.file_ext}`
+			if (post.file_ext == ".mp4") {
+				msg.edit(url);
+				return;
+			}
+			const embed = new Discord.RichEmbed()
+			.setColor(color)
+			.setTitle(name).setURL(url)
+			.setImage(url)
+		msg.edit({embed}).catch(console.error);
+			  }
+		})
+	})
+}
+
 
 client.login(process.env.TOKEN);
