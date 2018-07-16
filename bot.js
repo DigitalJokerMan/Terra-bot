@@ -52,7 +52,7 @@ client.on("guildMemberRemove", (member) => {
 });
 
 client.on("guildCreate", guild => {
-	guild.owner.send("I'm terrabot, made by terradice, thanks for inviting me, Heres some special information, to declare a welcome channel, put {welcome} in its description,");
+	guild.owner.send("I'm terrabot, made by terradice, thanks for inviting me, Heres some special information, to declare a welcome channel, put {welcome} in its description, to block swear words in a channel, put {safe} in its description");
 	
 	let first = false;
       guild.channels.forEach(async (c) => {
@@ -65,7 +65,10 @@ client.on("guildCreate", guild => {
             })
 });
 client.on('message', message => {
-
+		const swearWords = ["fuck", "shit", "damn", "nigger", "fucker", "motherfucker", "dick", "pussy"];
+		if(swearWords.some(word => message.content.includes(word)) ) {
+		  message.delete();
+		}
 		let msg = message.content;
 		if (message.author.bot) return;
 		if (!message.guild) return;
