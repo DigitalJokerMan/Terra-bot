@@ -130,8 +130,8 @@ async function handleCommand(message, command, args) {
 		}
 		message.channel.send("<a:googling:426453223310622740>" + " Loading...").then(msg => {
 			booru.posts({ tags: 'rating:e order:favcount limit:200' }).then(posts => {
-				console.log(posts instanceof);
-				if (posts typeof) {
+				console.log(posts typeof);
+				if (posts instanceof array) {
 					  console.log('posts is an array')
 					} else {
  				 console.log(JSON.stringify(posts))
