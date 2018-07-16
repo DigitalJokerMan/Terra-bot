@@ -133,7 +133,7 @@ async function handleCommand(message, command, args) {
 					const index = Math.floor(Math.random() * posts.length);
 					const post = await posts[index];  
 					if (!post) {
-						message.reply("An error has occured");	
+						msg.edit("An error has occured");	
 					}
 				 }
 				const url = booru.url(post.file_url)
