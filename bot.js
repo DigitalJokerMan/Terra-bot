@@ -71,7 +71,6 @@ client.on('message', message => {
 				  message.delete();
 				}
 				}
-			})
 		let msg = message.content;
 		if (message.author.bot) return;
 		if (!message.guild) return;
