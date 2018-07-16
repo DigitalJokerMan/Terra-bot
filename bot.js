@@ -514,7 +514,7 @@ function fetchPosts(message, color, msg) {
 			if ('success' in posts && !posts.success) {
 				setTimeout(() => {
 				  console.log(`Error: ${posts.message}\nRetrying in 1 second...`)
-				  fetchPosts(message);
+				  fetchPosts(message, color, msg);
 				}, 1000)
 			  } else {
 			const newPosts = posts.filter(item => item !== undefined);
