@@ -129,11 +129,11 @@ async function handleCommand(message, command, args) {
 			return;
 		}
 		message.channel.send("<a:googling:426453223310622740>" + " Loading...").then(msg => {
-			booru.posts({ tags: 'rating:e order:favcount limit:200' }).then(async (posts) => {
+			booru.posts({ tags: 'rating:e order:favcount limit:200' }).then(posts => {
 				console.log(posts instanceof Array);
 				const newPosts = posts.filter(item => item !== undefined);
 				const index = Math.floor(Math.random() * newPosts.length);
-				const post = await newPosts[index]; 
+				const post = newPosts[index]; 
 				const url = booru.url(post.file_url)
   				const name = `${post.md5}.${post.file_ext}`
 				if (post.file_ext == ".mp4") {
