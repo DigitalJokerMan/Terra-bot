@@ -138,6 +138,10 @@ async function handleCommand(message, command, args) {
 				 }
 				const url = booru.url(post.file_url)
   				const name = `${post.md5}.${post.file_ext}`
+				if (post.file_ext == ".mp4") {
+					msg.edit(url);
+					return;
+				}
 				const embed = new Discord.RichEmbed()
 				.setColor(color)
 				.setTitle(name).setURL(url)
