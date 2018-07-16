@@ -130,11 +130,13 @@ async function handleCommand(message, command, args) {
 		}
 		message.channel.send("<a:googling:426453223310622740>" + " Loading...").then(msg => {
 			booru.posts({ tags: 'rating:e order:favcount limit:200' }).then(async (posts) => {
-				const index = Math.floor(Math.random() * posts.length);
-				const post = await posts[index];  
+				const newPosts = posts.filter(item => item !== undefined)
+				const index = Math.floor(Math.random() * newPosts.length);
+				const post = await newPosts[index];  
+				
 				if(!post) {
 					const index = Math.floor(Math.random() * posts.length);
-					await const post = await posts[index];  
+					const post = await posts[index];  
 					if (!post) {
 						msg.edit("An error has occured");	
 					}
