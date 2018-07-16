@@ -149,7 +149,6 @@ async function handleCommand(message, command, args) {
 				.setImage(url)
 			msg.edit({embed}).catch(console.error);
 			})
-			}
 		})
 	}
 	if (command == "urban") {
@@ -509,7 +508,8 @@ async function handleCommand(message, command, args) {
 		.addField("Hours",Math.round(client.uptime / (1000 * 60 * 60)), true )
 		.addField("Minutes", Math.round(client.uptime / (1000 * 60)) % 60, true);
 		message.channel.send(embed)
-	}}
+	}
+}
 function playQueue(msg, results, connection) {
 	var queues = servers[msg.guild.id].queue;
 	if(!queues[0]) {
@@ -528,4 +528,5 @@ function playQueue(msg, results, connection) {
 			playQueue(msg, results, connection);
 		})
 }
+
 client.login(process.env.TOKEN);
