@@ -129,7 +129,7 @@ async function handleCommand(message, command, args) {
 			return;
 		}
 		message.channel.send("<a:googling:426453223310622740>" + " Loading...").then(msg => {
-			fetchPosts(message);
+			fetchPosts(message, color, msg);
 		})
 	}
 	if (command == "urban") {
