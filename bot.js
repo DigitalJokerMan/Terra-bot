@@ -129,9 +129,13 @@ async function handleCommand(message, command, args) {
 			booru.posts({ tags: 'rating:e order:favcount limit:200' }).then(async (posts) => {
 				const index = Math.floor(Math.random() * posts.length);
 				const post = await posts[index];  
-				if (!post) {
-					post = PostInvalid(post, posts);
-				}
+				if(!post) {
+					const index = Math.floor(Math.random() * posts.length);
+					const post = await posts[index];  
+					if (!post) {
+						message.reply("An error has occured");	
+					}
+				 }
 				const url = booru.url(post.file_url)
   				const name = `${post.md5}.${post.file_ext}`
 				const embed = new Discord.RichEmbed()
@@ -517,14 +521,5 @@ function playQueue(msg, results, connection) {
 			dispatcher.destroy();
 			playQueue(msg, results, connection);
 		})
-	}
-async function PostInvalid(post, posts) {
-	 if(!post) {
-		const index = Math.floor(Math.random() * posts.length);
-		const post = await posts[index];  
-		 PostInvalid(post);
-	} else {
-		return post;	
-	}
 }
 client.login(process.env.TOKEN);
