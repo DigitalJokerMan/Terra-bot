@@ -514,7 +514,7 @@ function playQueue(msg, results, connection) {
 			playQueue(msg, results, connection);
 		})
 	}
-function PostInvalid(post, posts) {
+async function PostInvalid(post, posts) {
 	 if(!post) {
 		const index = Math.floor(Math.random() * posts.length);
 		const post = await posts[index];  
