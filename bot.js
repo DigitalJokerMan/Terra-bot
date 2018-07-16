@@ -132,15 +132,7 @@ async function handleCommand(message, command, args) {
 			booru.posts({ tags: 'rating:e order:favcount limit:200' }).then(async (posts) => {
 				const newPosts = posts.filter(item => item !== undefined)
 				const index = Math.floor(Math.random() * newPosts.length);
-				const post = await newPosts[index];  
-				
-				if(!post) {
-					const index = Math.floor(Math.random() * posts.length);
-					const post = await posts[index];  
-					if (!post) {
-						msg.edit("An error has occured");	
-					}
-				 }
+				const post = await newPosts[index]; 
 				const url = booru.url(post.file_url)
   				const name = `${post.md5}.${post.file_ext}`
 				if (post.file_ext == ".mp4") {
