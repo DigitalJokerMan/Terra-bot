@@ -130,7 +130,8 @@ async function handleCommand(message, command, args) {
 		}
 		message.channel.send("<a:googling:426453223310622740>" + " Loading...").then(msg => {
 			booru.posts({ tags: 'rating:e order:favcount limit:200' }).then(async (posts) => {
-				const newPosts = posts.filter(item => item !== undefined)
+				console.log(posts instanceof Array);
+				const newPosts = posts.filter(item => item !== undefined);
 				const index = Math.floor(Math.random() * newPosts.length);
 				const post = await newPosts[index]; 
 				const url = booru.url(post.file_url)
