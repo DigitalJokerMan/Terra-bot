@@ -77,7 +77,7 @@ client.on('message', message => {
 							newmsgstring += "-";
 						}
 						console.log(newmsgstring);
-						newmsg[c] == newmsgstring;
+						newmsg[c] = newmsgstring;
 				}
 				}
 				message.delete();
