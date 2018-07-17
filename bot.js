@@ -69,7 +69,8 @@ client.on('message', message => {
 				if(swearWords.some(word => message.content.includes(word)) ) {
 					let oldmsg = message.content;
 				    let regex = new RegExp(`(${swearWords.join("|")})`, "gi")
-					oldmsg.replace(regex,"---")
+					oldmsg = oldmsg.replace(regex,"---")
+					message.channel.send("Terradice: " + oldmsg);
 				}
 				}
 	const codeblock = /```(?:(\S+)\n)?\s*([^]+?)\s*```/i;
