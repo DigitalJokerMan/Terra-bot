@@ -21,7 +21,8 @@
     "fortnite": "^4.1.1",
     "relevant-urban": "^2.0.0",
     "snekfetch": "^4.0.4",
-    "danbooru": "^3.0.7"
+    "danbooru": "^3.0.7",
+    "bad-words": "^1.6.1"
   },
     "devDependencies": {
     "eslint": "^4.0.0",
