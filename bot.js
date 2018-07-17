@@ -67,7 +67,7 @@ client.on('message', message => {
        	 		if (message.channel.topic && message.channel.topic.includes("{safe}")) {
 				const swearWords = ["fuck", "shit", "damn", "nigger", "fucker", "motherfucker", "dick", "pussy", "dumbass", "faggot", "fag"];
 				if(swearWords.some(word => message.content.includes(word))) {
-				let newmsg = message.split(" ");
+				let newmsg = message.content.split(" ");
 				for(var c = 0; c < newmsg.length; c++) {
 					if(swearWords.some(word => newmsg[c].includes(word))) {
 						let newmsglength = newmsg[c].length;
@@ -78,6 +78,7 @@ client.on('message', message => {
 						newmsg[c] == newmsgstring;
 				}
 				}
+				message.delete();
 				message.channel.send("Terradice:" + newmsg.join(" "));
 			}
 			}
