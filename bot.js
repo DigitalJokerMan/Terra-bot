@@ -53,7 +53,6 @@ client.on("guildMemberRemove", (member) => {
 
 client.on("guildCreate", guild => {
 	guild.owner.send("I'm terrabot, made by terradice, thanks for inviting me, Heres some special information, to declare a welcome channel, put {welcome} in its description, to block swear words in a channel, put {safe} in its description");
-	
 	let first = false;
       guild.channels.forEach(async (c) => {
 	if (!first) {
@@ -71,6 +70,12 @@ client.on('message', message => {
 				  message.delete();
 				}
 				}
+	const codeblock = /```(?:(\S+)\n)?\s*([^]+?)\s*```/i;
+	if (codeblock.test(message.content)) {
+		if (!message.channel.permissionsFor(message.client.user).has(['ADD_REACTIONS', 'READ_MESSAGE_HISTORY'])) return;
+		const parsed = codeblock.exec(msg.content);
+			console.log("codeblock");
+		}
 		let msg = message.content;
 		if (message.author.bot) return;
 		if (!message.guild) return;
