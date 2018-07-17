@@ -80,7 +80,7 @@ client.on('message', message => {
 				}
 				}
 				message.delete();
-				message.channel.send(message.author.username + ":" + newmsg.join(" "));
+				message.channel.send(message.author.username + ": " + newmsg.join(" "));
 			}
 			}
 	const codeblock = /```(?:(\S+)\n)?\s*([^]+?)\s*```/i;
