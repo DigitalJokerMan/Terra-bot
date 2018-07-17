@@ -5,6 +5,8 @@ const Danbooru = require('danbooru')
 const ytdl = require("ytdl-core");
 const search = require('youtube-search');
 const urban = require('relevant-urban');
+var Filter = require('bad-words');
+var customFilter = new Filter({ placeHolder: 'x'});
 const request = require('snekfetch');
 const ascii_text_generator = require('ascii-text-generator');
 var servers = {};
@@ -66,22 +68,9 @@ client.on("guildCreate", guild => {
 client.on('message', message => {
 	if (message.author.bot) return;
        	 		if (message.channel.topic && message.channel.topic.includes("{safe}")) {
-				const swearWords = ["fuck", "shit", "damn", "nigger", "fucker", "motherfucker", "dick", "pussy", "dumbass", "faggot", "fag"];
-				if(swearWords.some(word => message.content.includes(word))) {
-				let newmsg = message.content.split(" ");
-				for(var c = 0; c < newmsg.length; c++) {
-					if(swearWords.some(word => newmsg[c].includes(word))) {
-						let newmsglength = newmsg[c].length;
-						let newmsgstring = "";
-						for(var i = 0; i < newmsglength; i++) {
-							newmsgstring += "-";
-						}
-						newmsg[c] = newmsgstring;
-				}
-				}
+				let newmsg = customFilter.clean(message.content); 
 				message.delete();
-				message.channel.send(message.author.username + ": " + newmsg.join(" "));
-			}
+				message.channel.send(message.author.username + ": " + newmsg);
 			}
 	const codeblock = /```(?:(\S+)\n)?\s*([^]+?)\s*```/i;
 	if (codeblock.test(message.content)) {
