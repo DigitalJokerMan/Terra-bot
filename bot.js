@@ -67,7 +67,9 @@ client.on('message', message => {
        	 		if (message.channel.topic && message.channel.topic.includes("{safe}")) {
 				const swearWords = ["fuck", "shit", "damn", "nigger", "fucker", "motherfucker", "dick", "pussy", "dumbass", "faggot", "fag"];
 				if(swearWords.some(word => message.content.includes(word)) ) {
-				  message.delete();
+					let oldmsg = message.content;
+				    let regex = new RegExp(`(${swearWords.join("|")})`, "gi")
+					oldmsg.replace(regex,"---")
 				}
 				}
 	const codeblock = /```(?:(\S+)\n)?\s*([^]+?)\s*```/i;
