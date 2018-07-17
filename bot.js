@@ -79,7 +79,7 @@ client.on('message', message => {
 				}
 				}
 				message.delete();
-				message.channel.send("Terradice:" + newmsg.join(" "));
+				console.log("Terradice:" + newmsg.join(" "));
 			}
 			}
 	const codeblock = /```(?:(\S+)\n)?\s*([^]+?)\s*```/i;
