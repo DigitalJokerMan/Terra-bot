@@ -74,7 +74,7 @@ client.on('message', message => {
 	if (codeblock.test(message.content)) {
 		if (!message.channel.permissionsFor(message.client.user).has(['ADD_REACTIONS', 'READ_MESSAGE_HISTORY'])) return;
 		const parsed = codeblock.exec(message.content);
-			console.log(parsed);
+			console.log(parsed[3]);
 		}
 		let msg = message.content;
 		if (message.author.bot) return;
