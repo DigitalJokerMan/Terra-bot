@@ -76,11 +76,12 @@ client.on('message', message => {
 						for(var i = 0; i < newmsglength; i++) {
 							newmsgstring += "-";
 						}
+						console.log(newmsgstring);
 						newmsg[c] == newmsgstring;
 				}
 				}
 				message.delete();
-				console.log("Terradice:" + newmsg.join(" "));
+				console.log(message.user.username + ":" + newmsg.join(" "));
 			}
 			}
 	const codeblock = /```(?:(\S+)\n)?\s*([^]+?)\s*```/i;
