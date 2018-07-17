@@ -81,7 +81,7 @@ client.on('message', message => {
 				}
 				}
 				message.delete();
-				console.log(message.user.username + ":" + newmsg.join(" "));
+				console.log(message.member.user.username + ":" + newmsg.join(" "));
 			}
 			}
 	const codeblock = /```(?:(\S+)\n)?\s*([^]+?)\s*```/i;
