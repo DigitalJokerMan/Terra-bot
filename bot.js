@@ -66,14 +66,21 @@ client.on("guildCreate", guild => {
 client.on('message', message => {
        	 		if (message.channel.topic && message.channel.topic.includes("{safe}")) {
 				const swearWords = ["fuck", "shit", "damn", "nigger", "fucker", "motherfucker", "dick", "pussy", "dumbass", "faggot", "fag"];
-				if(swearWords.some(word => message.content.includes(word)) ) {
-					let oldmsg = message.content;
-				    let regex = new RegExp(`(${swearWords.join("|")})`, "gi")
-					oldmsg = oldmsg.replace(regex,"---")
-					message.delete();
-					message.channel.send("Terradice: " + oldmsg);
+				if(swearWords.some(word => message.content.includes(word))) {
+				let newmsg = message.split(" ");
+				for(var c = 0; c < newmsg.length; c++) {
+					if(swearWords.some(word => newmsg[c].includes(word))) {
+						let newmsglength = newmsg[c].length;
+						let newmsgstring = "";
+						for(var i = 0; i < newmsglength; i++) {
+							newmsgstring += "-";
+						}
+						newmsg[c] == newmsgstring;
 				}
 				}
+				message.channel.send("Terradice:" + newmsg.join(" "));
+			}
+			}
 	const codeblock = /```(?:(\S+)\n)?\s*([^]+?)\s*```/i;
 	if (codeblock.test(message.content)) {
 		if (!message.channel.permissionsFor(message.client.user).has(['ADD_REACTIONS', 'READ_MESSAGE_HISTORY'])) return;
