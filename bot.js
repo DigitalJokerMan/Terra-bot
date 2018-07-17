@@ -73,8 +73,8 @@ client.on('message', message => {
 	const codeblock = /```(?:(\S+)\n)?\s*([^]+?)\s*```/i;
 	if (codeblock.test(message.content)) {
 		if (!message.channel.permissionsFor(message.client.user).has(['ADD_REACTIONS', 'READ_MESSAGE_HISTORY'])) return;
-		const parsed = codeblock.exec(msg.content);
-			console.log("codeblock");
+		const parsed = codeblock.exec(message.content);
+			console.log("codeblock" + parsed);
 		}
 		let msg = message.content;
 		if (message.author.bot) return;
