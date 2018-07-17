@@ -68,9 +68,11 @@ client.on("guildCreate", guild => {
 client.on('message', message => {
 	if (message.author.bot) return;
        	 		if (message.channel.topic && message.channel.topic.includes("{safe}")) {
+			  if(customFilter.isProfane(message.content)) { 
 				let newmsg = customFilter.clean(message.content); 
 				message.delete();
 				message.channel.send(message.author.username + ": " + newmsg);
+			  }
 			}
 	const codeblock = /```(?:(\S+)\n)?\s*([^]+?)\s*```/i;
 	if (codeblock.test(message.content)) {
