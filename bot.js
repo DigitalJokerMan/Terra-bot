@@ -70,6 +70,7 @@ client.on('message', message => {
 					let oldmsg = message.content;
 				    let regex = new RegExp(`(${swearWords.join("|")})`, "gi")
 					oldmsg = oldmsg.replace(regex,"---")
+					message.delete();
 					message.channel.send("Terradice: " + oldmsg);
 				}
 				}
