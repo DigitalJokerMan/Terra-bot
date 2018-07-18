@@ -519,7 +519,7 @@ async function handleCommand(message, command, args) {
 			let onlinecount = message.guild.members.filter(user => user.presence.status === "online").size;
 			let reactneeded = Math.round(onlinecount/4);
 			let messageid;
-			message.channel.send(`Votekick initiated on ${member} by ${message.author}`).then(msg => {
+			message.channel.send(`Votekick initiated on ${member} by ${message.author} . ${reactneeded} yes votes needed!`).then(msg => {
 				 messageid = msg.id
 				 channel.fetchMessage(messageid).then(message => { 
 					message.react(':white_check_mark:')
