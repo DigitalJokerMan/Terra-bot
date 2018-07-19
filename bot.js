@@ -516,26 +516,30 @@ async function handleCommand(message, command, args) {
 	if (command == "votekick") {
 		let member =  message.mentions.members.first() || message.guild.members.get(args[0]);
 		if (!member) return message.reply("Please mention a member to votekick!");
-			let onlinecount = message.guild.members.filter(user => user.presence.status === "online").size;
-			let reactneeded = Math.round(onlinecount/4);
-            let messageid;
-            let downvotes;
-            let upvotes;
+			var onlinecount = message.guild.members.filter(user => user.presence.status === "online").size;
+			var reactneeded = Math.round(onlinecount/4);
+            var messageid;
+            var downvotes;
+            var upvotes;
 			message.channel.send(`Votekick initiated on ${member} by ${message.author}! ${reactneeded} yes votes needed!`).then(async m => {
               await m.react("✅");
               await m.react("❎");
                 }).catch(console.error);
 			const filter = (reaction) => reaction.emoji.name === ':white_check_mark:';
 				message.awaitReactions(filter, { time: 15000 }).then(collected =>{
-                    upvotes = collected;
                     })
+                filter.on('end', () => {
+                     console.log("filter done")
+                    upvotes = collected;
+                })
                     const filter1 = (reaction) => reaction.emoji.name === ':negative_squared_cross_mark:';
 				  message.awaitReactions(filter, { time: 15000 }).then(collected1 =>{
-                      downvotes = collected1
-				 }).catch(console.error);
-                filter.on('end', ({
-                    
-                }))
+                      
+                 }).catch(console.error);
+                filter1.on('end', () => {
+                     console.log("filter1 done")
+                    downvotes = collected1;
+                })
 				 let finalsize = upvotes - downvotes;  //collector.on('end', ({}))
 				  if (finalsize > reactneeded) {
 					  member.send("You have been votekicked from " + message.guild);
