@@ -521,22 +521,15 @@ async function handleCommand(message, command, args) {
 			let messageid;
 			message.channel.send(`Votekick initiated on ${member} by ${message.author} . ${reactneeded} yes votes needed!`).then(msg => {
 				 messageid = msg.id
-				 channel.fetchMessage(messageid).then(message => { 
-					message.react(':white_check_mark:')
-					message.react(':negative_squared_cross_mark:')
+				 channel.fetchMessage(messageid).then(msg => { 
+					msg.react(':white_check_mark:')
+					msg.react(':negative_squared_cross_mark:')
 				}).catch(console.error);
 				});
 			const filter = (reaction) => reaction.emoji.name === ':white_check_mark:';
 				message.awaitReactions(filter, { time: 15000 }).then(collected =>{
 					const filter = (reaction) => reaction.emoji.name === ':negative_squared_cross_mark:';
 				  message.awaitReactions(filter, { time: 15000 }).then(collected1 =>{
-					if (collected.size > message.guild) {
-						member.send("You have been votekicked from " + message.guild);
-						member.kick();
-						message.channel.send(`${member} Has been succsesfully kicked!`)
-					} else {
-						message.channel.send("Not enough voted yes to kick " + member + "!")
-					}
 				 }).catch(console.error);
 	
 				 let finalsize = collected - collected1;
