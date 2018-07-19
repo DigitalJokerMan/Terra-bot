@@ -518,19 +518,25 @@ async function handleCommand(message, command, args) {
 		if (!member) return message.reply("Please mention a member to votekick!");
 			let onlinecount = message.guild.members.filter(user => user.presence.status === "online").size;
 			let reactneeded = Math.round(onlinecount/4);
-			let messageid;
+            let messageid;
+            let downvotes;
+            let upvotes;
 			message.channel.send(`Votekick initiated on ${member} by ${message.author}! ${reactneeded} yes votes needed!`).then(async m => {
               await m.react("✅");
               await m.react("❎");
                 }).catch(console.error);
 			const filter = (reaction) => reaction.emoji.name === ':white_check_mark:';
 				message.awaitReactions(filter, { time: 15000 }).then(collected =>{
-					const filter = (reaction) => reaction.emoji.name === ':negative_squared_cross_mark:';
+                    upvotes = collected;
+                    })
+                    const filter1 = (reaction) => reaction.emoji.name === ':negative_squared_cross_mark:';
 				  message.awaitReactions(filter, { time: 15000 }).then(collected1 =>{
+                      downvotes = collected1
 				 }).catch(console.error);
-	
-				 let finalsize = collected - collected1;
-	
+                filter.on('end', ({
+                    
+                }))
+				 let finalsize = upvotes - downvotes;  //collector.on('end', ({}))
 				  if (finalsize > reactneeded) {
 					  member.send("You have been votekicked from " + message.guild);
 					  member.kick();
@@ -540,7 +546,6 @@ async function handleCommand(message, command, args) {
 					  message.channel.send("Not enough voted yes to kick " + member + "!")
 					  return;
 				  }
-				})
 		}
 }
 function playQueue(msg, results, connection) {
