@@ -538,8 +538,10 @@ async function handleCommand(message, command, args) {
 					  member.send("You have been votekicked from " + message.guild);
 					  member.kick();
 					  message.channel.send(`${member} Has been succsesfully kicked!`)
+					  return;
 				  } else {
 					  message.channel.send("Not enough voted yes to kick " + member + "!")
+					  return;
 				  }
 				})
 		}
