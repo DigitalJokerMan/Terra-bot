@@ -1,4 +1,4 @@
-const Discord = require('discord.js');
+const Discord = require('discord.js');const Discord = require('discord.js');
 const google = require('google');
 const config = require("./config.json");
 const Danbooru = require('danbooru')
@@ -519,13 +519,10 @@ async function handleCommand(message, command, args) {
 			let onlinecount = message.guild.members.filter(user => user.presence.status === "online").size;
 			let reactneeded = Math.round(onlinecount/4);
 			let messageid;
-			message.channel.send(`Votekick initiated on ${member} by ${message.author} . ${reactneeded} yes votes needed!`).then(msg => {
-				 messageid = msg.id
-				 channel.fetchMessage(messageid).then(msg => { 
-					msg.react(':white_check_mark:')
-					msg.react(':negative_squared_cross_mark:')
-				}).catch(console.error);
-				});
+			message.channel.send(`Votekick initiated on ${member} by ${message.author}! ${reactneeded} yes votes needed!`).then(async m => {
+              await m.react("✅");
+              await m.react("❎");
+                }).catch(console.error);
 			const filter = (reaction) => reaction.emoji.name === ':white_check_mark:';
 				message.awaitReactions(filter, { time: 15000 }).then(collected =>{
 					const filter = (reaction) => reaction.emoji.name === ':negative_squared_cross_mark:';
