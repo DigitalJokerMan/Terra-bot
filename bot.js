@@ -390,10 +390,10 @@ async function handleCommand(message, command, args) {
         let newtime = time * 60 * 1000;
         if (!time) return message.reply("Specify a time!");
         if (isNaN(time)) return message.reply("Time must be an integer");
-        if (member.user.roles.has(muterole)) {
+/*        if (member.user.roles.has(muterole)) {
             message.reply(`${member} is already muted!`)
             return;
-        }
+        } */
         member.addRole(muterole);
         message.channel.send(`${member} Has been muted by ${caller} for ${time} minutes!`);
         setTimeout(() => {
@@ -401,10 +401,10 @@ async function handleCommand(message, command, args) {
         }, newtime);
     }
     if (command == "unmute") {
-        if (!member.user.roles.has(muterole)) {
+    /*    if (!member.user.roles.has(muterole)) {
             message.reply(`${member} isnt muted!`)
             return;
-        }
+        } */
         member.removeRole(muterole);
     }
     if (command == "kick") {
