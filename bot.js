@@ -1,8 +1,8 @@
 const Discord = require('discord.js');
 const google = require('google');
-const config = require("./config.json");
-const Danbooru = require('danbooru')
-const ytdl = require("ytdl-core");
+const config = require('./config.json');
+const Danbooru = require('danbooru');
+const ytdl = require('ytdl-core');
 const search = require('youtube-search');
 const urban = require('relevant-urban');
 var Filter = require('bad-words');
@@ -11,184 +11,186 @@ const request = require('snekfetch');
 const ascii_text_generator = require('ascii-text-generator');
 var servers = {};
 const client = new Discord.Client();
-const booru = new Danbooru()
+const booru = new Danbooru();
 
 const streamOptions = { seek: 0, volume: 1 };
 var prefix = config.prefix;
 var opts = {
-    maxResults: 10,
-    key: process.env.youtubekey
+	maxResults: 10,
+	key: process.env.youtubekey
 };
 client.on('ready', () => {
-    console.log(`Bots is ready and working in ${client.guilds.size} servers with ${client.users.size} users!`);
-    client.user.setActivity("Terradice&RedSponge|;help");
-    for (var key of client.guilds.keys()) {
-        servers[key] = {}
-        servers["" + key]["queue"] = [];
-        servers["" + key]["playing"] = false;
-    }
+	console.log(`Bots is ready and working in ${client.guilds.size} servers with ${client.users.size} users!`);
+	client.user.setActivity('Terradice&RedSponge|;help');
+	for (var key of client.guilds.keys()) {
+		servers[key] = {};
+		servers[`${key}`].queue = [];
+		servers[`${key}`].playing = false;
+	}
 });
 
 client.on('guildMemberAdd', member => {
-    console.log(`${member.user.username} has joined`);
-    let first = false;
-    member.guild.channels.forEach(async(c) => {
-        if (!first) {
-            if (c.topic && c.topic.includes("{welcome}")) {
-                first = true;
-                c.send(`${member.user} has joined!`);
-            }
-        }
-    });
-})
-client.on("guildMemberRemove", (member) => {
-    let first = false;
-    member.guild.channels.forEach(async(c) => {
-        if (!first) {
-            if (c.topic && c.topic.includes("{welcome}")) {
-                first = true;
-                c.send(`${member.user.username} has left!`);
-            }
-        }
-    })
+	console.log(`${member.user.username} has joined`);
+	let first = false;
+	member.guild.channels.forEach(async c => {
+		if (!first) {
+			if (c.topic && c.topic.includes('{welcome}')) {
+				first = true;
+				c.send(`${member.user} has joined!`);
+			}
+		}
+	});
+});
+client.on('guildMemberRemove', member => {
+	let first = false;
+	member.guild.channels.forEach(async c => {
+		if (!first) {
+			if (c.topic && c.topic.includes('{welcome}')) {
+				first = true;
+				c.send(`${member.user.username} has left!`);
+			}
+		}
+	});
 });
 
-client.on("guildCreate", guild => {
-    guild.owner.send("I'm terrabot, made by terradice, thanks for inviting me, Heres some special information, to declare a welcome channel, put {welcome} in its description, to block swear words in a channel, put {safe} in its description");
-    let first = false;
-    guild.channels.forEach(async(c) => {
-        if (!first) {
-            if (c.permissionsFor(client.user.id).has('SEND_MESSAGES')) {
-                c.send("Hi, my name is terrabot, thank you very much for inviting me to your server! The bot does not require admin access but some features might not work without it! Write ;help to get started, and have fun!");
-                first = true;
-            }
-        }
-    })
+client.on('guildCreate', guild => {
+	guild.owner.send("I'm terrabot, made by terradice, thanks for inviting me, Heres some special information, to declare a welcome channel, put {welcome} in its description, to block swear words in a channel, put {safe} in its description");
+	let first = false;
+	guild.channels.forEach(async c => {
+		if (!first) {
+			if (c.permissionsFor(client.user.id).has('SEND_MESSAGES')) {
+				c.send('Hi, my name is terrabot, thank you very much for inviting me to your server! The bot does not require admin access but some features might not work without it! Write ;help to get started, and have fun!');
+				first = true;
+			}
+		}
+	});
 });
 client.on('message', message => {
-    if (message.author.bot) return;
-    if (message.channel.topic && message.channel.topic.includes("{safe}")) {
-        if (customFilter.isProfane(message.content)) {
-            let newmsg = customFilter.clean(message.content);
-            message.delete();
-            message.channel.send(message.author.username + ": " + newmsg);
-        }
-    }
-    const codeblock = /```(?:(\S+)\n)?\s*([^]+?)\s*```/i;
-    if (codeblock.test(message.content)) {
-        if (!message.channel.permissionsFor(message.client.user).has(['ADD_REACTIONS', 'READ_MESSAGE_HISTORY'])) return;
-        const parsed = codeblock.exec(message.content);
-        //console.log(parsed);
-    }
-    let msg = message.content;
-    if (!message.guild) return;
-    if (msg.startsWith(prefix)) {
-        msg = msg.substring(prefix.length);
-        let command = msg.split(" ")[0];
-        let args = msg.split(" ").slice(1);
+	if (message.author.bot) return;
+	if (message.channel.topic && message.channel.topic.includes('{safe}')) {
+		if (customFilter.isProfane(message.content)) {
+			let newmsg = customFilter.clean(message.content);
+			message.delete();
+			message.channel.send(`${message.author.username}: ${newmsg}`);
+		}
+	}
+	const codeblock = /```(?:(\S+)\n)?\s*([^]+?)\s*```/i;
+	if (codeblock.test(message.content)) {
+		if (!message.channel.permissionsFor(message.client.user).has(['ADD_REACTIONS', 'READ_MESSAGE_HISTORY'])) return;
+		const parsed = codeblock.exec(message.content);
+		// Console.log(parsed);
+	}
+	let msg = message.content;
+	if (!message.guild) return;
+	if (msg.startsWith(prefix)) {
+		msg = msg.substring(prefix.length);
+		let command = msg.split(' ')[0];
+		let args = msg.split(' ').slice(1);
 
-        handleCommand(message, command, args);
-    }
+		handleCommand(message, command, args);
+	}
 });
 
 async function handleCommand(message, command, args) {
-    var color = Math.floor(Math.random() * (16777216 - 0 + 1) + 0);
-    console.log("RUNNING COMMAND " + command + " WITH ARGS " + args + " IN SERVER " + message.guild);
-    if (command == "google") {
-        var lookup = args.join(" ");
-        message.channel.send("<a:googling:426453223310622740>" + " Loading...").then(msg => {
-            google(lookup, (err, res) => {
-                if (err) console.error(err);
-                else {
-                    let url = res.links[res.start].href; //you can also use .href instead of .link
-                    if (url != null) {
-                        msg.edit(url);
-                    } else {
-                        msg.edit("error");
-                    }
-                }
-            });
-        });
-    }
-    if (command == "eval") {
-        if (message.author.id !== "244111430956089344" && message.author.id !== "263995600641589248") return message.reply("Only the owners of the bot have access to that command!");
-        let pidor = args.join(" ");
-        try {
-            message.channel.send("Function: ```" + pidor + "```\n" + "Result:\n" + "```" + eval(pidor) + "```");
-        } catch (e) {
-            message.channel.send("Function: ```" + pidor + "```\n" + "Result:\n" + "```" + e + "```");
-        }
-    }
-    if (command == "ping") {
-        message.channel.send(new Date().getTime() - message.createdTimestamp + " ms");
-    }
-    if (command == "createchannel") {
-        let caller = message.guild.members.get(message.author.id);
-        let has_channels = caller.hasPermission("MANAGE_CHANNELS");
-        if (!has_mute) return message.reply("Sorry, you don't have permissions to use this!");
-        if (message.guild.roles.find("name", args.join("-"))) {
-            message.reply("That channel already exists!");
-            return;
-        }
-        message.guild.createChannel(args.join("-")).then(c => { c.setName(args.join("-"));
-            c.sendMessage("Here you go!"); })
-    }
-    if (command == "servers") {
-        message.channel.send("I am currently running in `" + client.guilds.size + "` servers!");
-    }
-    if (command == "youtube") {
-        search(args.join(' '), opts, function(err, results) {
-            if (err) return;
-            let result = results[0].link;
-            let resultname = results[0].title;
-            message.channel.send(result);
-        })
-    }
-    if (command == "invite") {
-        message.reply("Click the link below to add me to your server https://discordapp.com/oauth2/authorize?client_id=459782347936628747&scope=bot&permissions=8");
-    }
-    if (command == "danbooru") {
-        if (!message.channel.nsfw) {
-            message.reply("Shh! there are kids in here!");
-            return;
-        }
-        message.channel.send("<a:googling:426453223310622740>" + " Loading...").then(msg => {
-            fetchPosts(message, color, msg);
-        })
-    }
-    if (command == "urban") {
-        let search = args.join(" ");
-        urban(search).then(result => {
-            let title = result.word;
-            let description = result.definition;
-            let example = result.example;
-            let upvote = result.thumbsUp
-            let downvote = result.thumbsDown;
-            let link = result.urbanURL;
-            let tags = result.tags.join(" ");
-            const embed = new Discord.RichEmbed()
-                .setColor(color)
-                .setTitle(title).setURL(link)
-                .addField("Definition", description, false)
-                .addField("examples", example, false)
-                .addField("tags", tags, false)
-                .addField("Upvotes", ":thumbsup:" + upvote, true)
-                .addField("Downvotes", ":thumbsdown:" + downvote, true);
-            message.channel.send(embed)
-        })
-    }
-    if (command == "queue") {
-        message.reply(servers[message.guild.id].queue);
-    }
-    if (command == "fortnitestats") {
-        /*
-		    const platforms = ['pc', 'xbl', 'psn'];
+	var color = Math.floor(Math.random() * (16777216 - 0 + 1) + 0);
+	console.log(`RUNNING COMMAND ${command } WITH ARGS ${ args } IN SERVER ${message.guild}`);
+	if (command == 'google') {
+		var lookup = args.join(' ');
+		message.channel.send('<a:googling:426453223310622740>' + ' Loading...').then(msg => {
+			google(lookup, (err, res) => {
+				if (err) { console.error(err); } else {
+					let url = res.links[res.start].href; // You can also use .href instead of .link
+					if (url != null) {
+						msg.edit(url);
+					} else {
+						msg.edit('error');
+					}
+				}
+			});
+		});
+	}
+	if (command == 'eval') {
+		if (message.author.id !== '244111430956089344' && message.author.id !== '263995600641589248') return message.reply('Only the owners of the bot have access to that command!');
+		let pidor = args.join(' ');
+		try {
+			message.channel.send(`Function: \`\`\`${pidor}\`\`\`\n` + `Result:\n` + `\`\`\`${eval(pidor)}\`\`\``);
+		} catch (e) {
+			message.channel.send(`Function: \`\`\`${pidor }\`\`\`\n` + `Result:\n` + `\`\`\`${e}\`\`\``);
+		}
+	}
+	if (command == 'ping') {
+		message.channel.send(`${new Date().getTime() - message.createdTimestamp} ms`);
+	}
+	if (command == 'createchannel') {
+		let caller = message.guild.members.get(message.author.id);
+		let has_channels = caller.hasPermission('MANAGE_CHANNELS');
+		if (!has_mute) return message.reply("Sorry, you don't have permissions to use this!");
+		if (message.guild.roles.find('name', args.join('-'))) {
+			message.reply('That channel already exists!');
+			return;
+		}
+		message.guild.createChannel(args.join('-')).then(c => {
+			c.setName(args.join('-'));
+			c.sendMessage('Here you go!');
+		});
+	}
+	if (command == 'servers') {
+		message.channel.send(`I am currently running in \`${client.guilds.size }\` servers!`);
+	}
+	if (command == 'youtube') {
+		search(args.join(' '), opts, (err, results) => {
+			if (err) return;
+			let result = results[0].link;
+			let resultname = results[0].title;
+			message.channel.send(result);
+		});
+	}
+	if (command == 'invite') {
+		message.reply('Click the link below to add me to your server https://discordapp.com/oauth2/authorize?client_id=459782347936628747&scope=bot&permissions=8');
+	}
+	if (command == 'danbooru') {
+		if (!message.channel.nsfw) {
+			message.reply('Shh! there are kids in here!');
+			return;
+		}
+		message.channel.send('<a:googling:426453223310622740>' + ' Loading...').then(msg => {
+			fetchPosts(message, color, msg);
+		});
+	}
+	if (command == 'urban') {
+		let search = args.join(' ');
+		urban(search).then(result => {
+			let title = result.word;
+			let description = result.definition;
+			let example = result.example;
+			let upvote = result.thumbsUp;
+			let downvote = result.thumbsDown;
+			let link = result.urbanURL;
+			let tags = result.tags.join(' ');
+			const embed = new Discord.RichEmbed()
+				.setColor(color)
+				.setTitle(title)
+				.setURL(link)
+				.addField('Definition', description, false)
+				.addField('examples', example, false)
+				.addField('tags', tags, false)
+				.addField('Upvotes', `:thumbsup:${upvote}`, true)
+				.addField('Downvotes', `:thumbsdown:${downvote}`, true);
+			message.channel.send(embed);
+		});
+	}
+	if (command == 'queue') {
+		message.reply(servers[message.guild.id].queue);
+	}
+	if (command == 'fortnitestats') {
+		/*
+		    Const platforms = ['pc', 'xbl', 'psn'];
    		 const username = args.slice(1).join(' ');
  		   let platform = args[0];
 
  	 	if (!platforms.includes(platform)) {
 			message.reply("You need to specify a correct platform! EX: xbl, pc, psn");
-			return;	
+			return;
 		}
   	  	if (!username) {
 			message.reply("You need to specify a username!");
@@ -213,405 +215,402 @@ async function handleCommand(message, command, args) {
           		  .addField('K/D Ratio', data.stats.lifetime[11]['K/d'], true);
 		message.channel.send(embed)
 		}).catch(e => {
-			console.log(e);	
+			console.log(e);
 		});
 		*/
-        message.reply("WIP");
-    }
-    if (command == "ascii") {
-        let input_text = args.join(" ");
-        let text = "```" + ascii_text_generator(input_text, "2") + "```";
-        console.log(text);
-        try {
-            message.channel.send(text);
-        } catch (e) {
-            message.reply("The message is too long to be sent!");
-            return;
-        }
-    }
-    if (command == "skin") {
-        var parameter = args[0];
-        var link = "https://minotar.net/body/GTR.png";
-        if (!parameter) {
-            message.reply("You need to specify a name!");
-            return;
-        }
-        link = link.replace("GTR", parameter);
-        message.channel.send({ files: [link] });
-    }
-    if (command == "mc-achievement") {
-        var description = args.join("%20");
-        if (!description) {
-            message.reply("You need to specify a description!");
-        }
-        var link = "http://www.minecraftachievement.net/achievement/a.php?i=2&h=TerraBot&t=description";
-        link = link.replace("description", description);
-        message.channel.send(link);
-    }
-    if (command == "face") {
-        console.log("face");
-        if (!args[0]) {
-            message.reply("You need to specify a number!");
-            return;
-        }
-        switch (parseInt(args[0])) {
-            case 1:
-                message.channel.send("( .-. )");
-                break;
-            case 2:
-                message.channel.send("( .o.)");
-                break;
-            case 3:
-                message.channel.send("( ⚆ _ ⚆ )");
-                break;
-            case 4:
-                message.channel.send("( ﾟヮﾟ)");
-                break;
-            case 5:
-                message.channel.send("(¬_¬)");
-                break;
-            case 6:
-                message.channel.send("(ʘᗩʘ')");
-                break;
-            case 7:
-                message.channel.send("( ︶︿︶)");
-                break;
-            case 8:
-                message.channel.send("(¬‿¬)");
-                break;
-            case 9:
-                message.channel.send("(ʘ‿ʘ)");
-                break;
-            case 10:
-                message.channel.send("(ಠ_ಠ)");
-                break;
-            case 11:
-                message.channel.send("(ಥ_ಥ)");
-                break;
-            default:
-                message.reply("Unknown face!");
-                break;
-
-        }
-        message.delete(500);
-    }
-    if (command == "say") {
-        if (!args[0]) {
-            message.reply("You need to specify what to say!");
-            return;
-        }
-        message.channel.send(`${message.author} Says: ${args.join(" ")}`);
-    }
-    if (command == "play") {
-        if (message.member.voiceChannel) {
-            try {
-                if (message.member.voiceChannelID !== message.guild.voiceConnection.channel.id) {
-                    message.reply("You're not in the same voice channel as me!")
-                    return;
-                }
-            } catch (e) {}
-            if (!args[0]) {
-                message.reply("You must specify a name!");
-                return;
-            }
-            let result;
-            let resultname;
-            search(args.join(' '), opts, function(err, results) {
-                if (err) return;
-                result = results[0].link; //servers[message.guild.id].queue.push(result);
-                resultname = results[0].title;
-                message.reply(`Added ${results[0].title} to the queue`);
-                servers[message.guild.id].queue.push(results[0].link);
-                console.log(servers[message.guild.id].queue.length);
-            })
-            await (!servers[message.guild.id].queue[0]);
-            const connection = message.member.voiceChannel.join().then(connection => {
-                const stream = ytdl(servers[message.guild.id].queue[0], { filter: 'audioonly' });
-                const dispatcher = connection.playStream(stream, streamOptions);
-                dispatcher.on('end', () => {
-                    dispatcher.destroy();
-                    console.log("Song playing");
-                    console.log(servers[message.guild.id].queue.length);
-                    servers[message.guild.id].playing = true;
-                    playQueue(message, resultname, connection);
-                })
-            })
-        } else {
-            message.reply('You need to join a voice channel first!');
-            return;
-        }
-    }
-    if (command == "stop") {
-        if (!servers[message.guild.id].playing) {
-            message.reply("I'm not playing anything!")
-        }
-        if (message.member.voiceChannel) {
-            if (message.member.voiceChannelID !== message.guild.me.voiceChannelID) {
-                message.reply("You're not in the same voice channel as me!")
-                return;
-            } else {
-                console.log("queue over");
-                servers[message.guild.id].playing = false;
-                servers[message.guild.id].queue = []
-                message.member.voiceChannel.leave();
-                return;
-            }
-        } else {
-            message.reply('You need to join a voice channel first!');
-            return;
-        }
-    }
-    if (command == "createinvite") {
-        message.channel.createInvite().then(invite =>
-            message.channel.send(invite.url)
-        );
-    }
-    if (command === "mute") {
-        if (!message.guild.roles.find("name", "terra-mute")) {
-            message.guild.createRole({
-                name: 'terra-mute',
-                color: 'BLUE',
-                SEND_MESSAGES: false
-            })
-        }
-        let muterole = message.guild.roles.find("name", "terra-mute");
-        message.guild.channels.forEach(async(c) => {
-            await c.overwritePermissions(muterole, {
-                SEND_MESSAGES: false //overwrite
-            })
-        })
-        if (!message.member.hasPermission("MANAGE_ROLES")) return message.reply("You dont have permission to use this");
-        let member = message.mentions.members.first() || message.guild.members.get(args[0]);
-        if (!member) return message.reply("Please mention a member to mute!");
-        let caller = message.guild.members.get(message.author.id);
-        let has_mute = caller.hasPermission("MANAGE_ROLES");
-        if (!has_mute) return message.reply("Sorry, you don't have permissions to use this!");
-        let time = args[1] * 1;
-        let newtime = time * 60 * 1000;
-        if (!time) return message.reply("Specify a time!");
-        if (isNaN(time)) return message.reply("Time must be an integer");
-/*        if (member.user.roles.has(muterole)) {
+		message.reply('WIP');
+	}
+	if (command == 'ascii') {
+		let input_text = args.join(' ');
+		let text = `\`\`\`${ascii_text_generator(input_text, '2')}\`\`\``;
+		console.log(text);
+		try {
+			message.channel.send(text);
+		} catch (e) {
+			message.reply('The message is too long to be sent!');
+			return;
+		}
+	}
+	if (command == 'skin') {
+		var parameter = args[0];
+		var link = 'https://minotar.net/body/GTR.png';
+		if (!parameter) {
+			message.reply('You need to specify a name!');
+			return;
+		}
+		link = link.replace('GTR', parameter);
+		message.channel.send({ files: [link] });
+	}
+	if (command == 'mc-achievement') {
+		var description = args.join('%20');
+		if (!description) {
+			message.reply('You need to specify a description!');
+		}
+		var link = 'http://www.minecraftachievement.net/achievement/a.php?i=2&h=TerraBot&t=description';
+		link = link.replace('description', description);
+		message.channel.send(link);
+	}
+	if (command == 'face') {
+		console.log('face');
+		if (!args[0]) {
+			message.reply('You need to specify a number!');
+			return;
+		}
+		switch (parseInt(args[0])) {
+			case 1:
+				message.channel.send('( .-. )');
+				break;
+			case 2:
+				message.channel.send('( .o.)');
+				break;
+			case 3:
+				message.channel.send('( ⚆ _ ⚆ )');
+				break;
+			case 4:
+				message.channel.send('( ﾟヮﾟ)');
+				break;
+			case 5:
+				message.channel.send('(¬_¬)');
+				break;
+			case 6:
+				message.channel.send("(ʘᗩʘ')");
+				break;
+			case 7:
+				message.channel.send('( ︶︿︶)');
+				break;
+			case 8:
+				message.channel.send('(¬‿¬)');
+				break;
+			case 9:
+				message.channel.send('(ʘ‿ʘ)');
+				break;
+			case 10:
+				message.channel.send('(ಠ_ಠ)');
+				break;
+			case 11:
+				message.channel.send('(ಥ_ಥ)');
+				break;
+			default:
+				message.reply('Unknown face!');
+				break;
+		}
+		message.delete(500);
+	}
+	if (command == 'say') {
+		if (!args[0]) {
+			message.reply('You need to specify what to say!');
+			return;
+		}
+		message.channel.send(`${message.author} Says: ${args.join(' ')}`);
+	}
+	if (command == 'play') {
+		if (message.member.voiceChannel) {
+			try {
+				if (message.member.voiceChannelID !== message.guild.voiceConnection.channel.id) {
+					message.reply("You're not in the same voice channel as me!");
+					return;
+				}
+			} catch (e) {}
+			if (!args[0]) {
+				message.reply('You must specify a name!');
+				return;
+			}
+			let result;
+			let resultname;
+			search(args.join(' '), opts, (err, results) => {
+				if (err) return;
+				result = results[0].link; // Servers[message.guild.id].queue.push(result);
+				resultname = results[0].title;
+				message.reply(`Added ${results[0].title} to the queue`);
+				servers[message.guild.id].queue.push(results[0].link);
+				console.log(servers[message.guild.id].queue.length);
+			});
+			await !servers[message.guild.id].queue[0];
+			const connection = message.member.voiceChannel.join().then(connection => {
+				const stream = ytdl(servers[message.guild.id].queue[0], { filter: 'audioonly' });
+				const dispatcher = connection.playStream(stream, streamOptions);
+				dispatcher.on('end', () => {
+					dispatcher.destroy();
+					console.log('Song playing');
+					console.log(servers[message.guild.id].queue.length);
+					servers[message.guild.id].playing = true;
+					playQueue(message, resultname, connection);
+				});
+			});
+		} else {
+			message.reply('You need to join a voice channel first!');
+			return;
+		}
+	}
+	if (command == 'stop') {
+		if (!servers[message.guild.id].playing) {
+			message.reply("I'm not playing anything!");
+		}
+		if (message.member.voiceChannel) {
+			if (message.member.voiceChannelID !== message.guild.me.voiceChannelID) {
+				message.reply("You're not in the same voice channel as me!");
+				return;
+			} else {
+				console.log('queue over');
+				servers[message.guild.id].playing = false;
+				servers[message.guild.id].queue = [];
+				message.member.voiceChannel.leave();
+				return;
+			}
+		} else {
+			message.reply('You need to join a voice channel first!');
+			return;
+		}
+	}
+	if (command == 'createinvite') {
+		message.channel.createInvite().then(invite =>
+			message.channel.send(invite.url)
+		);
+	}
+	if (command === 'mute') {
+		if (!message.guild.roles.find('name', 'terra-mute')) {
+			message.guild.createRole({
+				name: 'terra-mute',
+				color: 'BLUE',
+				SEND_MESSAGES: false
+			});
+		}
+		let muterole = message.guild.roles.find('name', 'terra-mute');
+		message.guild.channels.forEach(async c => {
+			await c.overwritePermissions(muterole, { SEND_MESSAGES: false // Overwrite
+			});
+		});
+		if (!message.member.hasPermission('MANAGE_ROLES')) return message.reply('You dont have permission to use this');
+		let member = message.mentions.members.first() || message.guild.members.get(args[0]);
+		if (!member) return message.reply('Please mention a member to mute!');
+		let caller = message.guild.members.get(message.author.id);
+		let has_mute = caller.hasPermission('MANAGE_ROLES');
+		if (!has_mute) return message.reply("Sorry, you don't have permissions to use this!");
+		let time = args[1] * 1;
+		let newtime = time * 60 * 1000;
+		if (!time) return message.reply('Specify a time!');
+		if (isNaN(time)) return message.reply('Time must be an integer');
+		/*        If (member.user.roles.has(muterole)) {
             message.reply(`${member} is already muted!`)
             return;
         } */
-        member.addRole(muterole);
-        message.channel.send(`${member} Has been muted by ${caller} for ${time} minutes!`);
-        setTimeout(() => {
-            member.removeRole(muterole);
-        }, newtime);
-    }
-    if (command == "unmute") {
-    /*    if (!member.user.roles.has(muterole)) {
+		member.addRole(muterole);
+		message.channel.send(`${member} Has been muted by ${caller} for ${time} minutes!`);
+		setTimeout(() => {
+			member.removeRole(muterole);
+		}, newtime);
+	}
+	if (command == 'unmute') {
+		/*    If (!member.user.roles.has(muterole)) {
             message.reply(`${member} isnt muted!`)
             return;
         } */
-        member.removeRole(muterole);
-    }
-    if (command == "kick") {
-        let caller = message.guild.members.get(message.author.id);
-        let has_kick = caller.hasPermission("KICK_MEMBERS");
-        if (!has_kick) return message.reply("Sorry, you don't have permissions to use this!");
-        let member = message.mentions.members.first() || message.guild.members.get(args[0]);
-        if (!member) return message.reply("Please mention a valid member of this server");
-        if (!member.kickable) return message.reply("I cannot kick this user");
-        let reason = message.content.replace(";kick ", "");
-        reason = reason.replace(member, "");
-        if (!reason) reason = "No reason provided";
-        member.send(`You have been kicked from ${message.guild.name} by ${message.author.tag} for reason: ${reason}`).then(kicke => {
-            member.kick(reason)
-        });
-        message.channel.send(`${member.user.tag} has been kicked by ${message.author.tag} because: ${reason}`);
-    }
-    if (command == "ban") {
-        let caller = message.guild.members.get(message.author.id);
-        let has_ban = caller.hasPermission("BAN_MEMBERS");
-        if (!has_ban) return message.reply("Sorry, you don't have permissions to use this!");
-        let member = message.mentions.members.first() || message.guild.members.get(args[0]);
-        if (!member) return message.reply("Please mention a valid member of this server");
-        if (!member.bannable) return message.reply("I cannot ban this user");
-        let reason = message.content.replace(";kick ", "");
-        reason = reason.replace(member, "");
-        if (!reason) reason = "No reason provided";
-        member.send(`You have been banned from ${message.guild.name} by ${message.author.tag} for reason: ${reason}`).then(kicke => {
-            member.ban(reason)
-        });
-        message.channel.send(`${member.user.tag} has been banned by ${message.author.tag} because: ${reason}`);
-    }
-    if (command == "8ball") {
-        var rand = Math.floor(Math.random() * (2 - 1 + 1) + 1);
-        if (rand == 1) {
-            message.reply("No");
-        } else if (rand == 2) {
-            message.reply("Yes");
-        }
-    }
-    if (command == "help") {
-        const embed = new Discord.RichEmbed()
-            .setColor(color)
-            .setTitle("Help")
-            .setFooter(`Terrabot operating in ${client.guilds.size} servers`, 'https://cdn.discordapp.com/embed/avatars/4.png')
-            .addField(":question: Bot Info", "`help` `uptime` `code` `id` `invite` `detailedhelp` `servers", false)
-            .addField(":wrench: Utilities", "`google` `say` `ascii` `ping` `avatar` `urban` `youtube`", false)
-            .addField("Admin", "`kick` `mute` `ban`", false)
-            .addField(":musical_note: Music", "`play` `stop`", false)
-            .addField(":game_die: Fun", "`dice` `face` `8ball`", false)
-            .addField(":scroll: Server", "`createinvite`", false)
-            .addField("NSFW", "`danbooru`", false)
-            .addField("Minecraft", "`skin` `mc-achievement`", true)
-            .addField("Fortnite", "`fortnitestats`", true);
-        message.channel.send(embed)
-    }
-    if (command == "detailedhelp") {
-        const embed = new Discord.RichEmbed()
-            .setColor(color)
-            .setTitle("Detailed Help: * = optional")
-            .setFooter(`Terrabot, made by terradice`)
-            .addField("help", "Shows help", false)
-            .addField("uptime", "Shows bot uptime", false)
-            .addField("code", "Shows bot's github repository", false)
-            .addField("id (*user)", "Shows your or the mentioned user's id", false)
-            .addField("invite", "Shows invite for the bot", false)
-            .addField("detailedhelp", "Shows this message", false)
-            .addField("google (search)", "Returns first result from google search", false)
-            .addField("say (text)", "Says something as the bot", false)
-            .addField("ascii (text)", "converts text into big ascii letters", false)
-            .addField("ping", "Shows users ping to the bot", false)
-            .addField("avatar (*user)", "Shows users or the mentioned user's avatar", false)
-            .addField("urban (text)", "Searches definition on urban dictionary", false)
-            .addField("youtube (text)", "Searches video on youtube", false)
-            .addField("kick (user) (*reason)", "Kicks a user from a server", false)
-            .addField("mute (user) (minutes)", "Mutes a user for a specified amount of minutes", false)
-            .addField("ban (user) (*reason)", "Bans a user from a server", false)
-            .addField("play (text)", "Searches text on youtube and then plays the video", false)
-            .addField("stop", "Stops playing music", false)
-            .addField("dice (*rolls) (*min) (*max)", "Rolls a dice with the given parameters, if no parameters default is 1 1 6", false)
-            .addField("face (number)", "Sends a face from a database", false)
-            .addField("8ball (question)", "Answers yes or no to a question", false)
-            .addField("createinvite", "Creates an invite to the server", false)
-            .addField("skin (Minecraft user)", "Returns a minecraft account's skin", false)
-            .addField("mc-achievement (Text)", "Makes a minecraft achievement with the text as the description", false)
-            .addField("fortnitestats (player) (platform)", "Shows stats of a fortnite account (WIP)", false)
-        message.member.send(embed)
-        message.reply("Check DM's!");
-    }
-    if (command == "code") {
-        message.channel.send('https://github.com/Terradice/Terra-bot');
-    }
+		member.removeRole(muterole);
+	}
+	if (command == 'kick') {
+		let caller = message.guild.members.get(message.author.id);
+		let has_kick = caller.hasPermission('KICK_MEMBERS');
+		if (!has_kick) return message.reply("Sorry, you don't have permissions to use this!");
+		let member = message.mentions.members.first() || message.guild.members.get(args[0]);
+		if (!member) return message.reply('Please mention a valid member of this server');
+		if (!member.kickable) return message.reply('I cannot kick this user');
+		let reason = message.content.replace(';kick ', '');
+		reason = reason.replace(member, '');
+		if (!reason) reason = 'No reason provided';
+		member.send(`You have been kicked from ${message.guild.name} by ${message.author.tag} for reason: ${reason}`).then(kicke => {
+			member.kick(reason);
+		});
+		message.channel.send(`${member.user.tag} has been kicked by ${message.author.tag} because: ${reason}`);
+	}
+	if (command == 'ban') {
+		let caller = message.guild.members.get(message.author.id);
+		let has_ban = caller.hasPermission('BAN_MEMBERS');
+		if (!has_ban) return message.reply("Sorry, you don't have permissions to use this!");
+		let member = message.mentions.members.first() || message.guild.members.get(args[0]);
+		if (!member) return message.reply('Please mention a valid member of this server');
+		if (!member.bannable) return message.reply('I cannot ban this user');
+		let reason = message.content.replace(';kick ', '');
+		reason = reason.replace(member, '');
+		if (!reason) reason = 'No reason provided';
+		member.send(`You have been banned from ${message.guild.name} by ${message.author.tag} for reason: ${reason}`).then(kicke => {
+			member.ban(reason);
+		});
+		message.channel.send(`${member.user.tag} has been banned by ${message.author.tag} because: ${reason}`);
+	}
+	if (command == '8ball') {
+		var rand = Math.floor(Math.random() * (2 - 1 + 1) + 1);
+		if (rand == 1) {
+			message.reply('No');
+		} else if (rand == 2) {
+			message.reply('Yes');
+		}
+	}
+	if (command == 'help') {
+		const embed = new Discord.RichEmbed()
+			.setColor(color)
+			.setTitle('Help')
+			.setFooter(`Terrabot operating in ${client.guilds.size} servers`, 'https://cdn.discordapp.com/embed/avatars/4.png')
+			.addField(':question: Bot Info', '`help` `uptime` `code` `id` `invite` `detailedhelp` `servers', false)
+			.addField(':wrench: Utilities', '`google` `say` `ascii` `ping` `avatar` `urban` `youtube`', false)
+			.addField('Admin', '`kick` `mute` `ban`', false)
+			.addField(':musical_note: Music', '`play` `stop`', false)
+			.addField(':game_die: Fun', '`dice` `face` `8ball`', false)
+			.addField(':scroll: Server', '`createinvite`', false)
+			.addField('NSFW', '`danbooru`', false)
+			.addField('Minecraft', '`skin` `mc-achievement`', true)
+			.addField('Fortnite', '`fortnitestats`', true);
+		message.channel.send(embed);
+	}
+	if (command == 'detailedhelp') {
+		const embed = new Discord.RichEmbed()
+			.setColor(color)
+			.setTitle('Detailed Help: * = optional')
+			.setFooter(`Terrabot, made by terradice`)
+			.addField('help', 'Shows help', false)
+			.addField('uptime', 'Shows bot uptime', false)
+			.addField('code', "Shows bot's github repository", false)
+			.addField('id (*user)', "Shows your or the mentioned user's id", false)
+			.addField('invite', 'Shows invite for the bot', false)
+			.addField('detailedhelp', 'Shows this message', false)
+			.addField('google (search)', 'Returns first result from google search', false)
+			.addField('say (text)', 'Says something as the bot', false)
+			.addField('ascii (text)', 'converts text into big ascii letters', false)
+			.addField('ping', 'Shows users ping to the bot', false)
+			.addField('avatar (*user)', "Shows users or the mentioned user's avatar", false)
+			.addField('urban (text)', 'Searches definition on urban dictionary', false)
+			.addField('youtube (text)', 'Searches video on youtube', false)
+			.addField('kick (user) (*reason)', 'Kicks a user from a server', false)
+			.addField('mute (user) (minutes)', 'Mutes a user for a specified amount of minutes', false)
+			.addField('ban (user) (*reason)', 'Bans a user from a server', false)
+			.addField('play (text)', 'Searches text on youtube and then plays the video', false)
+			.addField('stop', 'Stops playing music', false)
+			.addField('dice (*rolls) (*min) (*max)', 'Rolls a dice with the given parameters, if no parameters default is 1 1 6', false)
+			.addField('face (number)', 'Sends a face from a database', false)
+			.addField('8ball (question)', 'Answers yes or no to a question', false)
+			.addField('createinvite', 'Creates an invite to the server', false)
+			.addField('skin (Minecraft user)', "Returns a minecraft account's skin", false)
+			.addField('mc-achievement (Text)', 'Makes a minecraft achievement with the text as the description', false)
+			.addField('fortnitestats (player) (platform)', 'Shows stats of a fortnite account (WIP)', false);
+		message.member.send(embed);
+		message.reply("Check DM's!");
+	}
+	if (command == 'code') {
+		message.channel.send('https://github.com/Terradice/Terra-bot');
+	}
 
-    if (command == "id") {
-        if (args[0]) {
-            message.channel.send(`ID:  ${message.mentions.members.first().id}`);
-            return;
-        }
-        message.channel.send(`ID:  ${message.author.id}`);
-    }
-    if (command == "avatar") {
-        if (args[0]) {
-            var user = message.mentions.users.first();
-            message.reply(`Here you go! ${user.avatarURL}`)
-        } else {
-            message.reply(`Here you go! ${message.author.avatarURL}`)
-        }
-    }
-    if (command == "dice") {
-        let roll = "";
-        let rolls = Number(args[0]) || 1;
-        let min = Number(args[1]) || 1;
-        let max = Number(args[2]) || 6;
-        for (var i = 0; i < rolls; i++) {
-            let dice = Math.floor(Math.random() * (max - min + 1) + min);
-            roll = roll.concat(dice).concat(",");
-        }
-        message.channel.send(roll);
-    }
-    if (command == "uptime") {
-        const embed = new Discord.RichEmbed()
-            .setColor(color)
-            .setFooter(`Terrabot operating in ${client.guilds.size} servers`, 'https://cdn.discordapp.com/embed/avatars/4.png')
-            .setAuthor("Uptime", client.user.avatarURL)
-            .addField("Hours", Math.round(client.uptime / (1000 * 60 * 60)), true)
-            .addField("Minutes", Math.round(client.uptime / (1000 * 60)) % 60, true);
-        message.channel.send(embed)
-    }
-    if (command == "votekick") {
-        let member = message.mentions.members.first() || message.guild.members.get(args[0]);
-        if (!member) return message.reply("Please mention a member to votekick!");
-        let onlinecount = message.guild.members.filter(user => user.presence.status === "online").size;
-        let reactneeded = Math.round(onlinecount / 4);
-        let messageid;
-        let downvotes;
-        let upvotes;
-        message.channel.send(`Votekick initiated on ${member} by ${message.author}! ${reactneeded} yes votes needed!`).then(async m => {
-           messageid = m.id;
-            await m.react("✅");
-            await m.react("❎");
-        }).catch(console.error);
-        const filter = (reaction) => reaction.emoji.name === ':white_check_mark:';
-        messageid.awaitReactions(filter, { time: 15000 }).then(collected => {
-            console.log("filter done")
-            upvotes = collected;
-        })
-        const filter1 = (reaction) => reaction.emoji.name === ':negative_squared_cross_mark:';
-        messageid.awaitReactions(filter, { time: 15000 }).then(collected1 => {
-          console.log("filter1 done")
-            downvotes = collected1;
-        }).catch(console.error);
-        let finalsize = upvotes - downvotes; //collector.on('end', ({}))
-        if (finalsize > reactneeded) {
-            member.send("You have been votekicked from " + message.guild);
-            member.kick();
-            message.channel.send(`${member} Has been succsesfully kicked!`)
-            return;
-        } else {
-            message.channel.send("Not enough voted yes to kick " + member + "!")
-            return;
-        }
-    }
+	if (command == 'id') {
+		if (args[0]) {
+			message.channel.send(`ID:  ${message.mentions.members.first().id}`);
+			return;
+		}
+		message.channel.send(`ID:  ${message.author.id}`);
+	}
+	if (command == 'avatar') {
+		if (args[0]) {
+			var user = message.mentions.users.first();
+			message.reply(`Here you go! ${user.avatarURL}`);
+		} else {
+			message.reply(`Here you go! ${message.author.avatarURL}`);
+		}
+	}
+	if (command == 'dice') {
+		let roll = '';
+		let rolls = Number(args[0]) || 1;
+		let min = Number(args[1]) || 1;
+		let max = Number(args[2]) || 6;
+		for (var i = 0; i < rolls; i++) {
+			let dice = Math.floor(Math.random() * (max - min + 1) + min);
+			roll = roll.concat(dice).concat(',');
+		}
+		message.channel.send(roll);
+	}
+	if (command == 'uptime') {
+		const embed = new Discord.RichEmbed()
+			.setColor(color)
+			.setFooter(`Terrabot operating in ${client.guilds.size} servers`, 'https://cdn.discordapp.com/embed/avatars/4.png')
+			.setAuthor('Uptime', client.user.avatarURL)
+			.addField('Hours', Math.round(client.uptime / (1000 * 60 * 60)), true)
+			.addField('Minutes', Math.round(client.uptime / (1000 * 60)) % 60, true);
+		message.channel.send(embed);
+	}
+	if (command == 'votekick') {
+		let member = message.mentions.members.first() || message.guild.members.get(args[0]);
+		if (!member) return message.reply('Please mention a member to votekick!');
+		let onlinecount = message.guild.members.filter(user => user.presence.status === 'online').size;
+		let reactneeded = Math.round(onlinecount / 4);
+		let messageid;
+		let downvotes;
+		let upvotes;
+		message.channel.send(`Votekick initiated on ${member} by ${message.author}! ${reactneeded} yes votes needed!`).then(async m => {
+			messageid = m.id;
+			await m.react('✅');
+			await m.react('❎');
+		}).catch(console.error);
+		const filter = reaction => reaction.emoji.name === ':white_check_mark:';
+		messageid.awaitReactions(filter, { time: 15000 }).then(collected => {
+			console.log('filter done');
+			upvotes = collected;
+		});
+		const filter1 = reaction => reaction.emoji.name === ':negative_squared_cross_mark:';
+		messageid.awaitReactions(filter, { time: 15000 }).then(collected1 => {
+			console.log('filter1 done');
+			downvotes = collected1;
+		}).catch(console.error);
+		let finalsize = upvotes - downvotes; // Collector.on('end', ({}))
+		if (finalsize > reactneeded) {
+			member.send(`You have been votekicked from ${message.guild}`);
+			member.kick();
+			message.channel.send(`${member} Has been succsesfully kicked!`);
+		} else {
+			message.channel.send(`Not enough voted yes to kick ${member }!`);
+		}
+	}
 }
 
 function playQueue(msg, results, connection) {
-    var queues = servers[msg.guild.id].queue;
-    if (!queues[0]) {
-        servers[message.guild.id].playing = false;
-        msg.channel.send("Queue over, disconnecting...");
-        msg.member.voiceChannel.leave();
-        return;
-    }
-    msg.channel.send(`Next up, ${results}`);
-    console.log(queues[0]);
-    const stream = ytdl(servers[msg.guild.id].queue[0], { filter: 'audioonly' });
-    const dispatcher = connection.playStream(stream, streamOptions);
-    dispatcher.on('end', () => {
-        servers[msg.guild.id].queue.shift();
-        dispatcher.destroy();
-        playQueue(msg, results, connection);
-    })
+	var queues = servers[msg.guild.id].queue;
+	if (!queues[0]) {
+		servers[message.guild.id].playing = false;
+		msg.channel.send('Queue over, disconnecting...');
+		msg.member.voiceChannel.leave();
+		return;
+	}
+	msg.channel.send(`Next up, ${results}`);
+	console.log(queues[0]);
+	const stream = ytdl(servers[msg.guild.id].queue[0], { filter: 'audioonly' });
+	const dispatcher = connection.playStream(stream, streamOptions);
+	dispatcher.on('end', () => {
+		servers[msg.guild.id].queue.shift();
+		dispatcher.destroy();
+		playQueue(msg, results, connection);
+	});
 }
 
 function fetchPosts(message, color, msg) {
-    booru.posts({ tags: 'rating:e order:favcount limit:200' }).then(posts => {
-        if ('success' in posts && !posts.success) {
-            setTimeout(() => {
-                console.log(`Error: ${posts.message}\nRetrying in 1 second...`)
-                fetchPosts(message, color, msg);
-            }, 1000)
-        } else {
-            const newPosts = posts.filter(item => item !== undefined);
-            const index = Math.floor(Math.random() * newPosts.length);
-            const post = newPosts[index];
-            const url = booru.url(post.file_url)
-            const name = `${post.md5}.${post.file_ext}`
-            if (post.file_ext == ".mp4") {
-                msg.edit(url);
-                return;
-            }
-            const embed = new Discord.RichEmbed()
-                .setColor(color)
-                .setTitle(name).setURL(url)
-                .setImage(url)
-            msg.edit({ embed }).catch(console.error);
-        }
-    })
+	booru.posts({ tags: 'rating:e order:favcount limit:200' }).then(posts => {
+		if ('success' in posts && !posts.success) {
+			setTimeout(() => {
+				console.log(`Error: ${posts.message}\nRetrying in 1 second...`);
+				fetchPosts(message, color, msg);
+			}, 1000);
+		} else {
+			const newPosts = posts.filter(item => item !== undefined);
+			const index = Math.floor(Math.random() * newPosts.length);
+			const post = newPosts[index];
+			const url = booru.url(post.file_url);
+			const name = `${post.md5}.${post.file_ext}`;
+			if (post.file_ext == '.mp4') {
+				msg.edit(url);
+				return;
+			}
+			const embed = new Discord.RichEmbed()
+				.setColor(color)
+				.setTitle(name)
+				.setURL(url)
+				.setImage(url);
+			msg.edit({ embed }).catch(console.error);
+		}
+	});
 }
 
 
