@@ -554,12 +554,12 @@ async function handleCommand(message, command, args) {
 			await m.react('✅');
 			await m.react('❎');
 		const filter = reaction => reaction.emoji.name === ':white_check_mark:';
-		m.id.awaitReactions(filter, { time: 15000 }).then(collected => {
+		m.awaitReactions(filter, { time: 15000 }).then(collected => {
 			console.log('filter done');
 			upvotes = collected - 1;
 		});
 		const filter1 = reaction => reaction.emoji.name === ':negative_squared_cross_mark:';
-		m.id.awaitReactions(filter, { time: 15000 }).then(collected1 => {
+		m.awaitReactions(filter, { time: 15000 }).then(collected1 => {
 			console.log('filter1 done');
 			downvotes = collected1 - 1;
 		}).catch(console.error);
