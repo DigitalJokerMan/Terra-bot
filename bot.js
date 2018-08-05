@@ -556,13 +556,13 @@ async function handleCommand(message, command, args) {
 		const filter = reaction => reaction.emoji.name === ':white_check_mark:';
 		m.awaitReactions(filter, { time: 15000 }).then(collected => {
 			console.log('filter done');
-			upvotes = collected - 1;
+			upvotes = collected.size - 1;
 			console.log("upvotes: " + upvotes)
 		});
 		const filter1 = reaction => reaction.emoji.name === ':negative_squared_cross_mark:';
 		m.awaitReactions(filter, { time: 15000 }).then(collected1 => {
 			console.log('filter1 done');
-			downvotes = collected1 - 1;
+			downvotes = collected1.size - 1;
 			console.log("downvotes: " + downvotes)
 		}).catch(console.error);
 		let finalsize = upvotes - downvotes; // Collector.on('end', ({}))
