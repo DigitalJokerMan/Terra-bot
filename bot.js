@@ -98,20 +98,15 @@ client.on('message', message => {
     		//console.log('Detect Promise Resolve: ' + JSON.stringify(result));
 		const lc = result[0].language_code;
 		console.log(lc);
-		translate(message.content, lc).then(text => {
-			console.log(text);
-			return;
-		})
-		translate(message.content, lc).then(text => {
+		const whatever = async () => {
+			 const text = await translate(message.content, { from: lc, to: 'en' });
 		const embed = new Discord.RichEmbed()
 			.setColor(color)
 			.setTitle('Translate')
 			.setFooter(`Terrabot operating in ${client.guilds.size} servers`, 'https://cdn.discordapp.com/embed/avatars/4.png')
 			.addField(`Translating from ${lc}`, text, false)
 		message.channel.send(embed);
-		}).catch(function (err) {
-			console.log(err);	
-		})
+		};
 	}).catch(function (err) {
     		console.log('Detect Promise Reject: ' + JSON.stringify(err));
 	});
