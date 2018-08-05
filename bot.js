@@ -576,13 +576,10 @@ async function handleCommand(message, command, args) {
 	if (command == 'votekick') {
 		let member = message.mentions.members.first() || message.guild.members.get(args[0]);
 		if (!member) return message.reply('Please mention a member to votekick!');
-		let botnumber = message.guild.members.filter(member => member.user.bot)
-		let onlinecount = message.guild.members.filter(user => user.presence.status === 'online').size - botnumber;
+		let onlinecount = message.guild.members.filter(user => user.presence.status === 'online').size - message.guild.members.filter(member => member.user.bot).size;
 		let reactneeded = Math.round(onlinecount / 4);
 		const agree = '✅';
 		const disagree = '❎';
-		let downvotes;
-		let upvotes;
 		message.channel.send(`Votekick initiated on ${member} by ${message.author}! ${reactneeded} yes votes needed!`).then(async m => {
 			await m.react(agree);
 			await m.react(disagree);
