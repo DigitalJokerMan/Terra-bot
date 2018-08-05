@@ -30,7 +30,7 @@ client.on('ready', () => {
 });
 client.on('messageDelete', message => {
 	let first = false;
-	member.guild.channels.forEach(async c => {
+	message.member.guild.channels.forEach(async c => {
 		if (!first) {
 			if (c.topic && c.topic.includes('{logs}')) {
 				first = true;
