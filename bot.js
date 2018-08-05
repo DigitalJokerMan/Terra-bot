@@ -556,7 +556,8 @@ async function handleCommand(message, command, args) {
 			await m.react(agree);
 			await m.react(disagree);
 			const reactions = await message.awaitReactions(reaction => reaction.emoji.name === agree || reaction.emoji.name === disagree, {time: 5000});
-			
+			console.log(reactions.get(disagree))
+			console.log(reactions.get(agree))
 			if (reactions.get(agree).count-1 > reactions.get(disagree).count-1) {
 				member.send(`You have been votekicked from ${message.guild}`);
 				member.kick();
