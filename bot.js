@@ -548,14 +548,12 @@ async function handleCommand(message, command, args) {
 		if (!member) return message.reply('Please mention a member to votekick!');
 		let onlinecount = message.guild.members.filter(user => user.presence.status === 'online').size;
 		let reactneeded = Math.round(onlinecount / 4);
-		let messageid;
 		let downvotes;
 		let upvotes;
 		message.channel.send(`Votekick initiated on ${member} by ${message.author}! ${reactneeded} yes votes needed!`).then(async m => {
 			messageid = m.id;
 			await m.react('✅');
 			await m.react('❎');
-		}).catch(console.error);
 		const filter = reaction => reaction.emoji.name === ':white_check_mark:';
 		messageid.awaitReactions(filter, { time: 15000 }).then(collected => {
 			console.log('filter done');
@@ -574,7 +572,7 @@ async function handleCommand(message, command, args) {
 		} else {
 			message.channel.send(`Not enough voted yes to kick ${member }!`);
 		}
-	}
+	}).catch(console.error);
 }
 
 function playQueue(msg, results, connection) {
