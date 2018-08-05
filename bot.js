@@ -35,6 +35,7 @@ client.on('ready', () => {
 	}
 });
 client.on('messageDelete', message => {
+	if (message.author.bot) return;
 	let first = false;
 	message.member.guild.channels.forEach(async c => {
 		if (!first) {
@@ -575,7 +576,8 @@ async function handleCommand(message, command, args) {
 	if (command == 'votekick') {
 		let member = message.mentions.members.first() || message.guild.members.get(args[0]);
 		if (!member) return message.reply('Please mention a member to votekick!');
-		let onlinecount = message.guild.members.filter(user => user.presence.status === 'online').size;
+		let botnumber = message.guild.members.filter(member => member.user.bot)
+		let onlinecount = message.guild.members.filter(user => user.presence.status === 'online').size - botnumber;
 		let reactneeded = Math.round(onlinecount / 4);
 		const agree = '✅';
 		const disagree = '❎';
