@@ -555,7 +555,7 @@ async function handleCommand(message, command, args) {
 		message.channel.send(`Votekick initiated on ${member} by ${message.author}! ${reactneeded} yes votes needed!`).then(async m => {
 			await m.react(agree);
 			await m.react(disagree);
-			const reactions = await message.awaitReactions(reaction => reaction.emoji.name === agree || reaction.emoji.name === disagree, {time: 5000});
+			await message.awaitReactions(reaction => reaction.emoji.name === agree && reaction.emoji.name === disagree, {time: 5000}).then(reactionss => {
 			console.log(reactions)
 			console.log(reactions.get(disagree))
 			console.log(reactions.get(agree))
@@ -568,6 +568,7 @@ async function handleCommand(message, command, args) {
 			  } else {
 				message.channel.send(`Not enough voted yes to kick ${member }!`);
 			  }
+			})
 	}).catch(console.error);
 }
 }
