@@ -574,6 +574,7 @@ async function handleCommand(message, command, args) {
 		}
 	}).catch(console.error);
 }
+}
 
 function playQueue(msg, results, connection) {
 	var queues = servers[msg.guild.id].queue;
