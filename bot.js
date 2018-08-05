@@ -64,7 +64,7 @@ client.on('guildMemberRemove', member => {
 });
 
 client.on('guildCreate', guild => {
-	guild.owner.send("I'm terrabot, made by terradice, thanks for inviting me, Heres some special information, to declare a welcome channel, put {welcome} in its description, to block swear words in a channel, put {safe} in its description");
+	guild.owner.send("I'm terrabot, made by terradice, thanks for inviting me, Heres some special information, to declare a welcome channel, put {welcome} in its topic, to block swear words in a channel, put {safe} in its topic, to make a logs channel, put {logs} in its topic");
 	let first = false;
 	guild.channels.forEach(async c => {
 		if (!first) {
