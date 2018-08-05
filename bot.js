@@ -586,7 +586,7 @@ async function handleCommand(message, command, args) {
 		message.channel.send(`Votekick initiated on ${member} by ${message.author}! ${reactneeded} yes votes needed!`).then(async m => {
 			await m.react(agree);
 			await m.react(disagree);
-			await message.awaitReactions(reaction => reaction.emoji.name === agree && reaction.emoji.name === disagree, {time: 5000}).then(reactionss => {
+			await message.awaitReactions(reaction => reaction.emoji.name === agree || reaction.emoji.name === disagree, {time: 5000}).then(reactionss => {
 			console.log(reactionss)
 			console.log(reactionss.get(disagree))
 			console.log(reactionss.get(agree))
