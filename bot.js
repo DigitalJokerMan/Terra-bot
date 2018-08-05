@@ -552,10 +552,11 @@ async function handleCommand(message, command, args) {
 		const disagree = '❎';
 		let downvotes;
 		let upvotes;
-		const reactions = await message.awaitReactions(reaction => reaction.emoji.name === agree || reaction.emoji.name === disagree, {time: 5000});
 		message.channel.send(`Votekick initiated on ${member} by ${message.author}! ${reactneeded} yes votes needed!`).then(async m => {
 			await m.react(agree);
 			await m.react(disagree);
+			const reactions = await message.awaitReactions(reaction => reaction.emoji.name === agree || reaction.emoji.name === disagree, {time: 5000});
+			
 			if (reactions.get(agree).count-1 > reactions.get(disagree).count-1) {
 				member.send(`You have been votekicked from ${message.guild}`);
 				member.kick();
