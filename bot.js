@@ -12,6 +12,10 @@ const ascii_text_generator = require('ascii-text-generator');
 var servers = {};
 const client = new Discord.Client();
 const booru = new Danbooru();
+var LanguageLayerAPI = require('language-detection');
+var languageLayerAPI = new LanguageLayerAPI({
+	access_key: process.env.languagedetect,
+});
 
 const streamOptions = { seek: 0, volume: 1 };
 var prefix = config.prefix;
@@ -83,6 +87,19 @@ client.on('message', message => {
 			message.delete();
 			message.channel.send(`${message.author.username}: ${newmsg}`);
 		}
+	}
+	if (message.channel.topic && message.channel.topic.includes('{translate}')) {
+		var detectQuery = {
+		query: message.content
+		};
+	languageLayerAPI.detect(detectQuery)
+	.then(function (result) {
+    		console.log('Detect Promise Resolve: ' + JSON.stringify(result));
+		message.channel.send(JSON.stringify(result).language_code)
+	})
+	.catch(function (err) {
+    		console.log('Detect Promise Reject: ' + JSON.stringify(err));
+	});
 	}
 	const codeblock = /```(?:(\S+)\n)?\s*([^]+?)\s*```/i;
 	if (codeblock.test(message.content)) {
