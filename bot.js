@@ -34,7 +34,7 @@ client.on('messageDelete', message => {
 		if (!first) {
 			if (c.topic && c.topic.includes('{logs}')) {
 				first = true;
-				c.send(`${message.member.user.username} deleted message` + "```" + message.content + "```");
+				c.send(`${message.member.user} deleted message` + "```" + message.content + "```");
 			}
 		}
 	});
@@ -47,6 +47,15 @@ client.on('guildMemberAdd', member => {
 			if (c.topic && c.topic.includes('{welcome}')) {
 				first = true;
 				c.send(`${member.user} has joined!`);
+			}
+		}
+	});
+	let first = false;
+	member.guild.channels.forEach(async c => {
+		if (!first) {
+			if (c.topic && c.topic.includes('{logs}')) {
+				first = true;
+				c.send(`${member.user.username} deleted message`);
 			}
 		}
 	});
