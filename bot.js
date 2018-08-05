@@ -15,6 +15,7 @@ const booru = new Danbooru();
 var LanguageLayerAPI = require('language-detection');
 var languageLayerAPI = new LanguageLayerAPI({
 	access_key: process.env.languagedetect,
+	secure: true
 });
 
 const streamOptions = { seek: 0, volume: 1 };
