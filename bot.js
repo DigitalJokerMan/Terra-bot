@@ -101,7 +101,7 @@ client.on('message', message => {
 		translate(message.content, lc).then(text => {
 			console.log(text);
 			return;
-		}
+		})
 		translate(message.content, lc).then(text => {
 		const embed = new Discord.RichEmbed()
 			.setColor(color)
