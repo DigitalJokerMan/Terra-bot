@@ -50,15 +50,6 @@ client.on('guildMemberAdd', member => {
 			}
 		}
 	});
-	let first = false;
-	member.guild.channels.forEach(async c => {
-		if (!first) {
-			if (c.topic && c.topic.includes('{logs}')) {
-				first = true;
-				c.send(`${member.user.username} deleted message`);
-			}
-		}
-	});
 });
 client.on('guildMemberRemove', member => {
 	let first = false;
