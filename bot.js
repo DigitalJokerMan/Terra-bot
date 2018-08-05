@@ -105,7 +105,9 @@ client.on('message', message => {
 			.setFooter(`Terrabot operating in ${client.guilds.size} servers`, 'https://cdn.discordapp.com/embed/avatars/4.png')
 			.addField(`Translating from ${lc}`, text, false)
 		message.channel.send(embed);
-		});
+		}).catch(function (err) {
+			console.log(err);	
+		})
 	}).catch(function (err) {
     		console.log('Detect Promise Reject: ' + JSON.stringify(err));
 	});
