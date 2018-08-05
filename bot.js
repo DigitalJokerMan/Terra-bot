@@ -548,18 +548,20 @@ async function handleCommand(message, command, args) {
 		if (!member) return message.reply('Please mention a member to votekick!');
 		let onlinecount = message.guild.members.filter(user => user.presence.status === 'online').size;
 		let reactneeded = Math.round(onlinecount / 4);
+		const agree = '✅';
+		const disagree = '❎';
 		let downvotes;
 		let upvotes;
 		message.channel.send(`Votekick initiated on ${member} by ${message.author}! ${reactneeded} yes votes needed!`).then(async m => {
-			await m.react('✅');
-			await m.react('❎');
-		const filter = reaction => reaction.emoji.name === ':white_check_mark:';
+			await m.react(agree);
+			await m.react(disagree);
+		const filter = reaction => reaction.emoji.name === agree;
 		m.awaitReactions(filter, { time: 15000 }).then(collected => {
 			console.log('filter done');
 			upvotes = collected.size;
 			console.log("upvotes: " + upvotes)
 		});
-		const filter1 = reaction => reaction.emoji.name === ':negative_squared_cross_mark:';
+		const filter1 = reaction => reaction.emoji.name === disagree;
 		m.awaitReactions(filter1, { time: 15000 }).then(collected1 => {
 			console.log('filter1 done');
 			downvotes = collected1.size;
