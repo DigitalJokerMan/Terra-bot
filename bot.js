@@ -28,7 +28,17 @@ client.on('ready', () => {
 		servers[`${key}`].playing = false;
 	}
 });
-
+client.on('messageDelete', message => {
+	let first = false;
+	member.guild.channels.forEach(async c => {
+		if (!first) {
+			if (c.topic && c.topic.includes('{logs}')) {
+				first = true;
+				c.send(`${message.member.user.username} deleted message" ${message.contents} "`);
+			}
+		}
+	});
+})
 client.on('guildMemberAdd', member => {
 	console.log(`${member.user.username} has joined`);
 	let first = false;
