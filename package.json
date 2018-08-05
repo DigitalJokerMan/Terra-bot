@@ -22,7 +22,8 @@
     "relevant-urban": "^2.0.0",
     "snekfetch": "^4.0.4",
     "danbooru": "^3.0.7",
-    "bad-words": "^1.6.1"
+    "bad-words": "^1.6.1",
+    "language-detection": "^0.3.8"
   },
     "devDependencies": {
     "eslint": "^4.0.0",
