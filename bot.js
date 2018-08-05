@@ -551,16 +551,15 @@ async function handleCommand(message, command, args) {
 		let downvotes;
 		let upvotes;
 		message.channel.send(`Votekick initiated on ${member} by ${message.author}! ${reactneeded} yes votes needed!`).then(async m => {
-			messageid = m.id;
 			await m.react('✅');
 			await m.react('❎');
 		const filter = reaction => reaction.emoji.name === ':white_check_mark:';
-		messageid.awaitReactions(filter, { time: 15000 }).then(collected => {
+		m.id.awaitReactions(filter, { time: 15000 }).then(collected => {
 			console.log('filter done');
 			upvotes = collected;
 		});
 		const filter1 = reaction => reaction.emoji.name === ':negative_squared_cross_mark:';
-		messageid.awaitReactions(filter, { time: 15000 }).then(collected1 => {
+		m.id.awaitReactions(filter, { time: 15000 }).then(collected1 => {
 			console.log('filter1 done');
 			downvotes = collected1;
 		}).catch(console.error);
