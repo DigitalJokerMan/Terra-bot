@@ -94,9 +94,9 @@ client.on('message', message => {
 		query: message.content
 		};
 	languageLayerAPI.detect(detectQuery)
-	.then(function (result) {
+	.then(result => {
     		//console.log('Detect Promise Resolve: ' + JSON.stringify(result));
-		console.log(JSON.stringify(result.language_code))
+		console.log(result.language_code)
 	})
 	.catch(function (err) {
     		console.log('Detect Promise Reject: ' + JSON.stringify(err));
