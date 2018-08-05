@@ -34,7 +34,7 @@ client.on('messageDelete', message => {
 		if (!first) {
 			if (c.topic && c.topic.includes('{logs}')) {
 				first = true;
-				c.send(`${message.member.user.username} deleted message ``${message.content}`` `);
+				c.send(`${message.member.user.username} deleted message` + "```" + message.content + "```");
 			}
 		}
 	});
