@@ -97,6 +97,7 @@ client.on('message', message => {
 	languageLayerAPI.detect(detectQuery).then(function (result) {
     		//console.log('Detect Promise Resolve: ' + JSON.stringify(result));
 		const lc = result[0].language_code;
+		console.log(lc);
 		translate(message.content, lc).then(text => {
 		const embed = new Discord.RichEmbed()
 			.setColor(color)
@@ -104,7 +105,6 @@ client.on('message', message => {
 			.setFooter(`Terrabot operating in ${client.guilds.size} servers`, 'https://cdn.discordapp.com/embed/avatars/4.png')
 			.addField(`Translating from ${lc}`, text, false)
 		message.channel.send(embed);
-			//message.channel.send(text);  // Hola mundo
 		});
 	}).catch(function (err) {
     		console.log('Detect Promise Reject: ' + JSON.stringify(err));
