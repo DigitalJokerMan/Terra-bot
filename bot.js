@@ -98,7 +98,10 @@ client.on('message', message => {
     		//console.log('Detect Promise Resolve: ' + JSON.stringify(result));
 		const lc = result[0].language_code;
 		console.log(lc);
-		return;
+		translate(message.content, lc).then(text => {
+			console.log(text);
+			return;
+		}
 		translate(message.content, lc).then(text => {
 		const embed = new Discord.RichEmbed()
 			.setColor(color)
