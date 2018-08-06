@@ -12,7 +12,7 @@ const ascii_text_generator = require('ascii-text-generator');
 var servers = {};
 const client = new Discord.Client();
 const booru = new Danbooru();
-const translate = require('translate');
+const googleTranslate = require('google-translate')(process.env.translate);
 var LanguageLayerAPI = require('language-detection');
 var languageLayerAPI = new LanguageLayerAPI({
 	access_key: process.env.languagedetect,
