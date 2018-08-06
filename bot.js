@@ -13,11 +13,6 @@ var servers = {};
 const client = new Discord.Client();
 const booru = new Danbooru();
 const googleTranslate = require('google-translate')(process.env.translate);
-var LanguageLayerAPI = require('language-detection');
-var languageLayerAPI = new LanguageLayerAPI({
-	access_key: process.env.languagedetect,
-	secure: true
-});
 
 const streamOptions = { seek: 0, volume: 1 };
 var prefix = config.prefix;
@@ -92,25 +87,16 @@ client.on('message', message => {
 		}
 	}
 	if (message.channel.topic && message.channel.topic.includes('{translate}')) {
-		var detectQuery = {
-		query: message.content
-		};
-	languageLayerAPI.detect(detectQuery).then(function (result) {
-    		//console.log('Detect Promise Resolve: ' + JSON.stringify(result));
-		const lc = result[0].language_code;
-		console.log(lc);
-		const whatever = async () => {
-			 const text = await translate(message.content, { from: lc, to: 'en' });
-			};
+		googleTranslate.translate(message.content, source, en, function(err, translation) {
+			console.log(translation[0].translatedText);
+			// =>  { translatedText: 'Hallo', originalText: 'Hello', detectedSourceLanguage: 'en' }
+		  });
 		const embed = new Discord.RichEmbed()
 			.setColor(color)
 			.setTitle('Translate')
 			.setFooter(`Terrabot operating in ${client.guilds.size} servers`, 'https://cdn.discordapp.com/embed/avatars/4.png')
 			.addField(`Translating from ${lc}`, whatever, false)
 		message.channel.send(embed);
-	}).catch(function (err) {
-    		console.log('Detect Promise Reject: ' + JSON.stringify(err));
-	});
 	}
 	const codeblock = /```(?:(\S+)\n)?\s*([^]+?)\s*```/i;
 	if (codeblock.test(message.content)) {
