@@ -88,7 +88,7 @@ client.on('message', message => {
 	}
 	if (message.channel.topic && message.channel.topic.includes('{translate}')) {
 		googleTranslate.translate(message.content, 'en', function(err, translation) {
-			console.log(translation[0].translatedText);
+			console.log(translation); //[0].translatedText
 			// =>  { translatedText: 'Hallo', originalText: 'Hello', detectedSourceLanguage: 'en' }
 			const embed = new Discord.RichEmbed()
 			.setColor(color)
