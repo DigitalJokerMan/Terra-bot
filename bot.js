@@ -582,7 +582,7 @@ async function handleCommand(message, command, args) {
 		const disagree = '❎';
 		const embed = new Discord.RichEmbed()
 		.setColor(color)
-		.setTitle(`Votekick initiated on ${member.username} by ${message.author.username}`)
+		.setTitle(`Votekick initiated on ${member.user.username} by ${message.author.username}`)
 		.addField(`${agree} Needed: `, reactneeded, true)
 	message.channel.send(embed).then(async m => {
 			//await m.react(agree);
@@ -598,11 +598,20 @@ async function handleCommand(message, command, args) {
 			if (agreeCount > disagreeCount) {
 				member.send(`You have been votekicked from ${message.guild}`);
 				member.kick();
-				message.channel.send(`${member} Has been succsesfully kicked!`);
+			//	message.channel.send(`${member} Has been succsesfully kicked!`);
+			const embed = new Discord.RichEmbed()
+			.setColor(color)
+			.setTitle(`Votekick`)
+			.addField("Votekick Successful!", `${member} Has been successfully kicked!`, true)
+			message.channel.send(embed)
 			  } else if (agreeCount < disagreeCount) {
-				message.channel.send(`Not enough voted yes to kick ${member }!`);
+				const embed = new Discord.RichEmbed()
+				.setColor(color)
+				.setTitle(`Votekick`)
+				.addField("Votekick Failed!", `${member} Has not been kicked!`, true)
+				message.channel.send(embed)
 			  } else {
-				message.channel.send(`Not enough voted yes to kick ${member }!`);
+				message.channel.send("An error has occured, this should never ever happen!");
 			  }
 			})
 	}).catch(console.error);
