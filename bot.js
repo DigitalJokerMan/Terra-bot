@@ -76,7 +76,7 @@ client.on('guildCreate', guild => {
 	guild.channels.forEach(async c => {
 		if (!first) {
 			if (c.permissionsFor(client.user.id).has('SEND_MESSAGES')) {
-				c.send('Hi, my name is terrabot, thank you very much for inviting me to your server! The bot does not require admin access but some features might not work without it! Write ;help to get started, and have fun!');
+				c.send('Hi, my name is terrabot, thank you very much for inviting me to your server! The bot does not require admin access but some features might not work without it! Write ;help to get started, and have fun! And make sure to join my creators server to chat and have fun https://discord.gg/q8theun ');
 				first = true;
 			}
 		}
