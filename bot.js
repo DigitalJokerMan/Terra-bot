@@ -580,7 +580,12 @@ async function handleCommand(message, command, args) {
 		let reactneeded = Math.round(onlinecount / 4);
 		const agree = '✅';
 		const disagree = '❎';
-		message.channel.send(`Votekick initiated on ${member} by ${message.author}! ${reactneeded} yes votes needed!`).then(async m => {
+		const embed = new Discord.RichEmbed()
+		.setColor(color)
+		.setTitle(`Votekick initiated on ${member} by ${message.author}`)
+		.setFooter(`Terrabot operating in ${client.guilds.size} servers`, 'https://cdn.discordapp.com/embed/avatars/4.png')
+		.addField(`${agree} Needed: `, reactneeded, false)
+	message.channel.send(embed).then(async m => {
 			//await m.react(agree);
 			//await m.react(disagree);
 			const agreeReaction = await m.react(agree); // Keep what is returned
