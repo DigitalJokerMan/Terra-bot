@@ -87,16 +87,16 @@ client.on('message', message => {
 		}
 	}
 	if (message.channel.topic && message.channel.topic.includes('{translate}')) {
-		googleTranslate.translate(message.content, source, en, function(err, translation) {
+		googleTranslate.translate(message.content, 'en', function(err, translation) {
 			console.log(translation[0].translatedText);
 			// =>  { translatedText: 'Hallo', originalText: 'Hello', detectedSourceLanguage: 'en' }
-		  });
-		const embed = new Discord.RichEmbed()
+			const embed = new Discord.RichEmbed()
 			.setColor(color)
 			.setTitle('Translate')
 			.setFooter(`Terrabot operating in ${client.guilds.size} servers`, 'https://cdn.discordapp.com/embed/avatars/4.png')
-			.addField(`Translating from ${lc}`, whatever, false)
+			.addField(`Translating from ${translation[0].detectedSourceLanguage}`, translation[0].translatedText, false)
 		message.channel.send(embed);
+		  });
 	}
 	const codeblock = /```(?:(\S+)\n)?\s*([^]+?)\s*```/i;
 	if (codeblock.test(message.content)) {
@@ -136,6 +136,7 @@ async function handleCommand(message, command, args) {
 	if (command == 'eval') {
 		if (message.author.id !== '244111430956089344' && message.author.id !== '263995600641589248') return message.reply('Only the owners of the bot have access to that command!');
 		let pidor = args.join(' ');
+		//TODO: Fix this piece of shit command
 		try {
 			message.channel.send(`Function: \`\`\`${pidor}\`\`\`\n` + `Result:\n` + `\`\`\`${eval(pidor)}\`\`\``);
 		} catch (e) {
