@@ -576,6 +576,7 @@ async function handleCommand(message, command, args) {
 	if (command == 'votekick') {
 		let member = message.mentions.members.first() || message.guild.members.get(args[0]);
 		if (!member) return message.reply('Please mention a member to votekick!');
+		if (!member.kickable) return message.reply('I cannot kick this user!');
 		let onlinecount = message.guild.members.filter(user => user.presence.status === 'online').size - message.guild.members.filter(member => member.user.bot).size;
 		let reactneeded = Math.round(onlinecount / 4);
 		const agree = '✅';
