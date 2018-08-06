@@ -582,9 +582,8 @@ async function handleCommand(message, command, args) {
 		const disagree = '❎';
 		const embed = new Discord.RichEmbed()
 		.setColor(color)
-		.setTitle(`Votekick initiated on ${member} by ${message.author}`)
-		.setFooter(`Terrabot operating in ${client.guilds.size} servers`, 'https://cdn.discordapp.com/embed/avatars/4.png')
-		.addField(`${agree} Needed: `, reactneeded, false)
+		.setTitle(`Votekick initiated on ${member.username} by ${message.author.username}`)
+		.addField(`${agree} Needed: `, reactneeded, true)
 	message.channel.send(embed).then(async m => {
 			//await m.react(agree);
 			//await m.react(disagree);
