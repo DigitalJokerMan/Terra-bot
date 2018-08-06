@@ -581,17 +581,21 @@ async function handleCommand(message, command, args) {
 		const agree = '✅';
 		const disagree = '❎';
 		message.channel.send(`Votekick initiated on ${member} by ${message.author}! ${reactneeded} yes votes needed!`).then(async m => {
-			await m.react(agree);
-			await m.react(disagree);
+			//await m.react(agree);
+			//await m.react(disagree);
+			const agreeReaction = await msg.react(agree); // Keep what is returned
+			const disagreeReaction = await msg.react(disagree);
 			await message.awaitReactions(reaction => reaction.emoji.name === agree || reaction.emoji.name === disagree, {time: 5000}).then(reactionss => {
-			console.log(reactionss)
-			console.log(reactionss.get(disagree))
-			console.log(reactionss.get(agree))
-			if (reactions.get(agree).count-1 > reactions.get(disagree).count-1) {
+		//	console.log(reactionss)
+		//	console.log(reactionss.get(disagree))
+		//	console.log(reactionss.get(agree))
+			const agreeCount = agreeReaction.count - 1;
+			const disagreeCount = disagreeReaction.count - 1;
+			if (agreeCount > disagreeCount) {
 				member.send(`You have been votekicked from ${message.guild}`);
 				member.kick();
 				message.channel.send(`${member} Has been succsesfully kicked!`);
-			  } else if (reactions.get(agree).count-1 < reactions.get(disagree).count-1) {
+			  } else if (agreeCount < disagreeCount) {
 				message.channel.send(`Not enough voted yes to kick ${member }!`);
 			  } else {
 				message.channel.send(`Not enough voted yes to kick ${member }!`);
