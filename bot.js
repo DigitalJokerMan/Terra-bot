@@ -585,18 +585,17 @@ async function handleCommand(message, command, args) {
 		.setColor(color)
 		.setTitle(`Votekick initiated on ${member.user.username} by ${message.author.username}`)
 		.addField(`${agree} Needed: `, reactneeded, true)
+		.addField("Voting time :", `**2** Minutes`, true)
 	message.channel.send(embed).then(async m => {
 			//await m.react(agree);
 			//await m.react(disagree);
 			const agreeReaction = await m.react(agree); // Keep what is returned
 			const disagreeReaction = await m.react(disagree);
-			await message.awaitReactions(reaction => reaction.emoji.name === agree || reaction.emoji.name === disagree, {time: 5000}).then(reactionss => {
-		//	console.log(reactionss)
-		//	console.log(reactionss.get(disagree))
-		//	console.log(reactionss.get(agree))
+			await message.awaitReactions(reaction => reaction.emoji.name === agree || reaction.emoji.name === disagree, {time: 120000}).then(reactionss => {
 			const agreeCount = agreeReaction.count - 1;
 			const disagreeCount = disagreeReaction.count - 1;
-			if (agreeCount > disagreeCount) {
+			const finalValue = agreeCount - disagreeCount
+			if (finalValue > reactneeded) {
 				member.send(`You have been votekicked from ${message.guild}`);
 				member.kick();
 			//	message.channel.send(`${member} Has been succsesfully kicked!`);
@@ -605,13 +604,13 @@ async function handleCommand(message, command, args) {
 			.setTitle(`Votekick`)
 			.addField("Votekick Successful!", `${member} Has been successfully kicked!`, true)
 			message.channel.send(embed)
-			  } else if (agreeCount < disagreeCount) {
+			  } else if (finalValue < reactneeded) {
 				const embed = new Discord.RichEmbed()
 				.setColor(color)
 				.setTitle(`Votekick`)
 				.addField("Votekick Failed!", `${member} Has not been kicked!`, true)
 				message.channel.send(embed)
-			  } else if (agreeCount == disagreeCount) {
+			  } else if (finalValue == reactneeded) {
 				const embed = new Discord.RichEmbed()
 				.setColor(color)
 				.setTitle(`Votekick`)
