@@ -610,6 +610,12 @@ async function handleCommand(message, command, args) {
 				.setTitle(`Votekick`)
 				.addField("Votekick Failed!", `${member} Has not been kicked!`, true)
 				message.channel.send(embed)
+			  } else if (agreeCount == disagreeCount) {
+				const embed = new Discord.RichEmbed()
+				.setColor(color)
+				.setTitle(`Votekick`)
+				.addField("Votekick Failed!", `${member} Has not been kicked!`, true)
+				message.channel.send(embed)
 			  } else {
 				message.channel.send("An error has occured, this should never ever happen!");
 			  }
