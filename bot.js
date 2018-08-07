@@ -328,6 +328,10 @@ async function handleCommand(message, command, args) {
 			message.reply('You need to specify what to say!');
 			return;
 		}
+		if (args.join(' ').includes("@everyone")) {
+			message.reply("I cant @ everyone!");
+			return;
+		}
 		message.channel.send(`${message.author} Says: ${args.join(' ')}`);
 	}
 	if (command == 'play') {
