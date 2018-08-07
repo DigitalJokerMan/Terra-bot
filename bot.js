@@ -79,6 +79,7 @@ client.on('guildCreate', guild => {
 });
 client.on('message', message => {
 	if (message.author.bot) return;
+	var color = Math.floor(Math.random() * (16777216 - 0 + 1) + 0);
 	if (message.channel.topic && message.channel.topic.includes('{safe}')) {
 		if (customFilter.isProfane(message.content)) {
 			let newmsg = customFilter.clean(message.content);
@@ -89,6 +90,7 @@ client.on('message', message => {
 	if (message.channel.topic && message.channel.topic.includes('{translate}')) {
 		googleTranslate.translate(message.content, 'en', function(err, translation) {
 			console.log(translation); //[0].translatedText
+			return
 			// =>  { translatedText: 'Hallo', originalText: 'Hello', detectedSourceLanguage: 'en' }
 			const embed = new Discord.RichEmbed()
 			.setColor(color)
