@@ -37,7 +37,8 @@ client.on('messageDelete', message => {
 			if (c.topic && c.topic.includes('{logs}')) {
 				first = true;
 				if (message.attachments !== undefined) {
-					c.send(`${message.member.user} deleted image  ${{ files: [message.attachments.url] }}`);
+					c.send(`${message.member.user} deleted image`);
+					c.send({ files: [message.attachments.url] })
 					return
 				}
 				c.send(`${message.member.user} deleted message` + "```" + message.content + "```");
