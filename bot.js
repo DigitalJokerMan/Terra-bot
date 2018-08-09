@@ -93,7 +93,11 @@ client.on('message', message => {
 		}
 	}
 	if (message.channel.topic && message.channel.topic.includes('{translate}')) {
-		googleTranslate.translate("הוא כן אני שונה שחורים", 'en', function(err, translation) {
+		googleTranslate.detectLanguage('Hello', function(err, detection){
+			console.log(detection,langauge);
+			return
+		})
+		googleTranslate.translate("Ich liebe es zu programmieren", 'he', 'en', function(err, translation) {
 			console.log(translation.translatedText); //[0].translatedText
 			return
 			// =>  { translatedText: 'Hallo', originalText: 'Hello', detectedSourceLanguage: 'en' }
