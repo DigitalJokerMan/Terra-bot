@@ -644,7 +644,7 @@ function playQueue(msg, results, connection) {
 }
 
 function fetchPosts(message, color, msg, args) {
-	booru.posts({ tags: `rating:e limit:200 general:${args.join("_")}` }).then(posts => {
+	booru.posts({ tags: 'rating:e limit:200 order:rank' }).then(posts => {
 		if ('success' in posts && !posts.success) {
 			setTimeout(() => {
 				console.log(`Error: ${posts.message}\nRetrying in 1 second...`);
