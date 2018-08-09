@@ -93,8 +93,8 @@ client.on('message', message => {
 		}
 	}
 	if (message.channel.topic && message.channel.topic.includes('{translate}')) {
-		googleTranslate.translate(message.content, 'en', function(err, translation) {
-			console.log(translation); //[0].translatedText
+		googleTranslate.translate("הוא כן אני שונה שחורים", 'en', function(err, translation) {
+			console.log(translation.translatedText); //[0].translatedText
 			return
 			// =>  { translatedText: 'Hallo', originalText: 'Hello', detectedSourceLanguage: 'en' }
 			const embed = new Discord.RichEmbed()
