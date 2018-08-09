@@ -190,7 +190,7 @@ async function handleCommand(message, command, args) {
 			return;
 		}
 		message.channel.send('<a:googling:426453223310622740>' + ' Loading...').then(msg => {
-			fetchPosts(message, color, msg);
+			fetchPosts(message, color, msg, args);
 		});
 	}
 	if (command == 'urban') {
@@ -643,8 +643,8 @@ function playQueue(msg, results, connection) {
 	});
 }
 
-function fetchPosts(message, color, msg) {
-	booru.posts({ tags: 'rating:e limit:200' }).then(posts => {
+function fetchPosts(message, color, msg, args) {
+	booru.posts({ tags: `rating:e limit:200 general:${args.join("_")}` }).then(posts => {
 		if ('success' in posts && !posts.success) {
 			setTimeout(() => {
 				console.log(`Error: ${posts.message}\nRetrying in 1 second...`);
