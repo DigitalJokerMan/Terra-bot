@@ -98,7 +98,7 @@ client.on('message', message => {
 			return
 		})
 		googleTranslate.translate("Ich liebe es zu programmieren", 'he', 'en', function(err, translation) {
-			console.log(translation.translatedText); //[0].translatedText
+			//console.log(translation.translatedText); //[0].translatedText
 			return
 			// =>  { translatedText: 'Hallo', originalText: 'Hello', detectedSourceLanguage: 'en' }
 			const embed = new Discord.RichEmbed()
