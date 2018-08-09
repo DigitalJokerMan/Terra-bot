@@ -94,7 +94,7 @@ client.on('message', message => {
 	}
 	if (message.channel.topic && message.channel.topic.includes('{translate}')) {
 		googleTranslate.detectLanguage('Hello', function(err, detection){
-			console.log(detection,langauge);
+			console.log(detection.langauge);
 			return
 		})
 		googleTranslate.translate("Ich liebe es zu programmieren", 'he', 'en', function(err, translation) {
