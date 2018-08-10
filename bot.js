@@ -655,7 +655,6 @@ function fetchPosts(message, color, msg, args) {
 			const index = Math.floor(Math.random() * newPosts.length);
 			const post = newPosts[index];
 			const url = booru.url(post.file_url);
-			const request = http.get(url.href)
 			const name = `${post.md5}.${post.file_ext}`;
 			if (post.file_ext == '.mp4') {
 				msg.edit(url);
@@ -664,7 +663,7 @@ function fetchPosts(message, color, msg, args) {
 			const embed = new Discord.RichEmbed()
 				.setColor(color)
 				.setTitle(name)
-				.setURL(request)
+				.setURL(url)
 				.setImage(url);
 			msg.edit({ embed }).catch(console.error);
 		}
