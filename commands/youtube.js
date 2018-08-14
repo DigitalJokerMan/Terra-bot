@@ -1,9 +1,10 @@
 module.exports.config = {
-    name: "",
-    description: "",
-    usage: "",
+    name: "youtube",
+    description: "Searches for a video on youtube",
+    usage: "{TEXT}",
     ownerOnly: false,
-    argsMinimum: 0
+    adminOnly: false,
+    argsMinimum: 1
 }
 
 module.exports.run = (client, message, args) => {

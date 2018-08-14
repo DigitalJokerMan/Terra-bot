@@ -1,8 +1,9 @@
 module.exports.config = {
-    name: "",
-    description: "",
-    usage: "",
+    name: "kick",
+    description: "Kicks a user from the server",
+    usage: "{USER} {REASON}",
     ownerOnly: false,
+    adminOnly: true,
     argsMinimum: 0
 }
 

@@ -1,8 +1,9 @@
 module.exports.config = {
     name: "invite",
-    description: "Grabs an invite link.",
+    description: "Gives a link for the bot to be invited",
     usage: "",
     onwerOnly: false,
+    adminOnly: false,
     argsMinimum: 0
 }
 

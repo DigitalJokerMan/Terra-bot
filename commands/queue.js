@@ -1,8 +1,9 @@
 module.exports.config = {
-    name: "",
-    description: "",
+    name: "queue",
+    description: "Returns the server's queue",
     usage: "",
     ownerOnly: false,
+    adminOnly: false,
     argsMinimum: 0
 }
 

@@ -1,8 +1,9 @@
 module.exports.config = {
-    name: "",
-    description: "",
-    usage: "",
-    ownerOnly: false,
+    name: "eval",
+    description: "Runs a function",
+    usage: "{FUNCTION}",
+    ownerOnly: true,
+    adminOnly: false,
     argsMinimum: 0
 }
 

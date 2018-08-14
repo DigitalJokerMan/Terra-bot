@@ -1,9 +1,10 @@
 module.exports.config = {
-    name: "",
-    description: "",
-    usage: "",
+    name: "id",
+    description: "Returns a user's ID",
+    usage: "{USER}",
     ownerOnly: false,
-    argsMinimum: 0
+    adminOnly: false,
+    argsMinimum: 1
 }
 
 module.exports.run = (client, message, args) => {

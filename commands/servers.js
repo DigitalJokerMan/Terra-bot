@@ -1,8 +1,9 @@
 module.exports.config = {
-    name: "",
-    description: "",
+    name: "servers",
+    description: "Shows how many servers the bot is currently in",
     usage: "",
     ownerOnly: false,
+    adminOnly: false,
     argsMinimum: 0
 }
 

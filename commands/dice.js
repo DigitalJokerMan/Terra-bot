@@ -1,9 +1,10 @@
 module.exports.config = {
-    name: "",
-    description: "",
-    usage: "",
+    name: "dice",
+    description: "Rolls a dice",
+    usage: "{ROLLS} {MINIMUM} {MAXIMUM}",
     ownerOnly: false,
-    argsMinimum: 0
+    adminOnly: false,
+    argsMinimum: 3
 }
 
 module.exports.run = (client, message, args) => {

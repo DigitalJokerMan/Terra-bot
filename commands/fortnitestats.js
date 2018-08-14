@@ -1,9 +1,10 @@
 module.exports.config = {
-    name: "",
-    description: "",
-    usage: "",
+    name: "fortnitestats",
+    description: "Returns stats of a fortnite user",
+    usage: "{PLATFORM} {USERNAME}",
     ownerOnly: false,
-    argsMinimum: 0
+    adminOnly: false,
+    argsMinimum: 2
 }
 
 module.exports.run = (client, message, args) => {

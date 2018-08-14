@@ -1,8 +1,9 @@
 module.exports.config = {
-    name: "",
-    description: "",
+    name: "uptime",
+    description: "Shows how long the bot has been online",
     usage: "",
     ownerOnly: false,
+    adminOnly: false,
     argsMinimum: 0
 }
 

@@ -1,9 +1,10 @@
 module.exports.config = {
-    name: "",
-    description: "",
-    usage: "",
+    name: "votekick",
+    description: "Votekicks a user",
+    usage: "{USER}",
     ownerOnly: false,
-    argsMinimum: 0
+    adminOnly: false,
+    argsMinimum: 1
 }
 
 module.exports.run = (client, message, args) => {
