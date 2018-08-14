@@ -1,5 +1,3 @@
-//djman was here
-
 const Discord = require('discord.js');
 const google = require('google');
 const config = require('./config.json');
