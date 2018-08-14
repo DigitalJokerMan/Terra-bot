@@ -12,4 +12,4 @@ The bot dosent actually require admin permissions, if you want to assign specifi
 ## https://discordapp.com/oauth2/authorize?client_id=459782347936628747&scope=bot&permissions=0
 
 ## Special Thanks
-DJMAN my dude go follow him on twitter
+[DJMAN my dude go follow him on twitter](https://twitter.com/digitaljokerman)
