@@ -19,7 +19,7 @@ module.exports.run = (client, message, args) => {
 
     client.commands.forEach(command => {
         if (command.config.ownerOnly) return;
-        description += "`" + command.config.name + "` ";
+        description += " `" + command.config.name + "` ";
         lineSize++;
 
         if (lineSize > 6) {
