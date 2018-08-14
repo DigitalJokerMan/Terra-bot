@@ -42,12 +42,16 @@ function loadCommands() {
         if (error) return console.error(error); //If there was an error, log it.
 
         files.forEach((f, i) => {
-            if (!f.toLowerCase().endsWith(".js")) return;
+			try {
+				if (!f.toLowerCase().endsWith(".js")) return;
 
-            const command = require(`./commands/${f}`);
+				const command = require(`./commands/${f}`);
 
-            client.commands.set(command.config.name, command);
-            console.log(`Loaded command from ${f}!`);
+				client.commands.set(command.config.name, command);
+				console.log(`Loaded command from ${f}!`);
+			} catch (error) {
+				console.log(error);
+			}
         });
     });	
 }
