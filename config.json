@@ -1,5 +1,6 @@
 {
 "prefix": ";",
+"ownerID": "244111430956089344",
   "commands": {
     "cmd_eval": {
 		"display_in_help": false,
@@ -42,5 +43,5 @@
 		"name": "kick",
 		"help": "to kick people (Admin only)"
 	}
-  }
+	}	
 }
