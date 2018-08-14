@@ -38,7 +38,7 @@ module.exports = (client, message) => {
 	let messageArray = message.content.split(" ");
     let command = messageArray[0];
 
-    if (cmd.startsWith(Config.prefix)) {
+    if (command.startsWith(Config.prefix)) {
         let args = messageArray.slice(1);
         let commandHandler = client.commands.get(command.toLowerCase().slice(Config.prefix.length));
 
