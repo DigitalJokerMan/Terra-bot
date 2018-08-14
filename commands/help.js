@@ -31,5 +31,4 @@ module.exports.run = (client, message, args) => {
     embed.setDescription(description);
 
     message.channel.send({embed});
-    console.log(embed);
 }
