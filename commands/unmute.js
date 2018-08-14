@@ -9,7 +9,7 @@ module.exports.config = {
 
 module.exports.run = (client, message, args) => {
     let muterole = message.guild.roles.find('name', 'terra-mute');
-    if (!message.member.user.roles.has(muterole)) {
+    if (!message.member.roles.has(muterole)) {
         message.reply(`${member} isnt muted!`)
         return;
     }
