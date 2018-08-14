@@ -1,8 +1,9 @@
 module.exports.config = {
-    name: "",
-    description: "",
+    name: "createinvite",
+    description: "Creates an invite to the channel",
     usage: "",
     ownerOnly: false,
+    adminOnly: false,
     argsMinimum: 0
 }
 

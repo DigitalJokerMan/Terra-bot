@@ -1,9 +1,10 @@
 module.exports.config = {
-    name: "",
-    description: "",
-    usage: "",
+    name: "ban",
+    description: "Bans a user from the server",
+    usage: "{USER} {REASON}",
     ownerOnly: false,
-    argsMinimum: 0
+    adminOnly: true,
+    argsMinimum: 2
 }
 
 module.exports.run = (client, message, args) => {

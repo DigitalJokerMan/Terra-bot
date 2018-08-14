@@ -1,8 +1,9 @@
 module.exports.config = {
-    name: "",
-    description: "",
+    name: "nsfw",
+    description: "Shows an nsfw image from danbooru",
     usage: "",
     ownerOnly: false,
+    adminOnly: false,
     argsMinimum: 0
 }
 
