@@ -8,5 +8,9 @@ module.exports.config = {
 }
 
 module.exports.run = (client, message, args) => {
-
+    if (args[0]) {
+        message.channel.send(`ID:  ${message.mentions.members.first().id}`);
+        return;
+    }
+    message.channel.send(`ID:  ${message.author.id}`);
 }

@@ -8,5 +8,7 @@ module.exports.config = {
 }
 
 module.exports.run = (client, message, args) => {
-
+    message.channel.createInvite().then(invite =>
+        message.channel.send(invite.url)
+    );
 }
