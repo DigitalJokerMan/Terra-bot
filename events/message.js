@@ -43,7 +43,7 @@ module.exports = (client, message) => {
         let commandHandler = client.commands.get(command.toLowerCase().slice(Config.prefix.length));
 
         if (commandHandler) {
-            if (commandHandler.config.ownerOnly && msg.author.id != Config.ownerID) {
+            if (commandHandler.config.ownerOnly && message.author.id != Config.ownerID) {
                 message.reply("Only the bot owner can do that.");
                 return;
             }
