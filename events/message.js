@@ -3,6 +3,7 @@ const Discord = require("discord.js");
 
 module.exports = (client, message) => {
     if (message.author.bot) return;
+	message.channel.send("hello");
 	var color = Math.floor(Math.random() * (16777216 - 0 + 1) + 0);
 	if (message.channel.topic && message.channel.topic.includes('{safe}')) {
 		if (customFilter.isProfane(message.content)) {
