@@ -8,9 +8,10 @@ module.exports.config = {
 }
 
 module.exports.run = (client, message, args) => {
+    let member = message.mentions.first || args[1]
     let muterole = message.guild.roles.find('name', 'terra-mute');
-    if (!message.member.roles.has(muterole)) {
-        message.reply(`${message.member} isnt muted!`)
+    if (!member.roles.has(muterole)) {
+       message.channel.send(`${member} isnt muted!`)
         return;
     }
     member.removeRole(muterole);
